@@ -1,18 +1,15 @@
 (function(){
-    window.plugin_redirect_once = function(){
+    window.plugin_redirect = function(){
         return {
             component: 'main',
-            name: 'Auto Redirect Once',
-            version: '1.0.1',
+            name: 'Auto Redirect',
+            version: '1.0.0',
             author: 'Ты',
-            description: 'Редирект только при первом запуске',
+            description: 'Автоматический переход на кастомный URL',
 
             onCreate: function(){
-                // Проверяем, был ли редирект уже выполнен
-                if (!localStorage.getItem("plugin_redirect_done")) {
-                    localStorage.setItem("plugin_redirect_done", "true");
-                    location.href = "http://89.22.225.226:9118";  // используем location.href
-                }
+                // Принудительно открываем новый адрес
+                window.location.replace("http://89.22.225.226:9118");
             },
 
             onStart: function(){},
@@ -20,5 +17,5 @@
         }
     }
 
-    Lampa.Plugin.register('plugin_redirect_once', window.plugin_redirect_once());
+    Lampa.Plugin.register('plugin_redirect', window.plugin_redirect());
 })();
