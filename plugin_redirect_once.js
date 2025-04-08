@@ -1,4 +1,3 @@
-
 (function(){
     window.plugin_redirect_once = function(){
         return {
@@ -12,7 +11,7 @@
                 // Проверяем, был ли редирект уже выполнен
                 if (!localStorage.getItem("plugin_redirect_done")) {
                     localStorage.setItem("plugin_redirect_done", "true");
-                    window.location.replace("http://89.22.225.226:9118");
+                    location.href = "http://89.22.225.226:9118";  // используем location.href
                 }
             },
 
