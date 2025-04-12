@@ -11,9 +11,9 @@
                 Lampa.Storage.set('lampac_unic_id', unic_id);
             }
 
-            Lampa.Utils.putScriptAsync(["http://89.22.225.226:9118/startpage.js"], function () {});
-            Lampa.Utils.putScriptAsync(["http://89.22.225.226:9118/online.js"], function () {});
-            Lampa.Utils.putScriptAsync(["http://89.22.225.226:9118/tracks.js"], function () {});
+            Lampa.Utils.putScriptAsync(["http://94.156.114.7:11411/startpage.js"], function () {});
+            Lampa.Utils.putScriptAsync(["http://94.156.114.7:11411/online.js"], function () {});
+            Lampa.Utils.putScriptAsync(["http://94.156.114.7:11411/tracks.js"], function () {});
             Lampa.Utils.putScriptAsync(["https://lilorobert.github.io/lilbaby/no.js"], function () {});
         }
     }, 200);
