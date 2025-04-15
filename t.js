@@ -585,9 +585,9 @@
                 }
             `,
             sunset: `
-  body {
+body {
     background: linear-gradient(135deg, #ffe0f0 0%, #ffc0cb 50%, #ffb6c1 100%);
-    color: #4a004a;
+    color: #ffffff;
 }
 
 .menu__item.focus,
@@ -635,7 +635,16 @@
     background: rgba(255, 240, 250, 0.95);
     border: 1px solid rgba(255, 105, 180, 0.2);
     box-shadow: 0 0 25px rgba(255, 182, 193, 0.2);
+    color: #ffffff;
 }
+
+.settings__content *,
+.settings-input__content *,
+.selectbox__content *,
+.modal__content * {
+    color: #ffffff !important;
+}
+
 
             `,
             emerald: `
