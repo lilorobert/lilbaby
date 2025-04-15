@@ -54,6 +54,8 @@ function applyTheme(theme) {
 
 }
 
+}
+
 
     // Функция инициализации плагина
     function initPlugin() {
