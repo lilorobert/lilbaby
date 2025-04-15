@@ -19,41 +19,37 @@
     };
 
 function applyTheme(theme) {
-    // Удаляем старый стиль темы
     var oldStyle = document.querySelector('#interface_theme_mod_style');
     if (oldStyle) {
         oldStyle.parentNode.removeChild(oldStyle);
     }
 
-    // Применяем тему с изображением и анимацией
     var style = document.createElement('style');
     style.id = 'interface_theme_mod_style';
     var color = loaderColors[theme] || loaderColors.default;
 
-    var imageUrl = 'https://e7.pngegg.com/pngimages/204/930/png-clipart-thought-bulb-miscellaneous-cartoon.png'; // Замените на URL вашей картинки
-
-    // Создание стилей для анимации
-    style.textContent = `
-        #loader-image {
-            width: 100px;
-            height: 100px;
-            background-image: url(${imageUrl});
-            background-size: contain;
-            background-repeat: no-repeat;
-            animation: rotateLoader 2s linear infinite;
-        }
-
-        @keyframes rotateLoader {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    // Создание контейнера и добавление элементов
+    const loader = document.createElement('div');
+    loader.id = 'loader';
+    loader.innerHTML = `
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     `;
+    
+    document.body.appendChild(loader);
     document.head.appendChild(style);
 
-    // Создаем контейнер для картинки
-    var loader = document.createElement('div');
-    loader.id = 'loader-image';
-    document.body.appendChild(loader);
+    // Использование GSAP для анимации
+    gsap.to('.circle', {
+        scale: 1.5,
+        opacity: 0.5,
+        duration: 1,
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.2,
+        ease: "power1.inOut"
+    });
 
     // Логирование для отладки
     console.log('Theme applied:', theme, 'Loader color:', color);
