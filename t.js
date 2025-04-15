@@ -41,10 +41,10 @@
                 </g>
 
                 <!-- Вращение киноленты -->
-                <animateTransform attributeName="transform" type="rotate" from="0 75 75" to="360 75 75" dur="5s" repeatCount="indefinite" />
+                <animateTransform attributeName="transform" type="rotate" from="0 75 75" to="360 75 75" dur="10s" repeatCount="indefinite" />
 
                 <!-- Появление кадров -->
-                <animate xlink:href="#film rect" attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.5s" repeatCount="indefinite" />
+                <animate xlink:href="#film rect" attributeName="opacity" from="0" to="1" dur="1s" begin="0.5s" repeatCount="indefinite" />
             </svg>
         `);
 
@@ -52,6 +52,11 @@
         document.head.appendChild(style);
 
         console.log('Тема применена:', theme, 'Цвет loader\'а:', color);
+
+        // Сделаем элемент видимым с задержкой, чтобы анимация точно успела появиться
+        setTimeout(function() {
+            document.querySelector('.activity__loader').style.display = 'block';
+        }, 1000); // Задержка в 1 секунду перед тем как отобразить анимацию
     }
 
     function initPlugin() {
