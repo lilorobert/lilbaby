@@ -109,23 +109,23 @@
             /* Бабочки */
             .butterfly {
                 position: fixed;
-                width: 48px;
-                height: 48px;
-                background-image: url('https://cdn-icons-png.flaticon.com/512/616/616408.png');
-                background-size: cover;
+                width: 40px;
+                height: 40px;
+                background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSJwaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzg0IDI1NmMwLTYwLTYwLTEwOC0xMjgtOTMtNTYgMTItMTA4IDUwLTExMiAxMGMtNSA2Ni00MCAxMzUtODggMTYyLTM4IDIxLTgxIDMzLTEyNiAzMy00MiAwLTgyLTEwLTExOC0yOGwtMjcgMjcgMjggMjhjMjYgMjYgNTYgNDQgOTAgNTMgNzAgMTggMTQ0LTUgMTk2LTYzIDM4LTQ0IDYwLTk2IDYwLTE1MXptLTY0IDBjMC00NC0zNi04MC04MC04MHMtODAgMzYtODAgODAgMzYgODAgODAgODAgODAtMzYgODAtODB6Ii8+PC9zdmc+");
+                background-size: contain;
                 background-repeat: no-repeat;
-                animation: flutter 15s ease-in-out infinite;
-                opacity: 0.9;
-                z-index: 99999;
+                animation: flutter 14s linear infinite;
+                opacity: 0.8;
+                z-index: 9999;
                 pointer-events: none;
             }
 
             @keyframes flutter {
-                0%   { transform: translate(0, 0) rotate(0deg); }
-                25%  { transform: translate(-20px, -30px) rotate(10deg); }
-                50%  { transform: translate(20px, -10px) rotate(-10deg); }
-                75%  { transform: translate(-15px, -20px) rotate(5deg); }
-                100% { transform: translate(0, 0) rotate(0deg); }
+                0% { transform: translate(0, 0) rotate(0deg); }
+                25% { transform: translate(20vw, -10vh) rotate(15deg); }
+                50% { transform: translate(40vw, 10vh) rotate(-15deg); }
+                75% { transform: translate(60vw, -5vh) rotate(10deg); }
+                100% { transform: translate(80vw, 0vh) rotate(0deg); }
             }
         `;
 
@@ -135,12 +135,12 @@
         document.head.appendChild(styleSheet);
 
         // Добавляем бабочек
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 5; i++) {
             const butterfly = document.createElement('div');
             butterfly.classList.add('butterfly');
             butterfly.style.top = Math.random() * 80 + 'vh';
             butterfly.style.left = Math.random() * 90 + 'vw';
-            butterfly.style.animationDelay = (Math.random() * 5) + 's';
+            butterfly.style.animationDelay = (Math.random() * 10) + 's';
             document.body.appendChild(butterfly);
         }
     }
@@ -148,7 +148,7 @@
     if (window.appready) startMe();
     else {
         Lampa.Listener.follow('app', function (e) {
-            if (e.type == 'ready') {
+            if (e.type === 'ready') {
                 startMe();
             }
         });
