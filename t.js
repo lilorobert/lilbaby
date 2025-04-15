@@ -25,43 +25,40 @@ function applyTheme(theme) {
         oldStyle.parentNode.removeChild(oldStyle);
     }
 
-    // Применяем тему с новой анимацией
+    // Применяем тему с изображением и анимацией
     var style = document.createElement('style');
     style.id = 'interface_theme_mod_style';
     var color = loaderColors[theme] || loaderColors.default;
 
-    var svgCode = encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" width="135" height="135" viewBox="0 0 135 135">
-            <circle cx="30" cy="30" r="5" fill="${color}">
-                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="67.5" cy="30" r="5" fill="${color}">
-                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="105" cy="30" r="5" fill="${color}">
-                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="50" cy="70" r="5" fill="${color}">
-                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="85" cy="70" r="5" fill="${color}">
-                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-            </circle>
-        </svg>
-    `);
+    var imageUrl = 'https://e7.pngegg.com/pngimages/204/930/png-clipart-thought-bulb-miscellaneous-cartoon.png'; // Замените на URL вашей картинки
 
-    style.textContent = themes[theme].replace('${svgCode}', svgCode);
+    // Создание стилей для анимации
+    style.textContent = `
+        #loader-image {
+            width: 100px;
+            height: 100px;
+            background-image: url(${imageUrl});
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: rotateLoader 2s linear infinite;
+        }
+
+        @keyframes rotateLoader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
     document.head.appendChild(style);
+
+    // Создаем контейнер для картинки
+    var loader = document.createElement('div');
+    loader.id = 'loader-image';
+    document.body.appendChild(loader);
 
     // Логирование для отладки
     console.log('Theme applied:', theme, 'Loader color:', color);
-    console.log('SVG length:', decodeURIComponent(svgCode).length);
 }
+
 
 
 
