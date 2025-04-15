@@ -54,7 +54,6 @@ function applyTheme(theme) {
     // Логирование для отладки
     console.log('Theme applied:', theme, 'Loader color:', color);
     console.log('SVG length:', decodeURIComponent(svgCode).length);
-
 }
 
 
