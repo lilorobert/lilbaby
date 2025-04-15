@@ -31,15 +31,19 @@ function applyTheme(theme) {
     var color = loaderColors[theme] || loaderColors.default;
     var svgCode = encodeURIComponent(
         `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+            <!-- Катушка киноленты -->
+            <circle cx="75" cy="75" r="70" fill="none" stroke="${color}" stroke-width="5"/>
+            <circle cx="75" cy="75" r="55" fill="none" stroke="${color}" stroke-width="5"/>
+            
             <!-- Кинолента -->
-            <g transform="rotate(0, 75, 75)">
-                <rect x="5" y="60" width="10" height="30" fill="${color}" />
-                <rect x="30" y="60" width="10" height="30" fill="${color}" />
-                <rect x="55" y="60" width="10" height="30" fill="${color}" />
-                <rect x="80" y="60" width="10" height="30" fill="${color}" />
-                <rect x="105" y="60" width="10" height="30" fill="${color}" />
-                <rect x="130" y="60" width="10" height="30" fill="${color}" />
+            <g id="film" transform="rotate(0, 75, 75)">
+                <rect x="70" y="10" width="10" height="30" fill="${color}" />
+                <rect x="70" y="40" width="10" height="30" fill="${color}" />
+                <rect x="70" y="70" width="10" height="30" fill="${color}" />
+                <rect x="70" y="100" width="10" height="30" fill="${color}" />
+                <rect x="70" y="130" width="10" height="30" fill="${color}" />
             </g>
+
             <!-- Вращение киноленты -->
             <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 75 75" to="360 75 75" dur="2s" repeatCount="indefinite" />
         </svg>`
@@ -50,6 +54,8 @@ function applyTheme(theme) {
     // Логирование для отладки
     console.log('Theme applied:', theme, 'Loader color:', color);
     console.log('SVG length:', decodeURIComponent(svgCode).length);
+}
+
 }
 
 }
