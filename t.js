@@ -121,22 +121,34 @@
 
             .rain-drop {
                 position: absolute;
-                background-color: rgba(255, 255, 255, 0.6);
-                width: 2px;
-                height: 10px;
+                background-color: rgba(255, 255, 255, 0.8);
+                width: 1px;
+                height: 20px;
                 animation: fall linear infinite;
-                opacity: 0.6;
+                opacity: 0.8;
+                transform: rotate(0deg);
+                will-change: transform, opacity;
             }
 
             @keyframes fall {
                 0% {
-                    top: -10px;
+                    top: -20px;
                     transform: translateX(0);
                 }
                 100% {
                     top: 100vh;
-                    transform: translateX(30px);
+                    transform: translateX(calc(10px * (random() - 0.5)));
                 }
+            }
+
+            /* Плавное колебание капель */
+            .rain-drop:nth-child(odd) {
+                animation-duration: calc(1s + 2s * (random() * 2));
+            }
+
+            .rain-drop:nth-child(even) {
+                animation-duration: calc(1s + 2s * (random() * 2));
+                animation-delay: calc(-2s * (random() * 2));
             }
         `;
 
@@ -150,13 +162,13 @@
         rain.classList.add('rain');
         document.body.appendChild(rain);
 
-        // Генерируем капли
-        for (var i = 0; i < 100; i++) {
+        // Генерируем капли с случайными параметрами
+        for (var i = 0; i < 150; i++) {
             var drop = document.createElement('div');
             drop.classList.add('rain-drop');
             drop.style.left = Math.random() * 100 + 'vw';
-            drop.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            drop.style.animationDelay = Math.random() * 5 + 's';
+            drop.style.animationDuration = (Math.random() * 2 + 1) + 's'; // скорость падения капли
+            drop.style.animationDelay = Math.random() * 5 + 's'; // случайная задержка
             rain.appendChild(drop);
         }
     }
