@@ -41,7 +41,10 @@
                 </g>
 
                 <!-- Вращение киноленты -->
-                <animateTransform attributeName="transform" type="rotate" from="0 75 75" to="360 75 75" dur="3s" repeatCount="indefinite" />
+                <animateTransform attributeName="transform" type="rotate" from="0 75 75" to="360 75 75" dur="5s" repeatCount="indefinite" />
+
+                <!-- Появление кадров -->
+                <animate xlink:href="#film rect" attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.5s" repeatCount="indefinite" />
             </svg>
         `);
 
