@@ -4,13 +4,14 @@
     function startMe() {
         var styles = `
             body {
-                background: linear-gradient(to bottom right, #ffeaf4, #dfffe3);
-                color: #3a2d2d;
+                background: linear-gradient(to bottom right, #3b6e9d, #2f4755);
+                color: #e0f0f6;
                 font-family: 'Arial', sans-serif;
+                overflow: hidden;
             }
 
             body.black--style {
-                background: linear-gradient(to bottom right, #f6f0ff, #fff0f0);
+                background: linear-gradient(to bottom right, #4a7a8c, #2f4755);
             }
 
             .menu__item.focus,
@@ -30,9 +31,9 @@
             .head__action.hover,
             .player-panel .button.focus,
             .search-source.active {
-                background: linear-gradient(to right, #ffb6c1, #ffe4e1);
-                color: #000;
-                box-shadow: 0 0 10px rgba(255, 182, 193, 0.4);
+                background: linear-gradient(to right, #8e9f9e, #7b9fa3);
+                color: #fff;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             }
 
             .settings-folder.focus .settings-folder__icon {
@@ -40,16 +41,16 @@
             }
 
             .settings-param-title > span {
-                color: #222;
+                color: #fff;
             }
 
             .settings__content,
             .settings-input__content,
             .selectbox__content,
             .modal__content {
-                background: rgba(255, 255, 255, 0.85);
-                border: 1px solid rgba(255, 182, 193, 0.3);
-                box-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
+                background: rgba(24, 37, 48, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
             }
 
             .settings-input__links {
@@ -61,71 +62,81 @@
             .extensions__item.focus:after,
             .torrent-item.focus::after,
             .extensions__block-add.focus:after {
-                border-color: #ffb6c1;
+                border-color: #8e9f9e;
             }
 
             .online-prestige.focus::after,
             .iptv-channel.focus::before,
             .iptv-channel.last--focus::before {
-                border-color: #ffb6c1 !important;
+                border-color: #8e9f9e !important;
             }
 
             .time-line > div,
             .player-panel__position,
             .player-panel__position > div:after {
-                background-color: #ffb6c1;
+                background-color: #8e9f9e;
             }
 
             .extensions {
-                background: #fff0f0;
+                background: #2f4755;
             }
 
             .extensions__item,
             .extensions__block-add {
-                background-color: #ffe6ea;
+                background-color: #4b6b7b;
             }
 
             .torrent-item__size,
             .torrent-item__exe,
             .torrent-item__viewed,
             .torrent-serial__size {
-                background-color: #ffcad4;
-                color: #000;
+                background-color: #6e868a;
+                color: #fff;
             }
 
             .torrent-serial {
-                background-color: rgba(255, 203, 213, 0.15);
+                background-color: rgba(110, 134, 138, 0.1);
             }
 
             .torrent-file.focus,
             .torrent-serial.focus {
-                background-color: rgba(255, 203, 213, 0.35);
+                background-color: rgba(110, 134, 138, 0.35);
             }
 
             .iptv-channel {
-                background-color: #ffd1dc !important;
+                background-color: #4b7b84 !important;
             }
 
-            /* Бабочки */
-            .butterfly {
-                position: fixed;
-                width: 40px;
-                height: 40px;
-                background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSJwaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzg0IDI1NmMwLTYwLTYwLTEwOC0xMjgtOTMtNTYgMTItMTA4IDUwLTExMiAxMGMtNSA2Ni00MCAxMzUtODggMTYyLTM4IDIxLTgxIDMzLTEyNiAzMy00MiAwLTgyLTEwLTExOC0yOGwtMjcgMjcgMjggMjhjMjYgMjYgNTYgNDQgOTAgNTMgNzAgMTggMTQ0LTUgMTk2LTYzIDM4LTQ0IDYwLTk2IDYwLTE1MXptLTY0IDBjMC00NC0zNi04MC04MC04MHMtODAgMzYtODAgODAgMzYgODAgODAgODAgODAtMzYgODAtODB6Ii8+PC9zdmc+");
-                background-size: contain;
-                background-repeat: no-repeat;
-                animation: flutter 14s linear infinite;
-                opacity: 0.8;
-                z-index: 9999;
+            /* Анимация дождя */
+            .rain {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 pointer-events: none;
+                z-index: 999;
+                overflow: hidden;
             }
 
-            @keyframes flutter {
-                0% { transform: translate(0, 0) rotate(0deg); }
-                25% { transform: translate(20vw, -10vh) rotate(15deg); }
-                50% { transform: translate(40vw, 10vh) rotate(-15deg); }
-                75% { transform: translate(60vw, -5vh) rotate(10deg); }
-                100% { transform: translate(80vw, 0vh) rotate(0deg); }
+            .rain-drop {
+                position: absolute;
+                background-color: rgba(255, 255, 255, 0.6);
+                width: 2px;
+                height: 10px;
+                animation: fall linear infinite;
+                opacity: 0.6;
+            }
+
+            @keyframes fall {
+                0% {
+                    top: -10px;
+                    transform: translateX(0);
+                }
+                100% {
+                    top: 100vh;
+                    transform: translateX(30px);
+                }
             }
         `;
 
@@ -134,14 +145,19 @@
         styleSheet.innerText = styles;
         document.head.appendChild(styleSheet);
 
-        // Добавляем бабочек
-        for (let i = 0; i < 5; i++) {
-            const butterfly = document.createElement('div');
-            butterfly.classList.add('butterfly');
-            butterfly.style.top = Math.random() * 80 + 'vh';
-            butterfly.style.left = Math.random() * 90 + 'vw';
-            butterfly.style.animationDelay = (Math.random() * 10) + 's';
-            document.body.appendChild(butterfly);
+        // Добавляем дождевые капли
+        var rain = document.createElement('div');
+        rain.classList.add('rain');
+        document.body.appendChild(rain);
+
+        // Генерируем капли
+        for (var i = 0; i < 100; i++) {
+            var drop = document.createElement('div');
+            drop.classList.add('rain-drop');
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            drop.style.animationDelay = Math.random() * 5 + 's';
+            rain.appendChild(drop);
         }
     }
 
