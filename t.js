@@ -32,17 +32,25 @@ function applyTheme(theme) {
 
     var svgCode = encodeURIComponent(`
         <svg xmlns="http://www.w3.org/2000/svg" width="135" height="135" viewBox="0 0 135 135">
-            <circle cx="30" cy="30" r="15" fill="${color}">
-                <animate attributeName="r" values="15;25;15;25;15" dur="1.5s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="cy" values="30;50;30;50;30" dur="1.5s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+            <circle cx="30" cy="30" r="5" fill="${color}">
+                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
             </circle>
-            <circle cx="67.5" cy="30" r="20" fill="${color}">
-                <animate attributeName="r" values="20;30;20;30;20" dur="1.5s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="cy" values="30;50;30;50;30" dur="1.5s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+            <circle cx="67.5" cy="30" r="5" fill="${color}">
+                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
             </circle>
-            <circle cx="105" cy="30" r="25" fill="${color}">
-                <animate attributeName="r" values="25;35;25;35;25" dur="1.5s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
-                <animate attributeName="cy" values="30;50;30;50;30" dur="1.5s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+            <circle cx="105" cy="30" r="5" fill="${color}">
+                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="50" cy="70" r="5" fill="${color}">
+                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="85" cy="70" r="5" fill="${color}">
+                <animate attributeName="r" values="5;20;5;20;5" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0;1" dur="1s" keyTimes="0;0.5;1;1.5" repeatCount="indefinite"/>
             </circle>
         </svg>
     `);
@@ -54,6 +62,7 @@ function applyTheme(theme) {
     console.log('Theme applied:', theme, 'Loader color:', color);
     console.log('SVG length:', decodeURIComponent(svgCode).length);
 }
+
 
 
     // Функция инициализации плагина
