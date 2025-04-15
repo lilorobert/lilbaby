@@ -30,25 +30,18 @@ function applyTheme(theme) {
     style.id = 'interface_theme_mod_style';
     var color = loaderColors[theme] || loaderColors.default;
     var svgCode = encodeURIComponent(
-        `<svg xmlns="http://www.w3.org/2000/svg" width="135" height="135" viewBox="0 0 135 135">
-            <circle cx="30" cy="30" r="15" fill="${color}">
-                <animate attributeName="r" values="15;20;15" dur="1s" keyTimes="0;0.5;1" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="65" cy="30" r="15" fill="${color}">
-                <animate attributeName="r" values="15;20;15" dur="1s" keyTimes="0;0.5;1" begin="0.2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="100" cy="30" r="15" fill="${color}">
-                <animate attributeName="r" values="15;20;15" dur="1s" keyTimes="0;0.5;1" begin="0.4s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="30" cy="70" r="15" fill="${color}">
-                <animate attributeName="r" values="15;20;15" dur="1s" keyTimes="0;0.5;1" begin="0.2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="65" cy="70" r="15" fill="${color}">
-                <animate attributeName="r" values="15;20;15" dur="1s" keyTimes="0;0.5;1" begin="0.4s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="100" cy="70" r="15" fill="${color}">
-                <animate attributeName="r" values="15;20;15" dur="1s" keyTimes="0;0.5;1" begin="0.6s" repeatCount="indefinite"/>
-            </circle>
+        `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+            <!-- Кинолента -->
+            <g transform="rotate(0, 75, 75)">
+                <rect x="5" y="60" width="10" height="30" fill="${color}" />
+                <rect x="30" y="60" width="10" height="30" fill="${color}" />
+                <rect x="55" y="60" width="10" height="30" fill="${color}" />
+                <rect x="80" y="60" width="10" height="30" fill="${color}" />
+                <rect x="105" y="60" width="10" height="30" fill="${color}" />
+                <rect x="130" y="60" width="10" height="30" fill="${color}" />
+            </g>
+            <!-- Вращение киноленты -->
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 75 75" to="360 75 75" dur="2s" repeatCount="indefinite" />
         </svg>`
     );
     style.textContent = themes[theme].replace('${svgCode}', svgCode);
@@ -57,6 +50,8 @@ function applyTheme(theme) {
     // Логирование для отладки
     console.log('Theme applied:', theme, 'Loader color:', color);
     console.log('SVG length:', decodeURIComponent(svgCode).length);
+}
+
 }
 
 
