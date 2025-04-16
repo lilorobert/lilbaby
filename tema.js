@@ -3,32 +3,48 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.3',
+        version: '0.0.4',
         debug: false,
         settings: {
             enabled: true,
             theme: 'default',
-            customColor: '' // Изначально пусто
+            color: '#FF0000' // Дефолтный цвет (красный)
         }
     };
 
-    function applyTheme(theme, customColor) {
+    // 10 популярных цветов
+    const COLOR_PRESETS = {
+        '#FF0000': 'Красный',
+        '#00FF00': 'Зелёный',
+        '#0000FF': 'Синий',
+        '#FFFF00': 'Жёлтый',
+        '#FF00FF': 'Розовый',
+        '#00FFFF': 'Голубой',
+        '#FFA500': 'Оранжевый',
+        '#800080': 'Фиолетовый',
+        '#008000': 'Тёмно-зелёный',
+        '#FFC0CB': 'Светло-розовый'
+    };
+
+    function applyTheme(theme, color) {
         $('#interface_mod_theme').remove();
         if (theme === 'default') return;
 
         const style = $('<style id="interface_mod_theme"></style>');
 
         const themes = {
-            bywolf_mod: `...`, // Твой CSS для космической темы
-            custom: customColor ? `
+            bywolf_mod: `...`, // Твой CSS для "Космической" темы
+            custom: `
                 /* Динамические стили для выбранного цвета */
-                .menu__item.focus, .card.focus .card__view::after {
-                    background: ${customColor} !important;
+                .menu__item.focus, 
+                .card.focus .card__view::after,
+                .settings-folder.focus {
+                    background: ${color} !important;
                 }
                 .time-line > div {
-                    background: ${customColor} !important;
+                    background: ${color} !important;
                 }
-            ` : ''
+            `
         };
 
         style.html(themes[theme] || '');
@@ -38,10 +54,10 @@
     function startPlugin() {
         // Загружаем сохранённые настройки
         InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
-        InterFaceMod.settings.customColor = Lampa.Storage.get('custom_color', '');
-        applyTheme(InterFaceMod.settings.theme, InterFaceMod.settings.customColor);
+        InterFaceMod.settings.color = Lampa.Storage.get('color_preset', '#FF0000');
+        applyTheme(InterFaceMod.settings.theme, InterFaceMod.settings.color);
 
-        // Добавляем выбор темы
+        // Выбор темы
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -50,62 +66,39 @@
                 values: {
                     'default': 'Обычная',
                     'bywolf_mod': 'Космическая',
-                    'custom': '🎨 Персональная'
+                    'custom': '🌈 Цветная'
                 },
                 default: 'default'
             },
             field: {
-                name: 'Выбор темы',
-                description: 'Стиль интерфейса'
+                name: 'Тема оформления',
+                description: 'Выберите стиль интерфейса'
             },
             onChange: function (value) {
                 InterFaceMod.settings.theme = value;
                 Lampa.Storage.set('theme_select', value);
-                applyTheme(value, InterFaceMod.settings.customColor);
-                // НЕ нужно вызывать update() - Lampa обновит интерфейс сам!
+                applyTheme(value, InterFaceMod.settings.color);
             }
         });
 
-        // Поле для цвета (появляется только для персональной темы)
+        // Выбор цвета (только для "Цветной" темы)
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
-                name: 'custom_color',
-                type: 'text',
-                default: ''
+                name: 'color_preset',
+                type: 'select',
+                values: COLOR_PRESETS,
+                default: '#FF0000'
             },
             field: {
-                name: 'Цвет (HEX)',
-                description: 'Например: #FF0000 (красный)',
-                hidden: () => InterFaceMod.settings.theme !== 'custom', // Автоматически скрывается
-                html: `
-                    <div style="display: flex; gap: 10px;">
-                        <input type="text" 
-                               placeholder="#FFFFFF" 
-                               class="settings-input" 
-                               value="${InterFaceMod.settings.customColor || ''}">
-                        <div class="settings-button" 
-                             style="width: 30px; height: 30px; 
-                                    background: ${InterFaceMod.settings.customColor || '#FF0000'};
-                                    border-radius: 4px;"></div>
-                    </div>
-                `,
-                onRender: (field) => {
-                    const input = field.querySelector('input');
-                    const colorPreview = field.querySelector('.settings-button');
-
-                    input.addEventListener('input', (e) => {
-                        const color = e.target.value;
-                        if (/^#[0-9A-F]{6}$/i.test(color)) {
-                            InterFaceMod.settings.customColor = color;
-                            Lampa.Storage.set('custom_color', color);
-                            colorPreview.style.background = color;
-                            if (InterFaceMod.settings.theme === 'custom') {
-                                applyTheme('custom', color);
-                            }
-                        }
-                    });
-                }
+                name: 'Цвет акцентов',
+                description: 'Выберите из популярных вариантов',
+                hidden: () => InterFaceMod.settings.theme !== 'custom'
+            },
+            onChange: function (value) {
+                InterFaceMod.settings.color = value;
+                Lampa.Storage.set('color_preset', value);
+                applyTheme('custom', value);
             }
         });
     }
@@ -118,6 +111,6 @@
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
         version: '1.0.0',
-        description: 'Кастомные темы с выбором цвета'
+        description: 'Темы с выбором цвета'
     };
 })();
