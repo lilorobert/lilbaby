@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.2',  // обновим версию
+        version: '0.0.2',
         debug: false,
         settings: {
             enabled: true,
@@ -78,14 +78,14 @@
             }
         });
 
-        // Добавляем отдельный пункт для персональной темы
+        // Добавляем отдельный пункт для "Персональной темы"
         Lampa.SettingsApi.addComponent({
             component: 'personal_theme_mod',
             name: 'Персональная тема',
             icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"></path></svg>'
         });
 
-        // Параметр для ввода кода цвета
+        // Параметр для ввода кода цвета в "Персональной теме"
         Lampa.SettingsApi.addParam({
             component: 'personal_theme_mod',
             param: {
@@ -99,7 +99,7 @@
                 onChange: function (value) {
                     InterFaceMod.settings.customColor = value;
                     Lampa.Storage.set('custom_color', value);
-                    applyTheme('custom_theme', value);
+                    applyTheme('custom_theme', value);  // Применяем выбранный цвет
                 }
             }
         });
