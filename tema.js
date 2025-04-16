@@ -60,12 +60,14 @@
     function startPlugin() {
         applyTheme();
 
+        // Добавляем компонент для темы
         Lampa.SettingsApi.addComponent({
             component: 'theme_mod',
             name: 'LampaColor Theme',
             icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
         });
 
+        // Параметр для выбора темы
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -89,6 +91,7 @@
             }
         });
 
+        // Параметр для выбора цвета персональной темы
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -111,6 +114,7 @@
         });
     }
 
+    // Запуск плагина после готовности приложения
     if (window.appready) {
         startPlugin();
     } else {
@@ -121,6 +125,7 @@
         });
     }
 
+    // Регистрация плагина
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
         version: '1.0.3',
