@@ -63,6 +63,19 @@
         $('head').append(style); // Добавляем стили в head
     }
 
+    // Функция для создания палитры цветов
+    function createColorPalette() {
+        const colors = ['#ff69b4', '#4caf50', '#2196f3', '#ff5722', '#9c27b0', '#03a9f4']; // Пример цветов
+        let paletteHtml = '<div id="colorPalette" style="display: flex; gap: 10px; margin-top: 10px;">';
+
+        colors.forEach(color => {
+            paletteHtml += `<div class="colorSwatch" style="width: 30px; height: 30px; background-color: ${color}; cursor: pointer;" data-color="${color}"></div>`;
+        });
+
+        paletteHtml += '</div>';
+        return paletteHtml;
+    }
+
     // Функция для старта плагина
     function startPlugin() {
         applyTheme(); // Применяем текущую тему
@@ -95,30 +108,41 @@
                 InterFaceMod.settings.theme = value; // Сохраняем выбранную тему
                 Lampa.Storage.set('theme_select', value); // Сохраняем в хранилище
                 applyTheme(); // Применяем новую тему
+
+                // Если выбрана персональная тема, отображаем палитру цветов
+                if (value === 'custom') {
+                    document.getElementById('colorPalette').style.display = 'flex';
+                } else {
+                    document.getElementById('colorPalette').style.display = 'none';
+                }
             }
         });
 
-        // Параметр для выбора цвета персональной темы
+        // Добавляем палитру цветов
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
-                name: 'custom_color',
-                type: 'html', // Используем HTML для отображения компонента выбора цвета
-                default: InterFaceMod.settings.customColor,
-                html: `<input type="color" id="colorPicker" value="${InterFaceMod.settings.customColor}">`
+                name: 'custom_color_palette',
+                type: 'html',
+                html: createColorPalette()
             },
             field: {
                 name: 'Цвет персональной темы',
                 description: 'Выберите свой любимый цвет для персональной темы'
             },
-            onChange: function (value) {
-                InterFaceMod.settings.customColor = value; // Сохраняем выбранный цвет
-                Lampa.Storage.set('custom_color', value); // Сохраняем цвет в хранилище
+            condition: () => InterFaceMod.settings.theme === 'custom', // Показываем только для персональной темы
+        });
+
+        // Обработчик изменения цвета из палитры
+        document.addEventListener('click', function (event) {
+            if (event.target && event.target.classList.contains('colorSwatch')) {
+                const selectedColor = event.target.getAttribute('data-color');
+                InterFaceMod.settings.customColor = selectedColor; // Сохраняем выбранный цвет
+                Lampa.Storage.set('custom_color', selectedColor); // Сохраняем цвет в хранилище
                 if (InterFaceMod.settings.theme === 'custom') {
-                    applyTheme(); // Применяем новый цвет, если выбрана персональная тема
+                    applyTheme(); // Применяем новый цвет
                 }
-            },
-            condition: () => InterFaceMod.settings.theme === 'custom' // Показываем только для персональной темы
+            }
         });
     }
 
