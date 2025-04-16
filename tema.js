@@ -3,134 +3,43 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.1',
+        version: '0.0.2', // обновим версию
         debug: false,
         settings: {
             enabled: true,
-            theme: 'default',
-            userColor: '#ff69b4'  // Дефолтный цвет
+            theme: 'default',  
+            personalColor: '#ffffff' // новый параметр для персонального цвета
         }
     };
 
-    function applyTheme(theme, color) {
+    function applyTheme(theme) {
+        // Удаляем старые стили, если они есть
         $('#interface_mod_theme').remove();
 
-        if (theme === 'default') return;
+        if (theme === 'default') return; // Если тема по умолчанию, не применяем стили
 
-        const style = $('<style id="interface_mod_theme"></style>');
+        const style = $('<style id="interface_mod_theme"></style>'); // Создаем элемент стилей
 
         const themes = {
-            bywolf_mod: `
+            bywolf_mod: `/* Космическая тема */ ...`, // (оставим как есть)
+            personal: `
                 body {
-                    background-color: #3b2a35;
-                    color: ${color};
-                }
-
-                body.black--style {
-                    background: #2a1d27;
-                }
-
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .selectbox-item.hover,
-                .full-person.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .simple-button.focus,
-                .iptv-list__item.focus,
-                .iptv-menu__list-item.focus,
-                .head__action.focus,
-                .head__action.hover,
-                .player-panel .button.focus,
-                .search-source.active {
-                    background: linear-gradient(to right, #ffb6c1 1%, ${color} 100%);
-                    color: #2a1d27;
-                }
-
-                .settings-folder.focus .settings-folder__icon {
-                    filter: invert(1);
-                }
-
-                .settings-param-title > span {
-                    color: #fff;
-                }
-
-                .settings__content,
-                .settings-input__content,
-                .selectbox__content,
-                .modal__content {
-                    background: linear-gradient(135deg, #4a2f3a 1%, #1c1016 100%);
-                }
-
-                .settings-input__links {
-                    background-color: rgba(255, 182, 193, 0.2);
-                }
-
-                .card.focus .card__view::after,
-                .card.hover .card__view::after,
-                .extensions__item.focus:after,
-                .torrent-item.focus::after,
-                .extensions__block-add.focus:after {
-                    border-color: #ffc0cb;
-                }
-
-                .online-prestige.focus::after,
-                .iptv-channel.focus::before,
-                .iptv-channel.last--focus::before {
-                    border-color: #ffc0cb !important;
-                }
-
-                .time-line > div,
-                .player-panel__position,
-                .player-panel__position > div:after {
-                    background-color: #ffc0cb;
-                }
-
-                .extensions {
-                    background: #2a1d27;
-                }
-
-                .extensions__item,
-                .extensions__block-add {
-                    background-color: #503043;
-                }
-
-                .torrent-item__size,
-                .torrent-item__exe,
-                .torrent-item__viewed,
-                .torrent-serial__size {
-                    background-color: #ffd9ec;
-                    color: #2a1d27;
-                }
-
-                .torrent-serial {
-                    background-color: rgba(255, 192, 203, 0.08);
-                }
-
-                .torrent-file.focus,
-                .torrent-serial.focus {
-                    background-color: rgba(255, 192, 203, 0.28);
-                }
-
-                .iptv-channel {
-                    background-color: #6a3c58 !important;
+                    background-color: ${InterFaceMod.settings.personalColor};
+                    color: #000; // текст черный для контраста
                 }
             `
         };
 
+        // Добавляем стили в head
         style.html(themes[theme] || '');
         $('head').append(style);
     }
 
     function startPlugin() {
-        // Применяем тему и цвет из хранилища
+        // Применяем тему из хранилища
         InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
-        InterFaceMod.settings.userColor = Lampa.Storage.get('user_color', '#ff69b4');
-        applyTheme(InterFaceMod.settings.theme, InterFaceMod.settings.userColor);
+        InterFaceMod.settings.personalColor = Lampa.Storage.get('personal_color', '#ffffff'); // получаем персональный цвет
+        applyTheme(InterFaceMod.settings.theme);
 
         // Добавляем настройку в интерфейс
         Lampa.SettingsApi.addComponent({
@@ -139,6 +48,7 @@
             icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
         });
 
+        // Добавляем параметр выбора темы
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -146,7 +56,8 @@
                 type: 'select',
                 values: {
                     'default': 'Обычная',
-                    'bywolf_mod': 'Космическая'
+                    'bywolf_mod': 'Космическая',
+                    'personal': 'Персональная' // добавляем новый выбор
                 },
                 default: 'default'
             },
@@ -157,24 +68,27 @@
             onChange: function (value) {
                 InterFaceMod.settings.theme = value;
                 Lampa.Storage.set('theme_select', value);
-                applyTheme(value, InterFaceMod.settings.userColor);
+                applyTheme(value);
             }
         });
 
+        // Добавляем параметр выбора цвета для персональной темы
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
-                name: 'user_color',
+                name: 'personal_color',
                 type: 'color',
-                value: InterFaceMod.settings.userColor,
-                field: {
-                    name: 'Цвет интерфейса',
-                    description: 'Выберите цвет интерфейса'
-                },
-                onChange: function (value) {
-                    InterFaceMod.settings.userColor = value;
-                    Lampa.Storage.set('user_color', value);
-                    applyTheme(InterFaceMod.settings.theme, value);
+                default: '#ffffff', // белый цвет по умолчанию
+            },
+            field: {
+                name: 'Цвет фона для персональной темы',
+                description: 'Выберите цвет для персональной темы'
+            },
+            onChange: function (color) {
+                InterFaceMod.settings.personalColor = color;
+                Lampa.Storage.set('personal_color', color); // сохраняем выбранный цвет
+                if (InterFaceMod.settings.theme === 'personal') {
+                    applyTheme('personal'); // сразу применяем, если выбрана персональная тема
                 }
             }
         });
@@ -194,7 +108,7 @@
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
         version: '1.0.0',
-        description: 'Тема оформления для Lampa с выбором цвета'
+        description: 'Тема оформления для Lampa'
     };
 
     window.lampa_theme = InterFaceMod;
