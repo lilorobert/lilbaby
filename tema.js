@@ -6,17 +6,19 @@
         version: '1.0.3',
         settings: {
             theme: Lampa.Storage.get('theme_select', 'default'),
-            customColor: Lampa.Storage.get('custom_color', '#ff69b4')
+            customColor: Lampa.Storage.get('custom_color', '#ff69b4') // Цвет по умолчанию
         }
     };
 
+    // Функция применения темы
     function applyTheme() {
-        $('#interface_mod_theme').remove();
+        $('#interface_mod_theme').remove(); // Удаляем старые стили
 
-        const style = $('<style id="interface_mod_theme"></style>');
+        const style = $('<style id="interface_mod_theme"></style>'); // Создаем новый элемент стилей
 
+        // Применяем стили в зависимости от выбранной темы
         if (InterFaceMod.settings.theme === 'default') {
-            $('head').append(style);
+            $('head').append(style); // Обычная тема, без изменений
             return;
         }
 
@@ -35,8 +37,12 @@
         }
 
         if (InterFaceMod.settings.theme === 'custom') {
-            const color = InterFaceMod.settings.customColor;
+            const color = InterFaceMod.settings.customColor; // Получаем выбранный цвет
             style.html(`
+                body {
+                    background-color: #2a1d27; /* Фон темный для персональной темы */
+                    color: #fff;
+                }
                 .menu__item.focus,
                 .menu__item.hover,
                 .settings-param.focus,
@@ -44,7 +50,7 @@
                 .simple-button.focus,
                 .full-start__button.focus,
                 .head__action.focus {
-                    background: ${color} !important;
+                    background: ${color} !important; /* Цвет, выбранный пользователем */
                     color: #fff !important;
                 }
 
@@ -54,13 +60,14 @@
             `);
         }
 
-        $('head').append(style);
+        $('head').append(style); // Добавляем стили в head
     }
 
+    // Функция для старта плагина
     function startPlugin() {
-        applyTheme();
+        applyTheme(); // Применяем текущую тему
 
-        // Добавляем компонент для темы
+        // Добавляем компонент для выбора темы
         Lampa.SettingsApi.addComponent({
             component: 'theme_mod',
             name: 'LampaColor Theme',
@@ -85,9 +92,9 @@
                 description: 'Выберите тему оформления интерфейса'
             },
             onChange: function (value) {
-                InterFaceMod.settings.theme = value;
-                Lampa.Storage.set('theme_select', value);
-                applyTheme();
+                InterFaceMod.settings.theme = value; // Сохраняем выбранную тему
+                Lampa.Storage.set('theme_select', value); // Сохраняем в хранилище
+                applyTheme(); // Применяем новую тему
             }
         });
 
@@ -96,21 +103,21 @@
             component: 'theme_mod',
             param: {
                 name: 'custom_color',
-                type: 'color',
+                type: 'color', // Выбор цвета
                 default: InterFaceMod.settings.customColor
             },
             field: {
                 name: 'Цвет персональной темы',
-                description: 'Выберите свой любимый цвет'
+                description: 'Выберите свой любимый цвет для персональной темы'
             },
             onChange: function (value) {
-                InterFaceMod.settings.customColor = value;
-                Lampa.Storage.set('custom_color', value);
+                InterFaceMod.settings.customColor = value; // Сохраняем выбранный цвет
+                Lampa.Storage.set('custom_color', value); // Сохраняем цвет в хранилище
                 if (InterFaceMod.settings.theme === 'custom') {
-                    applyTheme();
+                    applyTheme(); // Применяем новый цвет, если выбрана персональная тема
                 }
             },
-            condition: () => InterFaceMod.settings.theme === 'custom'
+            condition: () => InterFaceMod.settings.theme === 'custom' // Показываем только для персональной темы
         });
     }
 
