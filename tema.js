@@ -7,23 +7,23 @@
         debug: false,
         settings: {
             enabled: true,
-            theme: 'default'  
+            theme: 'default',
+            userColor: '#ff69b4'  // Дефолтный цвет
         }
     };
 
-    function applyTheme(theme) {
-        // Удаляем старые стили, если они есть
+    function applyTheme(theme, color) {
         $('#interface_mod_theme').remove();
 
-        if (theme === 'default') return; // Если тема по умолчанию, не применяем стили
+        if (theme === 'default') return;
 
-        const style = $('<style id="interface_mod_theme"></style>'); // Создаем элемент стилей
+        const style = $('<style id="interface_mod_theme"></style>');
 
         const themes = {
             bywolf_mod: `
                 body {
                     background-color: #3b2a35;
-                    color: #ffd9ec;
+                    color: ${color};
                 }
 
                 body.black--style {
@@ -47,7 +47,7 @@
                 .head__action.hover,
                 .player-panel .button.focus,
                 .search-source.active {
-                    background: linear-gradient(to right, #ffb6c1 1%, #ff69b4 100%);
+                    background: linear-gradient(to right, #ffb6c1 1%, ${color} 100%);
                     color: #2a1d27;
                 }
 
@@ -122,15 +122,15 @@
             `
         };
 
-        // Добавляем стили в head
         style.html(themes[theme] || '');
         $('head').append(style);
     }
 
     function startPlugin() {
-        // Применяем тему из хранилища
+        // Применяем тему и цвет из хранилища
         InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
-        applyTheme(InterFaceMod.settings.theme);
+        InterFaceMod.settings.userColor = Lampa.Storage.get('user_color', '#ff69b4');
+        applyTheme(InterFaceMod.settings.theme, InterFaceMod.settings.userColor);
 
         // Добавляем настройку в интерфейс
         Lampa.SettingsApi.addComponent({
@@ -157,7 +157,25 @@
             onChange: function (value) {
                 InterFaceMod.settings.theme = value;
                 Lampa.Storage.set('theme_select', value);
-                applyTheme(value);
+                applyTheme(value, InterFaceMod.settings.userColor);
+            }
+        });
+
+        Lampa.SettingsApi.addParam({
+            component: 'theme_mod',
+            param: {
+                name: 'user_color',
+                type: 'color',
+                value: InterFaceMod.settings.userColor,
+                field: {
+                    name: 'Цвет интерфейса',
+                    description: 'Выберите цвет интерфейса'
+                },
+                onChange: function (value) {
+                    InterFaceMod.settings.userColor = value;
+                    Lampa.Storage.set('user_color', value);
+                    applyTheme(InterFaceMod.settings.theme, value);
+                }
             }
         });
     }
@@ -176,7 +194,7 @@
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
         version: '1.0.0',
-        description: 'Тема оформления для Lampa'
+        description: 'Тема оформления для Lampa с выбором цвета'
     };
 
     window.lampa_theme = InterFaceMod;
