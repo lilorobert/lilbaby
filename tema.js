@@ -1,112 +1,151 @@
 (function () {
     'use strict';
 
+    // Основной объект плагина
     var InterFaceMod = {
+        // Название плагина
         name: 'LampaColor',
+        // Версия плагина
         version: '0.0.1',
+        // Включить отладку
         debug: false,
+        // Настройки по умолчанию
         settings: {
             enabled: true,
-            theme: 'default'
+            theme: 'barbie', // Устанавливаем тему на 'barbie' по умолчанию
         }
     };
 
+    // Функция для применения тем
     function applyTheme(theme) {
+        // Удаляем предыдущие стили темы
         $('#interface_mod_theme').remove();
 
+        // Если выбрано "Нет", просто удаляем стили
         if (theme === 'default') return;
 
+        // Создаем новый стиль
         const style = $('<style id="interface_mod_theme"></style>');
 
+        // Определяем стили для разных тем
         const themes = {
-            bywolf_mod: `
+            barbie: `
                 body {
-                    background: linear-gradient(135deg, #090227 0%, #170b34 50%, #261447 100%);
-                    color: #ffffff;
+                    background-color: #3b2a35;
+                    color: #ffd9ec;
                 }
+
+                body.black--style {
+                    background: #2a1d27;
+                }
+
                 .menu__item.focus,
                 .menu__item.traverse,
                 .menu__item.hover,
                 .settings-folder.focus,
                 .settings-param.focus,
                 .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
                 .full-start__button.focus,
                 .full-descr__tag.focus,
-                .player-panel .button.focus {
-                    background: linear-gradient(to right, #fc00ff, #00dbde);
-                    color: #fff;
-                    box-shadow: 0 0 30px rgba(252, 0, 255, 0.3);
-                    animation: cosmic-pulse 2s infinite;
-                }
-                @keyframes cosmic-pulse {
-                    0% { box-shadow: 0 0 20px rgba(252, 0, 255, 0.3); }
-                    50% { box-shadow: 0 0 30px rgba(0, 219, 222, 0.3); }
-                    100% { box-shadow: 0 0 20px rgba(252, 0, 255, 0.3); }
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #fc00ff;
-                    box-shadow: 0 0 30px rgba(0, 219, 222, 0.5);
-                }
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
                 .head__action.focus,
-                .head__action.hover {
-                    background: linear-gradient(45deg, #fc00ff, #00dbde);
-                    animation: cosmic-pulse 2s infinite;
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ffb6c1 1%, #ff69b4 100%);
+                    color: #2a1d27;
                 }
-                .full-start__background {
-                    opacity: 0.8;
-                    filter: saturate(1.3) contrast(1.1);
+
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
                 }
+
+                .settings-param-title > span {
+                    color: #fff;
+                }
+
                 .settings__content,
                 .settings-input__content,
                 .selectbox__content,
                 .modal__content {
-                    background: rgba(9, 2, 39, 0.95);
-                    border: 1px solid rgba(252, 0, 255, 0.1);
-                    box-shadow: 0 0 30px rgba(0, 219, 222, 0.1);
+                    background: linear-gradient(135deg, #4a2f3a 1%, #1c1016 100%);
+                }
+
+                .settings-input__links {
+                    background-color: rgba(255, 182, 193, 0.2);
+                }
+
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ffc0cb;
+                }
+
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ffc0cb !important;
+                }
+
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ffc0cb;
+                }
+
+                .extensions {
+                    background: #2a1d27;
+                }
+
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #503043;
+                }
+
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #ffd9ec;
+                    color: #2a1d27;
+                }
+
+                .torrent-serial {
+                    background-color: rgba(255, 192, 203, 0.08);
+                }
+
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 192, 203, 0.28);
+                }
+
+                .iptv-channel {
+                    background-color: #6a3c58 !important;
                 }
             `
         };
 
+        // Устанавливаем стили для выбранной темы
         style.html(themes[theme] || '');
+
+        // Добавляем стиль в head
         $('head').append(style);
     }
 
+    // Функция инициализации плагина
     function startPlugin() {
-        // Применяем тему из хранилища
-        InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
+        // Применяем настройки
+        InterFaceMod.settings.theme = 'barbie'; // Устанавливаем тему на 'barbie'
         applyTheme(InterFaceMod.settings.theme);
-
-        // Добавляем настройку в интерфейс
-        Lampa.SettingsApi.addComponent({
-            component: 'theme_mod',
-            name: 'LampaColor Theme',
-            icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
-        });
-
-        Lampa.SettingsApi.addParam({
-            component: 'theme_mod',
-            param: {
-                name: 'theme_select',
-                type: 'select',
-                values: {
-                    'default': 'Обычная',
-                    'bywolf_mod': 'Космическая'
-                },
-                default: 'default'
-            },
-            field: {
-                name: 'Выбор темы',
-                description: 'Выберите тему оформления интерфейса'
-            },
-            onChange: function (value) {
-                InterFaceMod.settings.theme = value;
-                Lampa.Storage.set('theme_select', value);
-                applyTheme(value);
-            }
-        });
     }
 
+    // Ждем загрузки приложения и запускаем плагин
     if (window.appready) {
         startPlugin();
     } else {
@@ -117,12 +156,6 @@
         });
     }
 
-    // Регистрация плагина
-    Lampa.Manifest.plugins = {
-        name: 'LampaColor',
-        version: '1.0.0',
-        description: 'Тема оформления для Lampa'
-    };
-
-    window.lampa_theme = InterFaceMod;
+    // Экспортируем объект плагина для внешнего доступа
+    window.season_info = InterFaceMod;
 })();
