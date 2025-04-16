@@ -3,13 +3,9 @@
 
     // Основной объект плагина
     var InterFaceMod = {
-        // Название плагина
         name: 'LampaColor',
-        // Версия плагина
         version: '0.0.1',
-        // Включить отладку
         debug: false,
-        // Настройки по умолчанию
         settings: {
             enabled: true,
             theme: 'default', // По умолчанию используем стандартную тему
@@ -142,13 +138,7 @@
         $('head').append(style);
     }
 
-    // Функция инициализации плагина
-    function startPlugin() {
-        // Применяем настройки
-        applyTheme(InterFaceMod.settings.theme);
-    }
-
-    // Инициализация меню с выбором темы
+    // Функция для создания меню с выбором темы
     function createMenu() {
         Lampa.Menu.add({
             'id': 'interface_mod',
@@ -162,17 +152,23 @@
                     'value': InterFaceMod.settings.theme,
                     'change': function (value) {
                         InterFaceMod.settings.theme = value;
-                        applyTheme(value);
+                        applyTheme(value); // Применяем выбранную тему
                     }
                 }
             ]
         });
     }
 
+    // Инициализация плагина
+    function startPlugin() {
+        // Применяем настройки
+        applyTheme(InterFaceMod.settings.theme);
+    }
+
     // Ждем загрузки приложения и запускаем плагин
     if (window.appready) {
         startPlugin();
-        createMenu(); // Создаем меню после инициализации плагина
+        createMenu(); // Создаем меню при готовности приложения
     } else {
         Lampa.Listener.follow('app', function (event) {
             if (event.type === 'ready') {
