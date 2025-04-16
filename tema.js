@@ -55,6 +55,7 @@
             icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
         });
 
+        // Добавляем параметр для выбора темы
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -63,7 +64,6 @@
                 values: {
                     'default': 'Обычная',
                     'bywolf_mod': 'Космическая',
-                    'custom_theme': 'Персональная'
                 },
                 default: 'default'
             },
@@ -78,8 +78,16 @@
             }
         });
 
+        // Добавляем отдельный пункт для персональной темы
+        Lampa.SettingsApi.addComponent({
+            component: 'personal_theme_mod',
+            name: 'Персональная тема',
+            icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"></path></svg>'
+        });
+
+        // Параметр для ввода кода цвета
         Lampa.SettingsApi.addParam({
-            component: 'theme_mod',
+            component: 'personal_theme_mod',
             param: {
                 name: 'custom_color',
                 type: 'text',
@@ -91,9 +99,7 @@
                 onChange: function (value) {
                     InterFaceMod.settings.customColor = value;
                     Lampa.Storage.set('custom_color', value);
-                    if (InterFaceMod.settings.theme === 'custom_theme') {
-                        applyTheme('custom_theme', value);
-                    }
+                    applyTheme('custom_theme', value);
                 }
             }
         });
