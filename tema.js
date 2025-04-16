@@ -3,71 +3,36 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.2',
+        version: '0.0.3',
         debug: false,
         settings: {
             enabled: true,
             theme: 'default',
-            customColor: '#ff69b4' // Значение по умолчанию
+            customColor: '' // Пустое значение по умолчанию
         }
     };
 
     function applyTheme(theme, customColor) {
         $('#interface_mod_theme').remove();
-
         if (theme === 'default') return;
 
         const style = $('<style id="interface_mod_theme"></style>');
 
         const themes = {
-            bywolf_mod: `
-                body {
-                    background-color: #3b2a35;
-                    color: #ffd9ec;
-                }
-                /* ... остальные стили bywolf_mod ... */
-            `,
-            custom: `
-                body {
-                    background-color: #1a1a1a;
-                    color: #ffffff;
-                }
-
+            bywolf_mod: `...`, // Твой старый CSS для bywolf_mod
+            custom: customColor ? `
                 .menu__item.focus,
-                .menu__item.traverse,
                 .menu__item.hover,
                 .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .selectbox-item.hover,
-                .full-person.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .simple-button.focus,
-                .iptv-list__item.focus,
-                .iptv-menu__list-item.focus,
-                .head__action.focus,
-                .head__action.hover,
-                .player-panel .button.focus,
-                .search-source.active {
-                    background: ${customColor};
-                    color: #000000;
-                }
-
                 .card.focus .card__view::after,
-                .card.hover .card__view::after,
-                .extensions__item.focus:after,
-                .torrent-item.focus::after,
-                .extensions__block-add.focus:after {
-                    border-color: ${customColor};
+                .player-panel .button.focus {
+                    background: ${customColor} !important;
+                    color: #000 !important;
                 }
-
-                .time-line > div,
-                .player-panel__position,
-                .player-panel__position > div:after {
-                    background-color: ${customColor};
+                .time-line > div {
+                    background: ${customColor} !important;
                 }
-            `
+            ` : ''
         };
 
         style.html(themes[theme] || '');
@@ -76,15 +41,16 @@
 
     function startPlugin() {
         InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
-        InterFaceMod.settings.customColor = Lampa.Storage.get('custom_color', '#ff69b4');
+        InterFaceMod.settings.customColor = Lampa.Storage.get('custom_color', '');
         applyTheme(InterFaceMod.settings.theme, InterFaceMod.settings.customColor);
 
         Lampa.SettingsApi.addComponent({
             component: 'theme_mod',
             name: 'LampaColor Theme',
-            icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
+            icon: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>'
         });
 
+        // Выбор темы
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -93,64 +59,84 @@
                 values: {
                     'default': 'Обычная',
                     'bywolf_mod': 'Космическая',
-                    'custom': 'Персональная'
+                    'custom': '🎨 Персональная'
                 },
                 default: 'default'
             },
             field: {
                 name: 'Выбор темы',
-                description: 'Выберите тему оформления интерфейса'
+                description: 'Выберите стиль оформления'
             },
             onChange: function (value) {
                 InterFaceMod.settings.theme = value;
                 Lampa.Storage.set('theme_select', value);
                 applyTheme(value, InterFaceMod.settings.customColor);
+                Lampa.SettingsApi.update(); // Обновляем настройки, чтобы показать/скрыть поле цвета
             }
         });
 
-        // Добавляем новую настройку для кастомного цвета
+        // Поле для цвета (появляется только при выборе "Персональная")
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
                 name: 'custom_color',
                 type: 'text',
-                default: '#ff69b4'
+                default: ''
             },
             field: {
-                name: 'Персональный цвет',
-                description: 'Введите HEX-код цвета (например, #ff0000)',
-                hidden: () => InterFaceMod.settings.theme !== 'custom' // Показываем только когда выбрана персональная тема
-            },
-            onChange: function (value) {
-                // Проверяем, что это корректный HEX-цвет
-                if (/^#[0-9A-F]{6}$/i.test(value)) {
-                    InterFaceMod.settings.customColor = value;
-                    Lampa.Storage.set('custom_color', value);
-                    if (InterFaceMod.settings.theme === 'custom') {
-                        applyTheme('custom', value);
+                name: 'HEX-код цвета',
+                description: 'Например: #ff0000 (красный)',
+                hidden: () => InterFaceMod.settings.theme !== 'custom',
+                html: `
+                    <div class="settings-param__value" style="gap: 10px; display: flex;">
+                        <input type="text" placeholder="#000000" class="settings-input" data-color-input>
+                        <button class="settings-button" data-color-example style="
+                            background: #ff0000;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 4px;
+                        "></button>
+                    </div>
+                `,
+                onRender: (field) => {
+                    const input = field.querySelector('[data-color-input]');
+                    const exampleBtn = field.querySelector('[data-color-example]');
+
+                    input.value = InterFaceMod.settings.customColor;
+
+                    // Примеры цветов
+                    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+                    let colorIndex = 0;
+
+                    exampleBtn.addEventListener('click', () => {
+                        colorIndex = (colorIndex + 1) % colors.length;
+                        input.value = colors[colorIndex];
+                        updateColor(colors[colorIndex]);
+                    });
+
+                    input.addEventListener('input', (e) => {
+                        updateColor(e.target.value);
+                    });
+
+                    function updateColor(color) {
+                        if (/^#[0-9A-F]{6}$/i.test(color)) {
+                            InterFaceMod.settings.customColor = color;
+                            Lampa.Storage.set('custom_color', color);
+                            applyTheme('custom', color);
+                            exampleBtn.style.background = color;
+                        }
                     }
-                } else {
-                    Lampa.Noty.show('Введите корректный HEX-цвет (например, #ff0000)');
                 }
             }
         });
     }
 
-    if (window.appready) {
-        startPlugin();
-    } else {
-        Lampa.Listener.follow('app', function (event) {
-            if (event.type === 'ready') {
-                startPlugin();
-            }
-        });
-    }
+    if (window.appready) startPlugin();
+    else Lampa.Listener.follow('app', (e) => e.type === 'ready' && startPlugin());
 
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
         version: '1.0.0',
-        description: 'Тема оформления для Lampa с поддержкой персонального цвета'
+        description: 'Кастомизация тем с персональными цветами'
     };
-
-    window.lampa_theme = InterFaceMod;
 })();
