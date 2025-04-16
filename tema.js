@@ -1,31 +1,25 @@
 (function () {
     'use strict';
 
-    // Основной объект плагина
     var InterFaceMod = {
         name: 'LampaColor',
         version: '0.0.1',
         debug: false,
         settings: {
             enabled: true,
-            theme: 'default', // По умолчанию используем стандартную тему
+            theme: 'default'  
         }
     };
 
-    // Функция для применения темы
     function applyTheme(theme) {
-        // Удаляем предыдущие стили темы
         $('#interface_mod_theme').remove();
 
-        // Если выбрано "Нет", просто удаляем стили
         if (theme === 'default') return;
 
-        // Создаем новый стиль
         const style = $('<style id="interface_mod_theme"></style>');
 
-        // Определяем стили для разных тем
         const themes = {
-            barbie: `
+            bywolf_mod: `
                 body {
                     background-color: #3b2a35;
                     color: #ffd9ec;
@@ -124,60 +118,64 @@
                 .iptv-channel {
                     background-color: #6a3c58 !important;
                 }
-            `,
-            // Другие темы могут быть добавлены сюда
-            default: `
-                /* Здесь могут быть стили для стандартной темы */
             `
         };
 
-        // Устанавливаем стили для выбранной темы
-        style.html(themes[theme] || themes['default']);
-
-        // Добавляем стиль в head
+        style.html(themes[theme] || '');
         $('head').append(style);
     }
 
-    // Функция для создания меню с выбором темы
-    function createMenu() {
-        Lampa.Menu.add({
-            'id': 'interface_mod',
-            'title': 'Интерфейс',
-            'list': [
-                {
-                    'title': 'Тема',
-                    'name': 'theme',
-                    'type': 'select',
-                    'values': ['default', 'barbie'], // Добавляем новую тему "barbie"
-                    'value': InterFaceMod.settings.theme,
-                    'change': function (value) {
-                        InterFaceMod.settings.theme = value;
-                        applyTheme(value); // Применяем выбранную тему
-                    }
-                }
-            ]
-        });
-    }
-
-    // Инициализация плагина
     function startPlugin() {
-        // Применяем настройки
+        // Применяем тему из хранилища
+        InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
         applyTheme(InterFaceMod.settings.theme);
-    }
 
-    // Ждем загрузки приложения и запускаем плагин
-    if (window.appready) {
-        startPlugin();
-        createMenu(); // Создаем меню при готовности приложения
-    } else {
-        Lampa.Listener.follow('app', function (event) {
-            if (event.type === 'ready') {
-                startPlugin();
-                createMenu(); // Создаем меню при готовности приложения
+        // Добавляем настройку в интерфейс
+        Lampa.SettingsApi.addComponent({
+            component: 'theme_mod',
+            name: 'LampaColor Theme',
+            icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
+        });
+
+        Lampa.SettingsApi.addParam({
+            component: 'theme_mod',
+            param: {
+                name: 'theme_select',
+                type: 'select',
+                values: {
+                    'default': 'Обычная',
+                    'bywolf_mod': 'Космическая'
+                },
+                default: 'default'
+            },
+            field: {
+                name: 'Выбор темы',
+                description: 'Выберите тему оформления интерфейса'
+            },
+            onChange: function (value) {
+                InterFaceMod.settings.theme = value;
+                Lampa.Storage.set('theme_select', value);
+                applyTheme(value);
             }
         });
     }
 
-    // Экспортируем объект плагина для внешнего доступа
-    window.season_info = InterFaceMod;
+    if (window.appready) {
+        startPlugin();
+    } else {
+        Lampa.Listener.follow('app', function (event) {
+            if (event.type === 'ready') {
+                startPlugin();
+            }
+        });
+    }
+
+    // Регистрация плагина
+    Lampa.Manifest.plugins = {
+        name: 'LampaColor',
+        version: '1.0.0',
+        description: 'Тема оформления для Lampa'
+    };
+
+    window.lampa_theme = InterFaceMod;
 })();
