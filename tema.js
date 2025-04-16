@@ -69,6 +69,13 @@
                 InterFaceMod.settings.theme = value;
                 Lampa.Storage.set('theme_select', value);
                 applyTheme(value);
+                
+                // Если выбрана персональная тема, показываем элемент для выбора цвета
+                if (value === 'personal') {
+                    $('#personal_color_picker').show();
+                } else {
+                    $('#personal_color_picker').hide();
+                }
             }
         });
 
@@ -92,6 +99,11 @@
                 }
             }
         });
+
+        // Скрываем выбор цвета, если выбрана не персональная тема
+        if (InterFaceMod.settings.theme !== 'personal') {
+            $('#personal_color_picker').hide();
+        }
     }
 
     if (window.appready) {
