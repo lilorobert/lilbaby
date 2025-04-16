@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.2',
+        version: '0.0.3',
         debug: false,
         settings: {
             enabled: true,
@@ -82,25 +82,27 @@
         Lampa.SettingsApi.addComponent({
             component: 'personal_theme_mod',
             name: 'Персональная тема',
-            icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"></path></svg>'
-        });
+            icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"></path></svg>',
+            onClick: function () {
+                // Создаем поле ввода цвета для персональной темы
+                let colorInput = $('<input type="text" id="customColorInput" value="' + InterFaceMod.settings.customColor + '" placeholder="#ffffff" />');
+                let colorLabel = $('<label for="customColorInput">Введите код цвета:</label>');
 
-        // Параметр для ввода кода цвета в "Персональной теме"
-        Lampa.SettingsApi.addParam({
-            component: 'personal_theme_mod',
-            param: {
-                name: 'custom_color',
-                type: 'text',
-                value: InterFaceMod.settings.customColor,
-                field: {
-                    name: 'Персональный цвет фона',
-                    description: 'Введите код цвета для персональной темы (например, #ff5733)'
-                },
-                onChange: function (value) {
-                    InterFaceMod.settings.customColor = value;
-                    Lampa.Storage.set('custom_color', value);
-                    applyTheme('custom_theme', value);  // Применяем выбранный цвет
-                }
+                // Создаем блок для ввода
+                let colorWrapper = $('<div id="customColorWrapper"></div>');
+                colorWrapper.append(colorLabel);
+                colorWrapper.append(colorInput);
+
+                // Добавляем в интерфейс
+                $('#settings_page').append(colorWrapper);
+
+                // Добавляем обработчик изменения значения
+                colorInput.on('input', function () {
+                    let colorValue = $(this).val();
+                    InterFaceMod.settings.customColor = colorValue;
+                    Lampa.Storage.set('custom_color', colorValue);
+                    applyTheme('custom_theme', colorValue);  // Применяем выбранный цвет
+                });
             }
         });
     }
