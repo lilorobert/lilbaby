@@ -7,7 +7,7 @@
         debug: false,
         settings: {
             enabled: true,
-            theme: 'default'
+            theme: 'default'  
         }
     };
 
@@ -25,84 +25,100 @@
                     background-color: #3b2a35;
                     color: #ffd9ec;
                 }
-                /* Добавьте остальные стили для bywolf_mod */
-            `,
-            cosmic_blue: `
-                body {
-                    background-color: #001f3d;
-                    color: #a7c7e7;
+
+                body.black--style {
+                    background: #2a1d27;
                 }
-                /* Добавьте остальные стили для cosmic_blue */
-            `,
-            sunny_yellow: `
-                body {
-                    background-color: #ffec3d;
+
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ffb6c1 1%, #ff69b4 100%);
                     color: #2a1d27;
                 }
-                /* Добавьте остальные стили для sunny_yellow */
-            `,
-            forest_green: `
-                body {
-                    background-color: #228b22;
-                    color: #f0e68c;
+
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
                 }
-                /* Добавьте остальные стили для forest_green */
-            `,
-            ocean_blue: `
-                body {
-                    background-color: #0077be;
-                    color: #f0f8ff;
+
+                .settings-param-title > span {
+                    color: #fff;
                 }
-                /* Добавьте остальные стили для ocean_blue */
-            `,
-            sunset_orange: `
-                body {
-                    background-color: #ff4500;
-                    color: #fff8dc;
+
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #4a2f3a 1%, #1c1016 100%);
                 }
-                /* Добавьте остальные стили для sunset_orange */
-            `,
-            lavender_purple: `
-                body {
-                    background-color: #8a2be2;
-                    color: #ffffff;
+
+                .settings-input__links {
+                    background-color: rgba(255, 182, 193, 0.2);
                 }
-                /* Добавьте остальные стили для lavender_purple */
-            `,
-            cool_gray: `
-                body {
-                    background-color: #708090;
-                    color: #ffffff;
+
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ffc0cb;
                 }
-                /* Добавьте остальные стили для cool_gray */
-            `,
-            cherry_red: `
-                body {
-                    background-color: #d2042d;
-                    color: #fffaf0;
+
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ffc0cb !important;
                 }
-                /* Добавьте остальные стили для cherry_red */
-            `,
-            pastel_pink: `
-                body {
-                    background-color: #ffb6c1;
+
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ffc0cb;
+                }
+
+                .extensions {
+                    background: #2a1d27;
+                }
+
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #503043;
+                }
+
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #ffd9ec;
                     color: #2a1d27;
                 }
-                /* Добавьте остальные стили для pastel_pink */
-            `,
-            midnight_black: `
-                body {
-                    background-color: #000000;
-                    color: #ffffff;
+
+                .torrent-serial {
+                    background-color: rgba(255, 192, 203, 0.08);
                 }
-                /* Добавьте остальные стили для midnight_black */
-            `,
-            emerald_green: `
-                body {
-                    background-color: #50c878;
-                    color: #ffffff;
+
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 192, 203, 0.28);
                 }
-                /* Добавьте остальные стили для emerald_green */
+
+                .iptv-channel {
+                    background-color: #6a3c58 !important;
+                }
             `
         };
 
@@ -130,18 +146,7 @@
                 type: 'select',
                 values: {
                     'default': 'Обычная',
-                    'bywolf_mod': 'Космическая',
-                    'cosmic_blue': 'Космический Синий',
-                    'sunny_yellow': 'Солнечный Желтый',
-                    'forest_green': 'Лесной Зеленый',
-                    'ocean_blue': 'Океанский Синий',
-                    'sunset_orange': 'Закатный Оранжевый',
-                    'lavender_purple': 'Лаванда',
-                    'cool_gray': 'Прохладный Серый',
-                    'cherry_red': 'Вишневый Красный',
-                    'pastel_pink': 'Пастельный Розовый',
-                    'midnight_black': 'Полночный Черный',
-                    'emerald_green': 'Изумрудно Зеленый'
+                    'bywolf_mod': 'Космическая'
                 },
                 default: 'default'
             },
