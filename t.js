@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '1.0.0',
+        version: '1.1.1',
         debug: false,
         settings: {
             enabled: true,
@@ -13,197 +13,129 @@
 
     function applyTheme(theme) {
         $('#interface_mod_theme').remove();
-
         if (theme === 'default') return;
 
         const style = $('<style id="interface_mod_theme"></style>');
 
         const themes = {
-            bywolf_mod: ` /* Твоя старая розовая тема */
-                body {
-                    background-color: #3b2a35;
-                    color: #ffd9ec;
+            neon_night: `
+                body { background-color: #0f0f1b; color: #e0ff70; }
+                body.black--style { background: #181827; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #c471f5, 0 0 15px rgba(196, 113, 245, 0.5) !important;
+                    background: transparent !important;
                 }
-                body.black--style {
-                    background: #2a1d27;
-                }
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .selectbox-item.hover,
-                .full-person.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .simple-button.focus,
-                .iptv-list__item.focus,
-                .iptv-menu__list-item.focus,
-                .head__action.focus,
-                .head__action.hover,
-                .player-panel .button.focus,
-                .search-source.active {
-                    background: linear-gradient(to right, #ffb6c1 1%, #ff69b4 100%);
-                    color: #2a1d27;
-                }
-                .settings-folder.focus .settings-folder__icon {
-                    filter: invert(1);
-                }
-                .settings-param-title > span {
-                    color: #fff;
-                }
-                .settings__content,
-                .settings-input__content,
-                .selectbox__content,
-                .modal__content {
-                    background: linear-gradient(135deg, #4a2f3a 1%, #1c1016 100%);
-                }
-                .settings-input__links {
-                    background-color: rgba(255, 182, 193, 0.2);
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after,
-                .extensions__item.focus:after,
-                .torrent-item.focus::after,
-                .extensions__block-add.focus:after {
-                    border: 2px solid #ffc0cb;
-                    background: none !important;
-                }
-                .online-prestige.focus::after,
-                .iptv-channel.focus::before,
-                .iptv-channel.last--focus::before {
-                    border-color: #ffc0cb !important;
-                }
-                .time-line > div,
-                .player-panel__position,
-                .player-panel__position > div:after {
-                    background-color: #ffc0cb;
-                }
-                .extensions {
-                    background: #2a1d27;
-                }
-                .extensions__item,
-                .extensions__block-add {
-                    background-color: #503043;
-                }
-                .torrent-item__size,
-                .torrent-item__exe,
-                .torrent-item__viewed,
-                .torrent-serial__size {
-                    background-color: #ffd9ec;
-                    color: #2a1d27;
-                }
-                .torrent-serial {
-                    background-color: rgba(255, 192, 203, 0.08);
-                }
-                .torrent-file.focus,
-                .torrent-serial.focus {
-                    background-color: rgba(255, 192, 203, 0.28);
-                }
-                .iptv-channel {
-                    background-color: #6a3c58 !important;
+                .focus, .hover {
+                    background: linear-gradient(to right, #c471f5, #fa71cd) !important;
+                    color: #0f0f1b !important;
                 }
             `,
-            dark_neon: `
-                body {
-                    background-color: #121212;
-                    color: #e0e0e0;
+            forest_dream: `
+                body { background-color: #1e2d24; color: #d3f2c2; }
+                body.black--style { background: #162019; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #3f8a54, 0 0 15px rgba(63, 138, 84, 0.5) !important;
+                    background: transparent !important;
                 }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #00fff7;
-                    background: none !important;
-                }
-            `,
-            cyberpunk: `
-                body {
-                    background-color: #0f0f1b;
-                    color: #ff00cc;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #ff00cc;
-                    background: none !important;
+                .focus, .hover {
+                    background: linear-gradient(to right, #3f8a54, #a0c49d) !important;
+                    color: #0e1b12 !important;
                 }
             `,
-            solar_gold: `
-                body {
-                    background-color: #1e1e1e;
-                    color: #ffd700;
+            cyber_wave: `
+                body { background-color: #081b29; color: #a8f0ff; }
+                body.black--style { background: #04121d; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #00ffe7, 0 0 15px rgba(0, 255, 231, 0.5) !important;
+                    background: transparent !important;
                 }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #ffd700;
-                    background: none !important;
-                }
-            `,
-            forest_green: `
-                body {
-                    background-color: #1a2e1a;
-                    color: #aaffaa;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #00cc66;
-                    background: none !important;
+                .focus, .hover {
+                    background: linear-gradient(to right, #00ffe7, #0073ff) !important;
+                    color: #081b29 !important;
                 }
             `,
-            violet_night: `
-                body {
-                    background-color: #2e003e;
-                    color: #e0b3ff;
+            sunset_glow: `
+                body { background-color: #2e1a24; color: #ffdbb5; }
+                body.black--style { background: #1e1017; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #ff6e7f, 0 0 15px rgba(255, 110, 127, 0.5) !important;
+                    background: transparent !important;
                 }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #cc66ff;
-                    background: none !important;
-                }
-            `,
-            fire_red: `
-                body {
-                    background-color: #2a0000;
-                    color: #ff9999;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #ff3333;
-                    background: none !important;
+                .focus, .hover {
+                    background: linear-gradient(to right, #ff6e7f, #bfe9ff) !important;
+                    color: #2e1a24 !important;
                 }
             `,
-            ocean_blue: `
-                body {
-                    background-color: #001f3f;
-                    color: #cceeff;
+            peach_milk: `
+                body { background-color: #fff0e6; color: #5c3a21; }
+                body.black--style { background: #f5d3c8; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #ffd1dc, 0 0 15px rgba(255, 209, 220, 0.5) !important;
+                    background: transparent !important;
                 }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #3399ff;
-                    background: none !important;
-                }
-            `,
-            sand_sunset: `
-                body {
-                    background-color: #3c2f2f;
-                    color: #ffe4b5;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #ffcc99;
-                    background: none !important;
+                .focus, .hover {
+                    background: linear-gradient(to right, #ffd1dc, #ffe0b2) !important;
+                    color: #5c3a21 !important;
                 }
             `,
-            mint_fresh: `
-                body {
-                    background-color: #002d2d;
-                    color: #b3fff0;
+            terminal_dark: `
+                body { background-color: #000000; color: #00ff00; font-family: monospace; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #00ff00, 0 0 15px rgba(0, 255, 0, 0.5) !important;
+                    background: transparent !important;
                 }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #66ffcc;
-                    background: none !important;
+                .focus, .hover {
+                    background-color: #003300 !important;
+                    color: #00ff00 !important;
                 }
-            `
+            `,
+            arctic_light: `
+                body { background-color: #e0f7fa; color: #004d40; }
+                body.black--style { background: #cceef0; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #b2ebf2, 0 0 15px rgba(178, 235, 242, 0.5) !important;
+                    background: transparent !important;
+                }
+                .focus, .hover {
+                    background: linear-gradient(to right, #b2ebf2, #80deea) !important;
+                    color: #004d40 !important;
+                }
+            `,
+            solar_flare: `
+                body { background-color: #2a1100; color: #ffe082; }
+                body.black--style { background: #1d0b00; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #ff9800, 0 0 15px rgba(255, 152, 0, 0.5) !important;
+                    background: transparent !important;
+                }
+                .focus, .hover {
+                    background: linear-gradient(to right, #ff9800, #ff5722) !important;
+                    color: #2a1100 !important;
+                }
+            `,
+            lavender_dream: `
+                body { background-color: #f3e5f5; color: #4a148c; }
+                body.black--style { background: #e1bee7; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #ba68c8, 0 0 15px rgba(186, 104, 200, 0.5) !important;
+                    background: transparent !important;
+                }
+                .focus, .hover {
+                    background: linear-gradient(to right, #ba68c8, #ce93d8) !important;
+                    color: #4a148c !important;
+                }
+            `,
+            matrix_rain: `
+                body { background-color: #000000; color: #00ff00; font-family: 'Courier New', monospace; }
+                .card__focus, .card:hover {
+                    box-shadow: 0 0 0 2px #00ff00, 0 0 15px rgba(0, 255, 0, 0.5) !important;
+                    background: transparent !important;
+                }
+                .focus, .hover {
+                    background-color: #003300 !important;
+                    color: #00ff00 !important;
+                }
+            `,
         };
 
         style.html(themes[theme] || '');
@@ -227,16 +159,16 @@
                 type: 'select',
                 values: {
                     default: 'Обычная',
-                    bywolf_mod: 'Космическая',
-                    dark_neon: 'Неоновая тьма',
-                    cyberpunk: 'Киберпанк',
-                    solar_gold: 'Солнечное золото',
-                    forest_green: 'Лесная зелень',
-                    violet_night: 'Фиолетовая ночь',
-                    fire_red: 'Огненно-красная',
-                    ocean_blue: 'Океан',
-                    sand_sunset: 'Песчаный закат',
-                    mint_fresh: 'Свежая мята'
+                    neon_night: 'Неоновая ночь',
+                    forest_dream: 'Лесной сон',
+                    cyber_wave: 'Киберволна',
+                    sunset_glow: 'Закат',
+                    peach_milk: 'Персиковый милк',
+                    terminal_dark: 'Терминал',
+                    arctic_light: 'Арктический свет',
+                    solar_flare: 'Солнечный взрыв',
+                    lavender_dream: 'Лавандовый сон',
+                    matrix_rain: 'Матрица'
                 },
                 default: 'default'
             },
@@ -264,8 +196,8 @@
 
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
-        version: '1.0.0',
-        description: 'Набор тем оформления для Lampa'
+        version: '1.1.1',
+        description: 'Тема оформления для Lampa с 10 стилями и аккуратными рамками'
     };
 
     window.lampa_theme = InterFaceMod;
