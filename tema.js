@@ -12,11 +12,11 @@
         // Настройки по умолчанию
         settings: {
             enabled: true,
-            theme: 'barbie', // Устанавливаем тему на 'barbie' по умолчанию
+            theme: 'default', // По умолчанию используем стандартную тему
         }
     };
 
-    // Функция для применения тем
+    // Функция для применения темы
     function applyTheme(theme) {
         // Удаляем предыдущие стили темы
         $('#interface_mod_theme').remove();
@@ -128,11 +128,15 @@
                 .iptv-channel {
                     background-color: #6a3c58 !important;
                 }
+            `,
+            // Другие темы могут быть добавлены сюда
+            default: `
+                /* Здесь могут быть стили для стандартной темы */
             `
         };
 
         // Устанавливаем стили для выбранной темы
-        style.html(themes[theme] || '');
+        style.html(themes[theme] || themes['default']);
 
         // Добавляем стиль в head
         $('head').append(style);
@@ -141,17 +145,39 @@
     // Функция инициализации плагина
     function startPlugin() {
         // Применяем настройки
-        InterFaceMod.settings.theme = 'barbie'; // Устанавливаем тему на 'barbie'
         applyTheme(InterFaceMod.settings.theme);
+    }
+
+    // Инициализация меню с выбором темы
+    function createMenu() {
+        Lampa.Menu.add({
+            'id': 'interface_mod',
+            'title': 'Интерфейс',
+            'list': [
+                {
+                    'title': 'Тема',
+                    'name': 'theme',
+                    'type': 'select',
+                    'values': ['default', 'barbie'], // Добавляем новую тему "barbie"
+                    'value': InterFaceMod.settings.theme,
+                    'change': function (value) {
+                        InterFaceMod.settings.theme = value;
+                        applyTheme(value);
+                    }
+                }
+            ]
+        });
     }
 
     // Ждем загрузки приложения и запускаем плагин
     if (window.appready) {
         startPlugin();
+        createMenu(); // Создаем меню после инициализации плагина
     } else {
         Lampa.Listener.follow('app', function (event) {
             if (event.type === 'ready') {
                 startPlugin();
+                createMenu(); // Создаем меню при готовности приложения
             }
         });
     }
