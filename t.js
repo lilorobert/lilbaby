@@ -188,91 +188,6 @@
                     background-color: #2a506b !important;
                 }
             `,
-            forest_trail: `
-                body {
-                    background-color: #1e3b2a;
-                    color: #e8f5e9;
-                }
-                body.black--style {
-                    background: #14281e;
-                }
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .selectbox-item.hover,
-                .full-person.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .simple-button.focus,
-                .iptv-list__item.focus,
-                .iptv-menu__list-item.focus,
-                .head__action.focus,
-                .head__action.hover,
-                .player-panel .button.focus,
-                .search-source.active {
-                    background: linear-gradient(to right, #81c784 1%, #2e7d32 100%);
-                    color: #1a2e22;
-                }
-                .settings-folder.focus .settings-folder__icon {
-                    filter: invert(1);
-                }
-                .settings-param-title > span {
-                    color: #e8f5e9;
-                }
-                .settings__content,
-                .settings-input__content,
-                .selectbox__content,
-                .modal__content {
-                    background: linear-gradient(135deg, #2d4a3a 1%, #13261a 100%);
-                }
-                .settings-input__links {
-                    background-color: rgba(129, 199, 132, 0.2);
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after,
-                .extensions__item.focus:after,
-                .torrent-item.focus::after,
-                .extensions__block-add.focus:after {
-                    border-color: #a5d6a7;
-                }
-                .online-prestige.focus::after,
-                .iptv-channel.focus::before,
-                .iptv-channel.last--focus::before {
-                    border-color: #a5d6a7 !important;
-                }
-                .time-line > div,
-                .player-panel__position,
-                .player-panel__position > div:after {
-                    background-color: #66bb6a;
-                }
-                .extensions {
-                    background: #142e1e;
-                }
-                .extensions__item,
-                .extensions__block-add {
-                    background-color: #2d4a3a;
-                }
-                .torrent-item__size,
-                .torrent-item__exe,
-                .torrent-item__viewed,
-                .torrent-serial__size {
-                    background-color: #c8e6c9;
-                    color: #1a2e22;
-                }
-                .torrent-serial {
-                    background-color: rgba(129, 199, 132, 0.08);
-                }
-                .torrent-file.focus,
-                .torrent-serial.focus {
-                    background-color: rgba(129, 199, 132, 0.28);
-                }
-                .iptv-channel {
-                    background-color: #3a6b4a !important;
-                }
-            `,
             golden_sun: `
                 body {
                     background-color: #3d2e0f;
@@ -345,7 +260,7 @@
                 .torrent-item__viewed,
                 .torrent-serial__size {
                     background-color: #ffecb3;
-                    color: #3e2723;
+                    color: #3d2e0f;
                 }
                 .torrent-serial {
                     background-color: rgba(255, 213, 79, 0.08);
@@ -1037,6 +952,856 @@
                 .iptv-channel {
                     background-color: #5a3c6b !important;
                 }
+            `,
+            velvet_dusk: `
+                body {
+                    background-color: #2a1a2a;
+                    color: #f5e6ff;
+                }
+                body.black--style {
+                    background: #1a0f1a;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #c678dd 1%, #6c3082 100%);
+                    color: #f5e6ff;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #f5e6ff;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #3a1a3a 1%, #1c0a1c 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(198, 120, 221, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #e1bee7;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #e1bee7 !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ba68c8;
+                }
+                .extensions {
+                    background: #1a0f1a;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #3a1a3a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #f3e5f5;
+                    color: #2a1a2a;
+                }
+                .torrent-serial {
+                    background-color: rgba(198, 120, 221, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(198, 120, 221, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #5a3c5a !important;
+                }
+            `,
+            copper_blaze: `
+                body {
+                    background-color: #3d2614;
+                    color: #ffefe0;
+                }
+                body.black--style {
+                    background: #28180c;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ffb74d 1%, #e65100 100%);
+                    color: #3d2614;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #ffefe0;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #4a2a14 1%, #2a180a 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(255, 183, 77, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ffcc80;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ffcc80 !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ffa726;
+                }
+                .extensions {
+                    background: #2a180c;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #4a2a14;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #ffe0b2;
+                    color: #3d2614;
+                }
+                .torrent-serial {
+                    background-color: rgba(255, 183, 77, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 183, 77, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #6b4a28 !important;
+                }
+            `,
+            arctic_sky: `
+                body {
+                    background-color: #0f2a3a;
+                    color: #e1f5fe;
+                }
+                body.black--style {
+                    background: #091c26;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #80d8ff 1%, #0091ea 100%);
+                    color: #0f2a3a;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #e1f5fe;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #1a3a4a 1%, #0a1a26 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(128, 216, 255, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #b3e5fc;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #b3e5fc !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #4fc3f7;
+                }
+                .extensions {
+                    background: #0a1c26;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #1a3a4a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #b3e5fc;
+                    color: #0f2a3a;
+                }
+                .torrent-serial {
+                    background-color: rgba(128, 216, 255, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(128, 216, 255, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #2a506b !important;
+                }
+            `,
+            blood_moon: `
+                body {
+                    background-color: #3a0f1a;
+                    color: #ffebee;
+                }
+                body.black--style {
+                    background: #260912;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ff5252 1%, #b71c1c 100%);
+                    color: #3a0f1a;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #ffebee;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #4a1a1a 1%, #2a0a0a 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(255, 82, 82, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ff8a80;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ff8a80 !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ff1744;
+                }
+                .extensions {
+                    background: #2a0a0a;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #4a1a1a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #ffcdd2;
+                    color: #3a0f1a;
+                }
+                .torrent-serial {
+                    background-color: rgba(255, 82, 82, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 82, 82, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #6b2a2a !important;
+                }
+            `,
+            cosmic_gold: `
+                body {
+                    background-color: #332a0f;
+                    color: #fffde7;
+                }
+                body.black--style {
+                    background: #221c09;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ffd600 1%, #ff6d00 100%);
+                    color: #332a0f;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #fffde7;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #4a3a0f 1%, #2a1c09 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(255, 214, 0, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ffee58;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ffee58 !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ffc400;
+                }
+                .extensions {
+                    background: #2a1c09;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #4a3a0f;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #fff59d;
+                    color: #332a0f;
+                }
+                .torrent-serial {
+                    background-color: rgba(255, 214, 0, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 214, 0, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #6b5a1c !important;
+                }
+            `,
+            mystic_plum: `
+                body {
+                    background-color: #2a0f2a;
+                    color: #f3e5f5;
+                }
+                body.black--style {
+                    background: #1c091c;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ea80fc 1%, #9c27b0 100%);
+                    color: #f3e5f5;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #f3e5f5;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #3a0f3a 1%, #1c091c 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(234, 128, 252, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #e1bee7;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #e1bee7 !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ce93d8;
+                }
+                .extensions {
+                    background: #1c091c;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #3a0f3a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #f3e5f5;
+                    color: #2a0f2a;
+                }
+                .torrent-serial {
+                    background-color: rgba(234, 128, 252, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(234, 128, 252, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #5a1c5a !important;
+                }
+            `,
+            steel_blue: `
+                body {
+                    background-color: #1a2a3a;
+                    color: #e3f2fd;
+                }
+                body.black--style {
+                    background: #0f1c26;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #90caf9 1%, #1565c0 100%);
+                    color: #1a2a3a;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #e3f2fd;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #2a3a4a 1%, #0f1a26 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(144, 202, 249, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #bbdefb;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #bbdefb !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #64b5f6;
+                }
+                .extensions {
+                    background: #0f1a26;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #2a3a4a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #bbdefb;
+                    color: #1a2a3a;
+                }
+                .torrent-serial {
+                    background-color: rgba(144, 202, 249, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(144, 202, 249, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #3a4a6b !important;
+                }
+            `,
+            amber_night: `
+                body {
+                    background-color: #3a2a0f;
+                    color: #fff8e1;
+                }
+                body.black--style {
+                    background: #261c09;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ffc107 1%, #ff8f00 100%);
+                    color: #3a2a0f;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #fff8e1;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #4a3a0f 1%, #2a1c09 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(255, 193, 7, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ffecb3;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ffecb3 !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ffb300;
+                }
+                .extensions {
+                    background: #2a1c09;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #4a3a0f;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #ffecb3;
+                    color: #3a2a0f;
+                }
+                .torrent-serial {
+                    background-color: rgba(255, 193, 7, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 193, 7, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #6b5a1c !important;
+                }
+            `,
+            velvet_rose: `
+                body {
+                    background-color: #3a1a1a;
+                    color: #ffebee;
+                }
+                body.black--style {
+                    background: #261010;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ff8a80 1%, #d50000 100%);
+                    color: #3a1a1a;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #ffebee;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #4a1a1a 1%, #2a0a0a 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(255, 138, 128, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ffcdd2;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ffcdd2 !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ff5252;
+                }
+                .extensions {
+                    background: #2a0a0a;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #4a1a1a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #ffebee;
+                    color: #3a1a1a;
+                }
+                .torrent-serial {
+                    background-color: rgba(255, 138, 128, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 138, 128, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #6b2a2a !important;
+                }
+            `,
+            galaxy_core: `
+                body {
+                    background-color: #0f0f2a;
+                    color: #e8eaf6;
+                }
+                body.black--style {
+                    background: #09091c;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #7c4dff 1%, #311b92 100%);
+                    color: #e8eaf6;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #e8eaf6;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #1a1a4a 1%, #0a0a2a 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(124, 77, 255, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #b388ff;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #b388ff !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #651fff;
+                }
+                .extensions {
+                    background: #0a0a2a;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #1a1a4a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #d1c4e9;
+                    color: #0f0f2a;
+                }
+                .torrent-serial {
+                    background-color: rgba(124, 77, 255, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(124, 77, 255, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #3a3a6b !important;
+                }
             `
         };
 
@@ -1063,7 +1828,6 @@
                     'default': 'Обычная',
                     'bywolf_mod': 'Космическая',
                     'ocean_depth': 'Глубины океана',
-                    'forest_trail': 'Лесная тропа',
                     'golden_sun': 'Золотое солнце',
                     'royal_purple': 'Королевский пурпур',
                     'fire_glow': 'Огненное сияние',
@@ -1072,7 +1836,17 @@
                     'desert_sand': 'Пустынные пески',
                     'neon_dream': 'Неоновая мечта',
                     'emerald_island': 'Изумрудный остров',
-                    'twilight_sky': 'Сумеречное небо'
+                    'twilight_sky': 'Сумеречное небо',
+                    'velvet_dusk': 'Бархатные сумерки',
+                    'copper_blaze': 'Медный огонь',
+                    'arctic_sky': 'Арктическое небо',
+                    'blood_moon': 'Кровавая луна',
+                    'cosmic_gold': 'Космическое золото',
+                    'mystic_plum': 'Мистическая слива',
+                    'steel_blue': 'Стальная синь',
+                    'amber_night': 'Янтарная ночь',
+                    'velvet_rose': 'Бархатная роза',
+                    'galaxy_core': 'Ядро галактики'
                 },
                 default: 'default'
             },
