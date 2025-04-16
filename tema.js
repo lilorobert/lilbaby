@@ -12,11 +12,12 @@
     };
 
     function applyTheme(theme) {
+        // Удаляем старые стили, если они есть
         $('#interface_mod_theme').remove();
 
-        if (theme === 'default') return;
+        if (theme === 'default') return; // Если тема по умолчанию, не применяем стили
 
-        const style = $('<style id="interface_mod_theme"></style>');
+        const style = $('<style id="interface_mod_theme"></style>'); // Создаем элемент стилей
 
         const themes = {
             bywolf_mod: `
@@ -121,6 +122,7 @@
             `
         };
 
+        // Добавляем стили в head
         style.html(themes[theme] || '');
         $('head').append(style);
     }
