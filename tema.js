@@ -3,7 +3,7 @@
 
     const InterFaceMod = {
         name: 'LampaColor',
-        version: '1.0.2',
+        version: '1.0.3',
         settings: {
             theme: Lampa.Storage.get('theme_select', 'default'),
             customColor: Lampa.Storage.get('custom_color', '#ff69b4')
@@ -41,9 +41,15 @@
                 .menu__item.hover,
                 .settings-param.focus,
                 .selectbox-item.focus,
-                .simple-button.focus {
+                .simple-button.focus,
+                .full-start__button.focus,
+                .head__action.focus {
                     background: ${color} !important;
                     color: #fff !important;
+                }
+
+                .card.focus .card__view::after {
+                    border-color: ${color} !important;
                 }
             `);
         }
@@ -80,11 +86,9 @@
                 InterFaceMod.settings.theme = value;
                 Lampa.Storage.set('theme_select', value);
                 applyTheme();
-                Lampa.Settings.updateParams('theme_mod'); // перерисовать параметры
             }
         });
 
-        // Добавляем параметр выбора цвета, если выбрана "Персональная"
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -119,7 +123,7 @@
 
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
-        version: '1.0.2',
+        version: '1.0.3',
         description: 'Тема оформления с персональным цветом'
     };
 
