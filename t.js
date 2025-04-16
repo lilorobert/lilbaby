@@ -3,136 +3,109 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.1',
+        version: '1.1.0',
         debug: false,
         settings: {
             enabled: true,
-            theme: 'default'  
+            theme: 'default'
         }
     };
 
     function applyTheme(theme) {
-        // Удаляем старые стили, если они есть
         $('#interface_mod_theme').remove();
+        if (theme === 'default') return;
 
-        if (theme === 'default') return; // Если тема по умолчанию, не применяем стили
-
-        const style = $('<style id="interface_mod_theme"></style>'); // Создаем элемент стилей
+        const style = $('<style id="interface_mod_theme"></style>');
 
         const themes = {
-            bywolf_mod: `
-                body {
-                    background-color: #3b2a35;
-                    color: #ffd9ec;
+            neon_night: `
+                body { background-color: #0f0f1b; color: #e0ff70; }
+                body.black--style { background: #181827; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #c471f5, #fa71cd) !important;
+                    color: #0f0f1b !important;
                 }
-
-                body.black--style {
-                    background: #2a1d27;
+            `,
+            forest_dream: `
+                body { background-color: #1e2d24; color: #d3f2c2; }
+                body.black--style { background: #162019; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #3f8a54, #a0c49d) !important;
+                    color: #0e1b12 !important;
                 }
-
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .selectbox-item.hover,
-                .full-person.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .simple-button.focus,
-                .iptv-list__item.focus,
-                .iptv-menu__list-item.focus,
-                .head__action.focus,
-                .head__action.hover,
-                .player-panel .button.focus,
-                .search-source.active {
-                    background: linear-gradient(to right, #ffb6c1 1%, #ff69b4 100%);
-                    color: #2a1d27;
+            `,
+            cyber_wave: `
+                body { background-color: #081b29; color: #a8f0ff; }
+                body.black--style { background: #04121d; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #00ffe7, #0073ff) !important;
+                    color: #081b29 !important;
                 }
-
-                .settings-folder.focus .settings-folder__icon {
-                    filter: invert(1);
+            `,
+            sunset_glow: `
+                body { background-color: #2e1a24; color: #ffdbb5; }
+                body.black--style { background: #1e1017; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #ff6e7f, #bfe9ff) !important;
+                    color: #2e1a24 !important;
                 }
-
-                .settings-param-title > span {
-                    color: #fff;
+            `,
+            peach_milk: `
+                body { background-color: #fff0e6; color: #5c3a21; }
+                body.black--style { background: #f5d3c8; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #ffd1dc, #ffe0b2) !important;
+                    color: #5c3a21 !important;
                 }
-
-                .settings__content,
-                .settings-input__content,
-                .selectbox__content,
-                .modal__content {
-                    background: linear-gradient(135deg, #4a2f3a 1%, #1c1016 100%);
+            `,
+            terminal_dark: `
+                body { background-color: #000000; color: #00ff00; font-family: monospace; }
+                .focus, .hover {
+                    background-color: #003300 !important;
+                    color: #00ff00 !important;
                 }
-
-                .settings-input__links {
-                    background-color: rgba(255, 182, 193, 0.2);
+            `,
+            arctic_light: `
+                body { background-color: #e0f7fa; color: #004d40; }
+                body.black--style { background: #cceef0; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #b2ebf2, #80deea) !important;
+                    color: #004d40 !important;
                 }
-
-                .card.focus .card__view::after,
-                .card.hover .card__view::after,
-                .extensions__item.focus:after,
-                .torrent-item.focus::after,
-                .extensions__block-add.focus:after {
-                    border-color: #ffc0cb;
+            `,
+            solar_flare: `
+                body { background-color: #2a1100; color: #ffe082; }
+                body.black--style { background: #1d0b00; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #ff9800, #ff5722) !important;
+                    color: #2a1100 !important;
                 }
-
-                .online-prestige.focus::after,
-                .iptv-channel.focus::before,
-                .iptv-channel.last--focus::before {
-                    border-color: #ffc0cb !important;
+            `,
+            lavender_dream: `
+                body { background-color: #f3e5f5; color: #4a148c; }
+                body.black--style { background: #e1bee7; }
+                .focus, .hover {
+                    background: linear-gradient(to right, #ba68c8, #ce93d8) !important;
+                    color: #4a148c !important;
                 }
-
-                .time-line > div,
-                .player-panel__position,
-                .player-panel__position > div:after {
-                    background-color: #ffc0cb;
+            `,
+            matrix_rain: `
+                body { background-color: #000000; color: #00ff00; font-family: 'Courier New', monospace; }
+                .focus, .hover {
+                    background-color: #003300 !important;
+                    color: #00ff00 !important;
                 }
-
-                .extensions {
-                    background: #2a1d27;
-                }
-
-                .extensions__item,
-                .extensions__block-add {
-                    background-color: #503043;
-                }
-
-                .torrent-item__size,
-                .torrent-item__exe,
-                .torrent-item__viewed,
-                .torrent-serial__size {
-                    background-color: #ffd9ec;
-                    color: #2a1d27;
-                }
-
-                .torrent-serial {
-                    background-color: rgba(255, 192, 203, 0.08);
-                }
-
-                .torrent-file.focus,
-                .torrent-serial.focus {
-                    background-color: rgba(255, 192, 203, 0.28);
-                }
-
-                .iptv-channel {
-                    background-color: #6a3c58 !important;
-                }
-            `
+            `,
         };
 
-        // Добавляем стили в head
         style.html(themes[theme] || '');
         $('head').append(style);
     }
 
     function startPlugin() {
-        // Применяем тему из хранилища
         InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
         applyTheme(InterFaceMod.settings.theme);
 
-        // Добавляем настройку в интерфейс
         Lampa.SettingsApi.addComponent({
             component: 'theme_mod',
             name: 'LampaColor Theme',
@@ -145,8 +118,17 @@
                 name: 'theme_select',
                 type: 'select',
                 values: {
-                    'default': 'Обычная',
-                    'bywolf_mod': 'Космическая'
+                    default: 'Обычная',
+                    neon_night: 'Неоновая ночь',
+                    forest_dream: 'Лесной сон',
+                    cyber_wave: 'Киберволна',
+                    sunset_glow: 'Закат',
+                    peach_milk: 'Персиковый милк',
+                    terminal_dark: 'Терминал',
+                    arctic_light: 'Арктический свет',
+                    solar_flare: 'Солнечный взрыв',
+                    lavender_dream: 'Лавандовый сон',
+                    matrix_rain: 'Матрица'
                 },
                 default: 'default'
             },
@@ -172,11 +154,10 @@
         });
     }
 
-    // Регистрация плагина
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
-        version: '1.0.0',
-        description: 'Тема оформления для Lampa'
+        version: '1.1.0',
+        description: 'Тема оформления для Lampa с 10 новыми стилями'
     };
 
     window.lampa_theme = InterFaceMod;
