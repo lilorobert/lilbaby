@@ -1,16 +1,15 @@
 (function() {
     'use strict';
 
-    // Проверяем доступность необходимых API Lampa
+    // Проверяем доступность Lampa API
     if (!window.Lampa || !Lampa.Storage || !Lampa.SettingsApi) {
         console.error('Lampa API is not available');
         return;
     }
 
-    // Основной объект плагина
     var LampaColor = {
         name: 'LampaColor',
-        version: '0.0.4',
+        version: '0.0.5',
         settings: {
             theme: 'default',
             colors: {
@@ -21,10 +20,10 @@
                 card: '#503043'
             }
         },
-        stylesheet: null
+        stylesheet: null,
+        colorParams: []
     };
 
-    // Применяем выбранную тему
     function applyTheme() {
         // Удаляем старые стили
         if (LampaColor.stylesheet) {
@@ -32,13 +31,10 @@
             LampaColor.stylesheet = null;
         }
 
-        // Если выбрана стандартная тема - ничего не делаем
         if (LampaColor.settings.theme === 'default') return;
 
-        // Создаем элемент для стилей
         LampaColor.stylesheet = $('<style id="lampa_color_theme"></style>');
 
-        // Генерируем CSS в зависимости от темы
         var css = '';
         if (LampaColor.settings.theme === 'bywolf_mod') {
             css = generateBywolfTheme();
@@ -47,23 +43,14 @@
             css = generateCustomTheme();
         }
 
-        // Добавляем стили в документ
         LampaColor.stylesheet.html(css);
         $('head').append(LampaColor.stylesheet);
     }
 
-    // Генератор темы Bywolf
     function generateBywolfTheme() {
-        return `
-            body {
-                background-color: #3b2a35;
-                color: #ffd9ec;
-            }
-            /* ... остальные стили bywolf ... */
-        `;
+        return `body{background-color:#3b2a35;color:#ffd9ec;}`;
     }
 
-    // Генератор кастомной темы
     function generateCustomTheme() {
         var c = LampaColor.settings.colors;
         return `
@@ -72,47 +59,41 @@
                 color: ${c.text};
             }
             .menu__item.focus {
-                background: linear-gradient(to right, ${c.accentLight} 1%, ${c.accent} 100%);
+                background: ${c.accent};
+                color: ${c.text};
             }
-            /* ... другие элементы с кастомными цветами ... */
         `;
     }
 
-    // Инициализация плагина
     function initPlugin() {
-        // Загружаем сохраненные настройки
         loadSettings();
 
-        // Добавляем компонент в настройки
         Lampa.SettingsApi.addComponent({
             component: 'lampa_color',
-            name: 'Lampa Color Theme',
-            icon: '<!-- ваша иконка -->'
+            name: 'Lampa Color',
+            icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>'
         });
 
-        // Добавляем выбор темы
         addThemeSelector();
-
-        // Добавляем настройки цветов (только для кастомной темы)
-        addColorSettings();
+        createColorSettings();
+        updateColorSettingsVisibility();
     }
 
-    // Загрузка сохраненных настроек
     function loadSettings() {
-        var savedTheme = Lampa.Storage.get('lampa_color_theme');
-        if (savedTheme) LampaColor.settings.theme = savedTheme;
-
-        var savedColors = Lampa.Storage.get('lampa_color_colors');
-        if (savedColors) LampaColor.settings.colors = savedColors;
+        var saved = Lampa.Storage.get('lampa_color_settings');
+        if (saved) {
+            LampaColor.settings.theme = saved.theme || 'default';
+            LampaColor.settings.colors = saved.colors || LampaColor.settings.colors;
+        }
     }
 
-    // Сохранение настроек
     function saveSettings() {
-        Lampa.Storage.set('lampa_color_theme', LampaColor.settings.theme);
-        Lampa.Storage.set('lampa_color_colors', LampaColor.settings.colors);
+        Lampa.Storage.set('lampa_color_settings', {
+            theme: LampaColor.settings.theme,
+            colors: LampaColor.settings.colors
+        });
     }
 
-    // Добавляем выбор темы
     function addThemeSelector() {
         Lampa.SettingsApi.addParam({
             component: 'lampa_color',
@@ -128,75 +109,87 @@
             },
             field: {
                 name: 'Theme',
-                description: 'Select interface theme'
+                description: 'Select color theme'
             },
             onChange: function(value) {
                 LampaColor.settings.theme = value;
                 saveSettings();
+                updateColorSettingsVisibility();
                 applyTheme();
             }
         });
     }
 
-    // Добавляем настройки цветов
-    function addColorSettings() {
-        addColorSetting('background', 'Background color', '#3b2a35');
-        addColorSetting('text', 'Text color', '#ffd9ec');
-        addColorSetting('accent', 'Accent color', '#ff69b4');
-        addColorSetting('accentLight', 'Light accent', '#ffb6c1');
-        addColorSetting('card', 'Card color', '#503043');
+    function createColorSettings() {
+        var colors = [
+            {name: 'background', label: 'Background', default: '#3b2a35'},
+            {name: 'text', label: 'Text', default: '#ffd9ec'},
+            {name: 'accent', label: 'Accent', default: '#ff69b4'},
+            {name: 'accentLight', label: 'Light accent', default: '#ffb6c1'},
+            {name: 'card', label: 'Cards', default: '#503043'}
+        ];
+
+        colors.forEach(function(color) {
+            var param = {
+                component: 'lampa_color',
+                param: {
+                    name: 'color_' + color.name,
+                    type: 'text',
+                    default: LampaColor.settings.colors[color.name] || color.default
+                },
+                field: {
+                    name: color.label,
+                    description: 'HEX color code',
+                    html: `
+                        <div class="color-picker">
+                            <input type="color" value="${LampaColor.settings.colors[color.name] || color.default}" 
+                                   data-color="${color.name}">
+                            <input type="text" value="${LampaColor.settings.colors[color.name] || color.default}" 
+                                   data-color-text="${color.name}" maxlength="7">
+                        </div>
+                    `
+                },
+                onChange: function(value) {
+                    if (/^#[0-9A-F]{6}$/i.test(value)) {
+                        LampaColor.settings.colors[color.name] = value;
+                        saveSettings();
+                        if (LampaColor.settings.theme === 'custom') applyTheme();
+                    }
+                }
+            };
+
+            LampaColor.colorParams.push(param);
+            Lampa.SettingsApi.addParam(param);
+        });
     }
 
-    // Добавляем параметр для конкретного цвета
-    function addColorSetting(name, label, defaultValue) {
-        Lampa.SettingsApi.addParam({
-            component: 'lampa_color',
-            param: {
-                name: 'color_' + name,
-                type: 'text',
-                default: LampaColor.settings.colors[name] || defaultValue
-            },
-            field: {
-                name: label,
-                description: 'HEX color code',
-                html: `
-                    <div class="color-picker">
-                        <input type="color" value="${LampaColor.settings.colors[name] || defaultValue}" 
-                               data-color="${name}">
-                        <input type="text" value="${LampaColor.settings.colors[name] || defaultValue}" 
-                               data-color-text="${name}" maxlength="7">
-                    </div>
-                `
-            },
-            onChange: function(value) {
-                if (isValidColor(value)) {
-                    LampaColor.settings.colors[name] = value;
-                    saveSettings();
-                    if (LampaColor.settings.theme === 'custom') applyTheme();
-                }
+    function updateColorSettingsVisibility() {
+        var isCustom = LampaColor.settings.theme === 'custom';
+        LampaColor.colorParams.forEach(function(param) {
+            var element = $('.settings-param[data-name="' + param.param.name + '"]');
+            if (element.length) {
+                element.toggle(isCustom);
             }
         });
     }
 
-    // Проверка HEX цвета
-    function isValidColor(color) {
-        return /^#[0-9A-F]{6}$/i.test(color);
-    }
-
-    // Запускаем плагин после загрузки приложения
+    // Инициализация
     if (window.appready) {
         initPlugin();
     } else {
-        Lampa.Listener.follow('app', function(e) {
-            if (e.type === 'ready') initPlugin();
+        var listener = Lampa.Listener.follow('app', function(e) {
+            if (e.type === 'ready') {
+                initPlugin();
+                listener.stop();
+            }
         });
     }
 
-    // Регистрируем плагин
+    // Регистрация плагина
     if (Lampa.Manifest && Lampa.Manifest.plugins) {
-        Lampa.Manifest.plugins['LampaColor'] = {
+        Lampa.Manifest.plugins.LampaColor = {
             name: 'Lampa Color',
-            version: '0.0.4',
+            version: '0.0.5',
             description: 'Custom color themes for Lampa'
         };
     }
