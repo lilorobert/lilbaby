@@ -12,13 +12,7 @@
         // Настройки по умолчанию
         settings: {
             enabled: true,
-            buttons_mode: 'default', // 'default', 'main_buttons', 'all_buttons'
-            show_movie_type: true,
             theme: 'default',
-            colored_ratings: true,
-            seasons_info_mode: 'aired',
-            show_episodes_on_main: false,
-            label_position: 'top-right' // 'top-right', 'top-left', 'bottom-right', 'bottom-left'
         }
     };
 
@@ -36,157 +30,6 @@
 
         // Определяем стили для разных тем
         const themes = {
-            neon: `
-                body {
-                    background: linear-gradient(135deg, #0d0221 0%, #150734 50%, #1f0c47 100%);
-                    color: #ffffff;
-                }
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .player-panel .button.focus {
-                    background: linear-gradient(to right, #ff00ff, #00ffff);
-                    color: #fff;
-                    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
-                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-                    border: none;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #ff00ff;
-                    box-shadow: 0 0 20px #00ffff;
-                }
-                .head__action.focus,
-                .head__action.hover {
-                    background: linear-gradient(45deg, #ff00ff, #00ffff);
-                    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
-                }
-                .full-start__background {
-                    opacity: 0.7;
-                    filter: brightness(1.2) saturate(1.3);
-                }
-                .settings__content,
-                .settings-input__content,
-                .selectbox__content,
-                .modal__content {
-                    background: rgba(15, 2, 33, 0.95);
-                    border: 1px solid rgba(255, 0, 255, 0.1);
-                }
-            `,
-            sunset: `
-                body {
-                    background: linear-gradient(135deg, #2d1f3d 0%, #614385 50%, #516395 100%);
-                    color: #ffffff;
-                }
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .player-panel .button.focus {
-                    background: linear-gradient(to right, #ff6e7f, #bfe9ff);
-                    color: #2d1f3d;
-                    box-shadow: 0 0 15px rgba(255, 110, 127, 0.3);
-                    font-weight: bold;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #ff6e7f;
-                    box-shadow: 0 0 15px rgba(255, 110, 127, 0.5);
-                }
-                .head__action.focus,
-                .head__action.hover {
-                    background: linear-gradient(45deg, #ff6e7f, #bfe9ff);
-                    color: #2d1f3d;
-                }
-                .full-start__background {
-                    opacity: 0.8;
-                    filter: saturate(1.2) contrast(1.1);
-                }
-            `,
-            emerald: `
-                body {
-                    background: linear-gradient(135deg, #1a2a3a 0%, #2C5364 50%, #203A43 100%);
-                    color: #ffffff;
-                }
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .player-panel .button.focus {
-                    background: linear-gradient(to right, #43cea2, #185a9d);
-                    color: #fff;
-                    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.3);
-                    border-radius: 5px;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 3px solid #43cea2;
-                    box-shadow: 0 0 20px rgba(67, 206, 162, 0.4);
-                }
-                .head__action.focus,
-                .head__action.hover {
-                    background: linear-gradient(45deg, #43cea2, #185a9d);
-                }
-                .full-start__background {
-                    opacity: 0.85;
-                    filter: brightness(1.1) saturate(1.2);
-                }
-                .settings__content,
-                .settings-input__content,
-                .selectbox__content,
-                .modal__content {
-                    background: rgba(26, 42, 58, 0.98);
-                    border: 1px solid rgba(67, 206, 162, 0.1);
-                }
-            `,
-            aurora: `
-                body {
-                    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-                    color: #ffffff;
-                }
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .player-panel .button.focus {
-                    background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
-                    color: #fff;
-                    box-shadow: 0 0 20px rgba(170, 75, 107, 0.3);
-                    transform: scale(1.02);
-                    transition: all 0.3s ease;
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after {
-                    border: 2px solid #aa4b6b;
-                    box-shadow: 0 0 25px rgba(170, 75, 107, 0.5);
-                }
-                .head__action.focus,
-                .head__action.hover {
-                    background: linear-gradient(45deg, #aa4b6b, #3b8d99);
-                    transform: scale(1.05);
-                }
-                .full-start__background {
-                    opacity: 0.75;
-                    filter: contrast(1.1) brightness(1.1);
-                }
-            `,
             bywolf_mod: `
                 body {
                     background: linear-gradient(135deg, #090227 0%, #170b34 50%, #261447 100%);
@@ -361,50 +204,6 @@
             }
         });
         
-        Lampa.SettingsApi.addParam({
-            component: 'season_info',
-            param: {
-                name: 'theme_select',
-                type: 'select',
-                values: {
-                    default: 'Нет',
-                    bywolf_mod: 'bywolf_mod',
-                    neon: 'Neon',
-                    sunset: 'Dark MOD',
-                    emerald: 'Emerald V1',
-                    aurora: 'Aurora'
-                },
-                default: 'default'
-            },
-            field: {
-                name: 'Тема интерфейса',
-                description: 'Выберите тему оформления интерфейса'
-            },
-            onChange: function(value) {
-                InterFaceMod.settings.theme = value;
-                Lampa.Settings.update();
-                applyTheme(value);
-            }
-        });
-        
-        Lampa.SettingsApi.addParam({
-            component: 'season_info',
-            param: {
-                name: 'colored_ratings',
-                type: 'trigger',
-                default: true
-            },
-            field: {
-                name: 'Цветные рейтинги',
-                description: 'Изменять цвет рейтинга в зависимости от оценки'
-            },
-            onChange: function (value) {
-                // Сохраняем текущий активный элемент
-                var activeElement = document.activeElement;
-                
-                // Обновляем настройку
-                InterFaceMod.settings.colored_ratings = value;
-                Lampa.Settings.update();
                 
                 // Используем setTimeout для отложенного выполнения, 
                 // чтобы не нарушать цикл обработки текущего события
@@ -427,13 +226,7 @@
         });
         
         // Применяем настройки
-        InterFaceMod.settings.buttons_mode = Lampa.Storage.get('buttons_mode', 'default');
-        InterFaceMod.settings.show_movie_type = Lampa.Storage.get('season_info_show_movie_type', true);
         InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
-        InterFaceMod.settings.colored_ratings = Lampa.Storage.get('colored_ratings', true);
-        InterFaceMod.settings.seasons_info_mode = Lampa.Storage.get('seasons_info_mode', 'aired');
-        InterFaceMod.settings.show_episodes_on_main = Lampa.Storage.get('show_episodes_on_main', false);
-        InterFaceMod.settings.label_position = Lampa.Storage.get('label_position', 'top-right');
         
         // Устанавливаем enabled на основе seasons_info_mode
         InterFaceMod.settings.enabled = (InterFaceMod.settings.seasons_info_mode !== 'none');
