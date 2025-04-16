@@ -1,26 +1,27 @@
 (function () {
     'use strict';
 
-    var InterFaceMod = {
+    const InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.3',
+        version: '1.0.2',
         settings: {
-            enabled: true,
             theme: Lampa.Storage.get('theme_select', 'default'),
             customColor: Lampa.Storage.get('custom_color', '#ff69b4')
         }
     };
 
-    function applyTheme(theme) {
+    function applyTheme() {
         $('#interface_mod_theme').remove();
 
-        if (theme === 'default') return;
-
         const style = $('<style id="interface_mod_theme"></style>');
-        const color = InterFaceMod.settings.customColor;
 
-        const themes = {
-            bywolf_mod: `
+        if (InterFaceMod.settings.theme === 'default') {
+            $('head').append(style);
+            return;
+        }
+
+        if (InterFaceMod.settings.theme === 'bywolf_mod') {
+            style.html(`
                 body {
                     background-color: #3b2a35;
                     color: #ffd9ec;
@@ -30,8 +31,12 @@
                     background: linear-gradient(to right, #ffb6c1 1%, #ff69b4 100%);
                     color: #2a1d27;
                 }
-            `,
-            custom: `
+            `);
+        }
+
+        if (InterFaceMod.settings.theme === 'custom') {
+            const color = InterFaceMod.settings.customColor;
+            style.html(`
                 .menu__item.focus,
                 .menu__item.hover,
                 .settings-param.focus,
@@ -40,15 +45,14 @@
                     background: ${color} !important;
                     color: #fff !important;
                 }
-            `
-        };
+            `);
+        }
 
-        style.html(themes[theme] || '');
         $('head').append(style);
     }
 
     function startPlugin() {
-        applyTheme(InterFaceMod.settings.theme);
+        applyTheme();
 
         Lampa.SettingsApi.addComponent({
             component: 'theme_mod',
@@ -75,15 +79,12 @@
             onChange: function (value) {
                 InterFaceMod.settings.theme = value;
                 Lampa.Storage.set('theme_select', value);
-                applyTheme(value);
-
-                // если выбрана "custom", перерисуем параметры
-                if (value === 'custom') {
-                    Lampa.Settings.updateParams('theme_mod');
-                }
+                applyTheme();
+                Lampa.Settings.updateParams('theme_mod'); // перерисовать параметры
             }
         });
 
+        // Добавляем параметр выбора цвета, если выбрана "Персональная"
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -93,13 +94,13 @@
             },
             field: {
                 name: 'Цвет персональной темы',
-                description: 'Выберите цвет для персональной темы'
+                description: 'Выберите свой любимый цвет'
             },
             onChange: function (value) {
                 InterFaceMod.settings.customColor = value;
                 Lampa.Storage.set('custom_color', value);
                 if (InterFaceMod.settings.theme === 'custom') {
-                    applyTheme('custom');
+                    applyTheme();
                 }
             },
             condition: () => InterFaceMod.settings.theme === 'custom'
@@ -118,8 +119,8 @@
 
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
-        version: '1.0.1',
-        description: 'Тема оформления с персональным цветом для Lampa'
+        version: '1.0.2',
+        description: 'Тема оформления с персональным цветом'
     };
 
     window.lampa_theme = InterFaceMod;
