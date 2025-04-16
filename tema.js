@@ -3,7 +3,7 @@
 
     const InterFaceMod = {
         name: 'LampaColor',
-        version: '1.0.3',
+        version: '1.0.4',
         settings: {
             theme: Lampa.Storage.get('theme_select', 'default'),
             customColor: Lampa.Storage.get('custom_color', '#ff69b4') // Цвет по умолчанию
@@ -135,7 +135,7 @@
     // Регистрация плагина
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
-        version: '1.0.3',
+        version: '1.0.4',
         description: 'Тема оформления с персональным цветом'
     };
 
