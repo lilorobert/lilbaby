@@ -1,192 +1,229 @@
-(function() {
+(function () {
     'use strict';
 
-    // Проверяем доступность Lampa API
-    if (!window.Lampa || !Lampa.Storage || !Lampa.SettingsApi) {
-        console.error('Lampa API is not available');
-        return;
-    }
-
-    var LampaColor = {
+    var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.6',
+        version: '1.0.0',
+        debug: false,
         settings: {
+            enabled: true,
             theme: 'default',
-            colors: {
-                background: '#3b2a35',
-                text: '#ffd9ec',
-                accent: '#ff69b4',
-                accentLight: '#ffb6c1',
-                card: '#503043'
-            }
-        },
-        stylesheet: null
+            customColor: '#ff69b4'
+        }
     };
 
-    // Применяем выбранную тему
-    function applyTheme() {
-        // Удаляем старые стили
-        if (LampaColor.stylesheet) {
-            LampaColor.stylesheet.remove();
-            LampaColor.stylesheet = null;
+    function applyTheme(theme) {
+        $('#interface_mod_theme').remove();
+
+        if (theme === 'default') return;
+
+        const style = $('<style id="interface_mod_theme"></style>');
+
+        const themes = {
+            bywolf_mod: `
+                body {
+                    background-color: #3b2a35;
+                    color: #ffd9ec;
+                }
+
+                body.black--style {
+                    background: #2a1d27;
+                }
+
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #ffb6c1 1%, #ff69b4 100%);
+                    color: #2a1d27;
+                }
+
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+
+                .settings-param-title > span {
+                    color: #fff;
+                }
+
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #4a2f3a 1%, #1c1016 100%);
+                }
+
+                .settings-input__links {
+                    background-color: rgba(255, 182, 193, 0.2);
+                }
+
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #ffc0cb;
+                }
+
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #ffc0cb !important;
+                }
+
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #ffc0cb;
+                }
+
+                .extensions {
+                    background: #2a1d27;
+                }
+
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #503043;
+                }
+
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #ffd9ec;
+                    color: #2a1d27;
+                }
+
+                .torrent-serial {
+                    background-color: rgba(255, 192, 203, 0.08);
+                }
+
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(255, 192, 203, 0.28);
+                }
+
+                .iptv-channel {
+                    background-color: #6a3c58 !important;
+                }
+            `,
+            custom: ''
+        };
+
+        if (theme === 'custom') {
+            const customColor = Lampa.Storage.get('custom_color', '#ff69b4');
+            themes.custom = `
+                body {
+                    background-color: ${customColor}20;
+                    color: ${customColor};
+                }
+
+                .menu__item.focus,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .simple-button.focus,
+                .full-start__button.focus {
+                    background-color: ${customColor};
+                    color: #000;
+                }
+
+                .card.focus .card__view::after {
+                    border-color: ${customColor};
+                }
+
+                .modal__content {
+                    border: 1px solid ${customColor};
+                }
+            `;
         }
 
-        if (LampaColor.settings.theme === 'default') return;
-
-        LampaColor.stylesheet = $('<style id="lampa_color_theme"></style>');
-
-        var css = '';
-        if (LampaColor.settings.theme === 'bywolf_mod') {
-            css = generateBywolfTheme();
-        } 
-        else if (LampaColor.settings.theme === 'custom') {
-            css = generateCustomTheme();
-        }
-
-        LampaColor.stylesheet.html(css);
-        $('head').append(LampaColor.stylesheet);
+        style.html(themes[theme] || '');
+        $('head').append(style);
     }
 
-    function generateBywolfTheme() {
-        return `body{background-color:#3b2a35;color:#ffd9ec;}`;
-    }
-
-    function generateCustomTheme() {
-        var c = LampaColor.settings.colors;
-        return `
-            body {
-                background-color: ${c.background};
-                color: ${c.text};
-            }
-            .menu__item.focus {
-                background: ${c.accent};
-                color: ${c.text};
-            }
-        `;
-    }
-
-    function initPlugin() {
-        loadSettings();
+    function startPlugin() {
+        InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
+        InterFaceMod.settings.customColor = Lampa.Storage.get('custom_color', '#ff69b4');
+        applyTheme(InterFaceMod.settings.theme);
 
         Lampa.SettingsApi.addComponent({
-            component: 'lampa_color',
-            name: 'Lampa Color',
-            icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>'
+            component: 'theme_mod',
+            name: 'LampaColor Theme',
+            icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
         });
 
-        addThemeSelector();
-        addColorSettings();
-    }
-
-    function loadSettings() {
-        var saved = Lampa.Storage.get('lampa_color_settings');
-        if (saved) {
-            LampaColor.settings.theme = saved.theme || 'default';
-            LampaColor.settings.colors = saved.colors || LampaColor.settings.colors;
-        }
-        applyTheme();
-    }
-
-    function saveSettings() {
-        Lampa.Storage.set('lampa_color_settings', {
-            theme: LampaColor.settings.theme,
-            colors: LampaColor.settings.colors
-        });
-    }
-
-    function addThemeSelector() {
         Lampa.SettingsApi.addParam({
-            component: 'lampa_color',
+            component: 'theme_mod',
             param: {
-                name: 'theme',
+                name: 'theme_select',
                 type: 'select',
                 values: {
-                    'default': 'Default',
-                    'bywolf_mod': 'Cosmic',
-                    'custom': 'Custom'
+                    'default': 'Обычная',
+                    'bywolf_mod': 'Космическая',
+                    'custom': 'Персональная'
                 },
                 default: 'default'
             },
             field: {
-                name: 'Theme',
-                description: 'Select color theme'
+                name: 'Выбор темы',
+                description: 'Выберите тему оформления интерфейса'
             },
-            onChange: function(value) {
-                LampaColor.settings.theme = value;
-                saveSettings();
-                applyTheme();
+            onChange: function (value) {
+                InterFaceMod.settings.theme = value;
+                Lampa.Storage.set('theme_select', value);
+                applyTheme(value);
+            }
+        });
+
+        Lampa.SettingsApi.addParam({
+            component: 'theme_mod',
+            param: {
+                name: 'custom_color',
+                type: 'color',
+                default: '#ff69b4'
+            },
+            field: {
+                name: 'Цвет интерфейса',
+                description: 'Выберите основной цвет для оформления'
+            },
+            onChange: function (value) {
+                InterFaceMod.settings.customColor = value;
+                Lampa.Storage.set('custom_color', value);
+                if (InterFaceMod.settings.theme === 'custom') applyTheme('custom');
             }
         });
     }
 
-    function addColorSettings() {
-        var colors = [
-            {name: 'background', label: 'Background', default: '#3b2a35'},
-            {name: 'text', label: 'Text', default: '#ffd9ec'},
-            {name: 'accent', label: 'Accent', default: '#ff69b4'},
-            {name: 'accentLight', label: 'Light accent', default: '#ffb6c1'},
-            {name: 'card', label: 'Cards', default: '#503043'}
-        ];
-
-        colors.forEach(function(color) {
-            Lampa.SettingsApi.addParam({
-                component: 'lampa_color',
-                param: {
-                    name: 'color_' + color.name,
-                    type: 'text',
-                    default: LampaColor.settings.colors[color.name] || color.default
-                },
-                field: {
-                    name: color.label,
-                    description: 'HEX color code',
-                    html: `
-                        <div class="color-picker">
-                            <input type="color" value="${LampaColor.settings.colors[color.name] || color.default}" 
-                                   data-color="${color.name}">
-                            <input type="text" value="${LampaColor.settings.colors[color.name] || color.default}" 
-                                   data-color-text="${color.name}" maxlength="7">
-                        </div>
-                    `
-                },
-                onChange: function(value) {
-                    if (/^#[0-9A-F]{6}$/i.test(value)) {
-                        LampaColor.settings.colors[color.name] = value;
-                        saveSettings();
-                        if (LampaColor.settings.theme === 'custom') applyTheme();
-                    }
-                }
-            });
+    if (window.appready) {
+        startPlugin();
+    } else {
+        Lampa.Listener.follow('app', function (event) {
+            if (event.type === 'ready') {
+                startPlugin();
+            }
         });
     }
 
-    // Новая улучшенная инициализация
-    function checkAppReady() {
-        if (window.appready) {
-            initPlugin();
-        } else {
-            var listener = Lampa.Listener.follow('app', function(e) {
-                if (e.type === 'ready') {
-                    initPlugin();
-                    // Безопасное отключение слушателя
-                    if (listener && listener.unfollow) {
-                        listener.unfollow();
-                    }
-                }
-            });
-        }
-    }
+    if (!Array.isArray(Lampa.Manifest.plugins)) Lampa.Manifest.plugins = [];
+    Lampa.Manifest.plugins.push({
+        name: 'LampaColor',
+        version: '1.0.0',
+        description: 'Тема оформления с возможностью выбора своего цвета'
+    });
 
-    // Запускаем проверку готовности
-    checkAppReady();
-
-    // Регистрация плагина
-    if (Lampa.Manifest && Lampa.Manifest.plugins) {
-        Lampa.Manifest.plugins.LampaColor = {
-            name: 'Lampa Color',
-            version: '0.0.6',
-            description: 'Custom color themes for Lampa'
-        };
-    }
-
-    window.LampaColor = LampaColor;
+    window.lampa_theme = InterFaceMod;
 })();
