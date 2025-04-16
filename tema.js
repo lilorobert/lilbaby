@@ -9,7 +9,7 @@
 
     var LampaColor = {
         name: 'LampaColor',
-        version: '0.0.5',
+        version: '0.0.6',
         settings: {
             theme: 'default',
             colors: {
@@ -20,10 +20,10 @@
                 card: '#503043'
             }
         },
-        stylesheet: null,
-        colorParams: []
+        stylesheet: null
     };
 
+    // Применяем выбранную тему
     function applyTheme() {
         // Удаляем старые стили
         if (LampaColor.stylesheet) {
@@ -75,8 +75,7 @@
         });
 
         addThemeSelector();
-        createColorSettings();
-        updateColorSettingsVisibility();
+        addColorSettings();
     }
 
     function loadSettings() {
@@ -85,6 +84,7 @@
             LampaColor.settings.theme = saved.theme || 'default';
             LampaColor.settings.colors = saved.colors || LampaColor.settings.colors;
         }
+        applyTheme();
     }
 
     function saveSettings() {
@@ -114,13 +114,12 @@
             onChange: function(value) {
                 LampaColor.settings.theme = value;
                 saveSettings();
-                updateColorSettingsVisibility();
                 applyTheme();
             }
         });
     }
 
-    function createColorSettings() {
+    function addColorSettings() {
         var colors = [
             {name: 'background', label: 'Background', default: '#3b2a35'},
             {name: 'text', label: 'Text', default: '#ffd9ec'},
@@ -130,7 +129,7 @@
         ];
 
         colors.forEach(function(color) {
-            var param = {
+            Lampa.SettingsApi.addParam({
                 component: 'lampa_color',
                 param: {
                     name: 'color_' + color.name,
@@ -156,40 +155,35 @@
                         if (LampaColor.settings.theme === 'custom') applyTheme();
                     }
                 }
-            };
-
-            LampaColor.colorParams.push(param);
-            Lampa.SettingsApi.addParam(param);
+            });
         });
     }
 
-    function updateColorSettingsVisibility() {
-        var isCustom = LampaColor.settings.theme === 'custom';
-        LampaColor.colorParams.forEach(function(param) {
-            var element = $('.settings-param[data-name="' + param.param.name + '"]');
-            if (element.length) {
-                element.toggle(isCustom);
-            }
-        });
+    // Новая улучшенная инициализация
+    function checkAppReady() {
+        if (window.appready) {
+            initPlugin();
+        } else {
+            var listener = Lampa.Listener.follow('app', function(e) {
+                if (e.type === 'ready') {
+                    initPlugin();
+                    // Безопасное отключение слушателя
+                    if (listener && listener.unfollow) {
+                        listener.unfollow();
+                    }
+                }
+            });
+        }
     }
 
-    // Инициализация
-    if (window.appready) {
-        initPlugin();
-    } else {
-        var listener = Lampa.Listener.follow('app', function(e) {
-            if (e.type === 'ready') {
-                initPlugin();
-                listener.stop();
-            }
-        });
-    }
+    // Запускаем проверку готовности
+    checkAppReady();
 
     // Регистрация плагина
     if (Lampa.Manifest && Lampa.Manifest.plugins) {
         Lampa.Manifest.plugins.LampaColor = {
             name: 'Lampa Color',
-            version: '0.0.5',
+            version: '0.0.6',
             description: 'Custom color themes for Lampa'
         };
     }
