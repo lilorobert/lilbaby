@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.4', // Обновляем версию из-за новых загрузчиков
+        version: '0.0.5', // Обновляем версию из-за новых загрузчиков
         debug: false,
         settings: {
             enabled: true,
@@ -32,19 +32,23 @@
         'merri-cinema': 'Merriweather (Артхаус / Драма)'
     };
 
-    // Доступные загрузчики
+    // Доступные загрузчики (переименованы на русский)
     const availableLoaders = {
         'standard': 'Стандартный',
-        'pulseLoader': 'PulseLoader',
-        'spinCircle': 'SpinCircle',
-        'waveDots': 'WaveDots',
-        'orbitRings': 'OrbitRings',
-        'bounceSquares': 'BounceSquares',
-        'ripplePulse': 'RipplePulse',
-        'gridFade': 'GridFade',
-        'twirlBars': 'TwirlBars',
-        'starBurst': 'StarBurst',
-        'hexSpin': 'HexSpin'
+        'pulseLoader': 'Пульсирующие полосы',
+        'orbitRings': 'Орбитальные кольца',
+        'gridFade': 'Сетка затухания',
+        'filmReel': 'Киноплёнка',
+        'clapperboard': 'Хлопушка',
+        'projectorBeam': 'Луч проектора',
+        'flickeringFrames': 'Мерцающие кадры',
+        'starfield': 'Звёздное поле',
+        'neonSign': 'Неоновая вывеска',
+        'vhsGlitch': 'VHS-глитч',
+        'digitalWave': 'Цифровая волна',
+        'pixelBurst': 'Пиксельный взрыв',
+        'retroBars': 'Ретро-полосы',
+        'quantumSpin': 'Квантовое вращение'
     };
 
     // Цвета для загрузчиков
@@ -58,7 +62,7 @@
 
         const style = $('<style id="interface_mod_theme"></style>');
 
-        const themes = {
+              const themes = {
             barbie: `
                 body {
                     background-color: #3b2a35;
@@ -2042,29 +2046,9 @@
                     `<svg xmlns="http://www.w3.org/2000/svg" width="135" height="140" fill="${color}"><rect width="15" height="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="30" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="140" x="60" rx="6"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="90" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect></svg>`
                 );
                 break;
-            case 'spinCircle':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="8"><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/><animate attributeName="r" values="40;35;40" dur="0.8s" repeatCount="indefinite"/></circle></svg>`
-                );
-                break;
-            case 'waveDots':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" fill="${color}"><circle cx="20" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0s"/></circle><circle cx="40" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.2s"/></circle><circle cx="60" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.4s"/></circle><circle cx="80" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.6s"/></circle><circle cx="100" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.8s"/></circle></svg>`
-                );
-                break;
             case 'orbitRings':
                 svgCode = encodeURIComponent(
                     `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><circle cx="50" cy="50" r="30"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="1.5s" repeatCount="indefinite"/></circle></svg>`
-                );
-                break;
-            case 'bounceSquares':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="20" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="40" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.25s"/></rect><rect x="60" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.5s"/></rect><rect x="80" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.75s"/></rect></svg>`
-                );
-                break;
-            case 'ripplePulse':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><circle cx="50" cy="50" r="20"><animate attributeName="r" values="20;40;20" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="30"><animate attributeName="r" values="30;50;30" dur="1.5s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0.5s"/></circle></svg>`
                 );
                 break;
             case 'gridFade':
@@ -2072,19 +2056,59 @@
                     `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="${color}"><rect x="10" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="25" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="40" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="10" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect><rect x="25" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.8s"/></rect><rect x="40" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="10" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="25" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="40" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
                 );
                 break;
-            case 'twirlBars':
+            case 'filmReel':
                 svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="45" y="20" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="45" y="60" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="20" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="60" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="40" y="30" width="20" height="40" rx="2"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite"/></rect><rect x="30" y="20" width="40" height="60" rx="5" fill="none" stroke="${color}" stroke-width="4"><animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/></rect></svg>`
                 );
                 break;
-            case 'starBurst':
+            case 'clapperboard':
                 svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><path d="M50 20L55 40L75 45L55 50L50 70L45 50L25 45L45 40Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite"/></path><path d="M50 15L53 35L70 40L53 45L50 65L47 45L30 40L47 35Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="20" y="40" width="60" height="40" rx="3"/><path d="M20 40 L40 20 L80 20 L60 40 Z"><animateTransform attributeName="transform" type="rotate" values="0 50 30;20 50 30;0 50 30" dur="1s" repeatCount="indefinite"/></path></svg>`
                 );
                 break;
-            case 'hexSpin':
+            case 'projectorBeam':
                 svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><path d="M50 25L65 37.5L65 62.5L50 75L35 62.5L35 37.5Z"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-width" values="6;10;6" dur="1.2s" repeatCount="indefinite"/></path></svg>`
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><path d="M20 50 H80"><animate attributeName="stroke-dasharray" values="0 60;60 0;0 60" dur="1.5s" repeatCount="indefinite"/></path><rect x="80" y="40" width="10" height="20" rx="2"><animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/></rect></svg>`
+                );
+                break;
+            case 'flickeringFrames':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="30" y="20" width="40" height="60" rx="3"><animate attributeName="opacity" values="1;0.3;1" dur="0.5s" repeatCount="indefinite" begin="0s"/></rect><rect x="35" y="25" width="30" height="50" rx="2"><animate attributeName="opacity" values="1;0.3;1" dur="0.5s" repeatCount="indefinite" begin="0.2s"/></rect></svg>`
+                );
+                break;
+            case 'starfield':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="20" y="20" width="5" height="5"><animate attributeName="x" values="20;80;20" dur="2s" repeatCount="indefinite"/></rect><rect x="40" y="40" width="5" height="5"><animate attributeName="x" values="40;80;40" dur="1.5s" repeatCount="indefinite"/></rect><rect x="60" y="60" width="5" height="5"><animate attributeName="x" values="60;80;60" dur="1.8s" repeatCount="indefinite"/></rect></svg>`
+                );
+                break;
+            case 'neonSign':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><rect x="20" y="30" width="60" height="40" rx="5"><animate attributeName="opacity" values="1;0.5;1" dur="1.2s" repeatCount="indefinite"/></rect><path d="M30 50 H70"><animate attributeName="opacity" values="1;0.5;1" dur="1.2s" repeatCount="indefinite" begin="0.3s"/></path></svg>`
+                );
+                break;
+            case 'vhsGlitch':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="20" y="30" width="60" height="10"><animate attributeName="x" values="20;25;20" dur="0.3s" repeatCount="indefinite"/></rect><rect x="20" y="50" width="60" height="10"><animate attributeName="x" values="20;15;20" dur="0.4s" repeatCount="indefinite"/></rect></svg>`
+                );
+                break;
+            case 'digitalWave':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><path d="M20 50 Q40 30 60 50 T100 50"><animate attributeName="d" values="M20 50 Q40 30 60 50 T100 50;M20 50 Q40 70 60 50 T100 50;M20 50 Q40 30 60 50 T100 50" dur="1.5s" repeatCount="indefinite"/></path></svg>`
+                );
+                break;
+            case 'pixelBurst':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="45" y="45" width="10" height="10"><animate attributeName="width" values="10;20;10" dur="1s" repeatCount="indefinite"/><animate attributeName="height" values="10;20;10" dur="1s" repeatCount="indefinite"/></rect><rect x="40" y="40" width="20" height="20" fill="none" stroke="${color}" stroke-width="2"><animate attributeName="opacity" values="1;0.5;1" dur="1s" repeatCount="indefinite"/></rect></svg>`
+                );
+                break;
+            case 'retroBars':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="30" y="20" width="10" height="60"><animate attributeName="height" values="60;40;60" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="45" y="20" width="10" height="60"><animate attributeName="height" values="60;40;60" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="60" y="20" width="10" height="60"><animate attributeName="height" values="60;40;60" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect></svg>`
+                );
+                break;
+            case 'quantumSpin':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><path d="M30 50 H70"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite"/></path><path d="M50 30 V70"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite" begin="0.3s"/></path></svg>`
                 );
                 break;
         }
