@@ -12,24 +12,25 @@
         }
     };
 
-  // Доступные шрифты
-const availableFonts = {
-    'system': 'Системный',
-    'montserrat': 'Montserrat',
-    'ubuntu': 'Ubuntu',
-    'fira-sans': 'Fira Sans',
-    'roboto': 'Roboto',
-    'open-sans': 'Open Sans',
-    'pt-sans': 'PT Sans',
-    'exo2': 'Exo 2',
-    'russo-one': 'Russo One',
-    'comfortaa': 'Comfortaa',
-    'netflix-style': 'Noto Sans (Netflix)',
-    'kinopoisk': 'Manrope (КиноПоиск)',
-    'raleway-film': 'Raleway (Постерный стиль)',
-    'jost-cinema': 'Jost (Современный)',
-    'merri-cinema': 'Merriweather (Артхаус / Драма)'
-};
+    // Доступные шрифты
+    const availableFonts = {
+        'system': 'Системный',
+        'montserrat': 'Montserrat',
+        'ubuntu': 'Ubuntu',
+        'fira-sans': 'Fira Sans',
+        'roboto': 'Roboto',
+        'open-sans': 'Open Sans',
+        'pt-sans': 'PT Sans',
+        'exo2': 'Exo 2',
+        'russo-one': 'Russo One',
+        'comfortaa': 'Comfortaa',
+        'netflix-style': 'Noto Sans (Netflix)',
+        'kinopoisk': 'Manrope (КиноПоиск)',
+        'raleway-film': 'Raleway (Постерный стиль)',
+        'jost-cinema': 'Jost (Современный)',
+        'merri-cinema': 'Merriweather (Артхаус / Драма)'
+    };
+
     // Стили лоадеров (10+ вариантов)
     const loaderStyles = {
         'default': {
@@ -92,7 +93,8 @@ const availableFonts = {
                     <animate attributeName="cy" dur="1s" begin="0.2s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
                 </circle>
                 <circle cx="100" cy="50" r="10">
-                    <animate attributeName="cy" dur="1s" begin="0.4s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
+                    <animate attributeName="cy" dur="1s" begin="0.4s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 登录
+0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
                 </circle>
                 <circle cx="140" cy="50" r="10">
                     <animate attributeName="cy" dur="1s" begin="0.6s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
@@ -174,13 +176,13 @@ const availableFonts = {
         }
     };
 
-        function applyTheme(theme) {
+    function applyTheme(theme) {
         $('#interface_mod_theme').remove();
         if (theme === 'default') return;
 
         const style = $('<style id="interface_mod_theme"></style>');
 
-        const themes = {
+              const themes = {
             barbie: `
                 body {
                     background-color: #3b2a35;
@@ -2098,61 +2100,59 @@ const availableFonts = {
         $('head').append(style);
     }
 
+
     function applyFont(font) {
-    // Удаляем предыдущие стили шрифтов
-    $('#interface_mod_font').remove();
+        $('#interface_mod_font').remove();
 
-    if (font === 'system') return; // Используем системный шрифт
+        if (font === 'system') return;
 
-    const style = $('<style id="interface_mod_font"></style>');
+        const style = $('<style id="interface_mod_font"></style>');
 
-    const fontStyles = {
-        'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
-        'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
-        'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
-        'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
-        'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
-        'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
-        'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
-        'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
-        'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
+        const fontStyles = {
+            'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
+            'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
+            'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
+        };
 
-        // Тематические (из фильмов)
-'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
-    'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
-    'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
-    'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
-    'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
-    };
+        const fontFamily = {
+            'montserrat': "'Montserrat', sans-serif",
+            'ubuntu': "'Ubuntu', sans-serif",
+            'fira-sans': "'Fira Sans', sans-serif",
+            'roboto': "'Roboto', sans-serif",
+            'open-sans': "'Open Sans', sans-serif",
+            'pt-sans': "'PT Sans', sans-serif",
+            'exo2': "'Exo 2', sans-serif",
+            'russo-one': "'Russo One', sans-serif",
+            'comfortaa': "'Comfortaa', cursive",
+            'netflix-style': "'Noto Sans', sans-serif",
+            'kinopoisk': "'Manrope', sans-serif",
+            'raleway-film': "'Raleway', sans-serif",
+            'jost-cinema': "'Jost', sans-serif",
+            'merri-cinema': "'Merriweather', serif"
+        };
 
-    const fontFamily = {
-        'montserrat': "'Montserrat', sans-serif",
-        'ubuntu': "'Ubuntu', sans-serif",
-        'fira-sans': "'Fira Sans', sans-serif",
-        'roboto': "'Roboto', sans-serif",
-        'open-sans': "'Open Sans', sans-serif",
-        'pt-sans': "'PT Sans', sans-serif",
-        'exo2': "'Exo 2', sans-serif",
-        'russo-one': "'Russo One', sans-serif",
-        'comfortaa': "'Comfortaa', cursive",
+        style.html(`
+            ${fontStyles[font] || ''}
+            body, .full-start-new__details, .settings-param-title {
+                font-family: ${fontFamily[font]} !important;
+            }
+        `);
 
-    'netflix-style': "'Noto Sans', sans-serif",
-    'kinopoisk': "'Manrope', sans-serif",
-    'raleway-film': "'Raleway', sans-serif",
-    'jost-cinema': "'Jost', sans-serif",
-    'merri-cinema': "'Merriweather', serif"
-    };
+        $('head').append(style);
+    }
 
-    style.html(`
-        ${fontStyles[font] || ''}
-        body, .full-start-new__details, .settings-param-title {
-            font-family: ${fontFamily[font]} !important;
-        }
-    `);
-
-    $('head').append(style);
-}
-  function applyLoader(loaderName) {
+    function applyLoader(loaderName) {
         $('#custom_loader_style').remove();
         if (loaderName === 'default') return;
 
@@ -2175,7 +2175,7 @@ const availableFonts = {
         $('head').append(style);
     }
 
- function startPlugin() {
+    function startPlugin() {
         // Загрузка сохраненных настроек
         InterFaceMod.settings = {
             theme: Lampa.Storage.get('theme_select', 'default'),
@@ -2238,7 +2238,7 @@ const availableFonts = {
             }
         });
 
-        // Добавляем выбор шрифта (НОВЫЙ БЛОК)
+        // Добавляем выбор шрифта
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -2257,7 +2257,10 @@ const availableFonts = {
                 applyFont(value);
             }
         });
-           component: 'theme_mod',
+
+        // Добавляем выбор стиля загрузки
+        Lampa.SettingsApi.addParam({
+            component: 'theme_mod',
             param: {
                 name: 'loader_style',
                 type: 'select',
