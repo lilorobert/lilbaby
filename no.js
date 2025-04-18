@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.13', // Обновляем версию из-за фикса размера и анимаций
+        version: '0.0.14', // Обновляем версию из-за фикса анимаций и центрирования
         debug: true, // Оставляем debug для отладки
         settings: {
             enabled: true,
@@ -234,7 +234,7 @@
             switch (loader) {
                 case 'pulseLoader':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect width="9.4" height="75" y="6.25" rx="3.75"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="75" x="18.8" y="6.25" rx="3.75"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="87.5" x="37.6" rx="3.75"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="75" x="56.4" y="6.25" rx="3.75"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="75" x="75.2" y="6.25" rx="3.75"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect width="9.4" height="75" x="4.7" y="4.9" rx="3.75"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="4.9;8.025;11.15;14.275;17.4;20.525;23.65;26.775;29.9;-0.25;4.9"/></rect><rect width="9.4" height="75" x="23.5" y="4.9" rx="3.75"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="4.9;8.025;11.15;14.275;17.4;20.525;23.65;26.775;29.9;-0.25;4.9"/></rect><rect width="9.4" height="87.5" x="42.3" y="4.9" rx="3.75"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="4.9;8.025;11.15;14.275;17.4;20.525;23.65;26.775;29.9;-0.25;4.9"/></rect><rect width="9.4" height="75" x="61.1" y="4.9" rx="3.75"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="4.9;8.025;11.15;14.275;17.4;20.525;23.65;26.775;29.9;-0.25;4.9"/></rect><rect width="9.4" height="75" x="79.9" y="4.9" rx="3.75"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="4.9;8.025;11.15;14.275;17.4;20.525;23.65;26.775;29.9;-0.25;4.9"/></rect></svg>`
                     );
                     break;
                 case 'spinCircle':
@@ -344,11 +344,15 @@
                     -webkit-background-size: 80% 80% !important;
                     -moz-background-size: 80% 80% !important;
                     -o-background-size: 80% 80% !important;
-                    display: none;
+                    display: block !important; /* Временно для теста */
                     width: 84.8px;
                     height: 84.8px;
                 }
                 .player-video__loader {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                     background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50% !important;
                     background-size: 80% 80% !important;
                     -webkit-background-size: 80% 80% !important;
@@ -361,17 +365,37 @@
             `);
             $('head').append(style);
 
-            // Проверка отображения .activity__loader
+            // Проверка отображения .activity__loader и .player-video__loader
             setTimeout(() => {
                 const activityLoaders = document.querySelectorAll('.activity__loader');
                 activityLoaders.forEach(loader => {
-                    if (window.getComputedStyle(loader).display !== 'none') {
-                        if (InterFaceMod.debug) {
-                            console.log(`Activity loader visible: ${loader}`);
-                        }
+                    const styles = window.getComputedStyle(loader);
+                    if (InterFaceMod.debug) {
+                        console.log(`Activity loader: display=${styles.display}, background=${styles.background}, width=${styles.width}, height=${styles.height}`);
+                    }
+                });
+
+                const videoLoaders = document.querySelectorAll('.player-video__loader');
+                videoLoaders.forEach(loader => {
+                    const styles = window.getComputedStyle(loader);
+                    if (InterFaceMod.debug) {
+                        console.log(`Video loader: display=${styles.display}, background=${styles.background}, width=${styles.width}, height=${styles.height}, position=${styles.position}, top=${styles.top}, left=${styles.left}, transform=${styles.transform}`);
                     }
                 });
             }, 1000);
+
+            // MutationObserver для отслеживания изменений .activity__loader
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach(mutation => {
+                    if (mutation.target.classList.contains('activity__loader')) {
+                        const styles = window.getComputedStyle(mutation.target);
+                        if (InterFaceMod.debug) {
+                            console.log(`Activity loader changed: display=${styles.display}, classList=${mutation.target.classList}`);
+                        }
+                    }
+                });
+            });
+            observer.observe(document.body, { childList: true, subtree: true, attributes: true });
 
             if (InterFaceMod.debug) {
                 console.log(`Loader ${loader} applied, color: ${color}`);
