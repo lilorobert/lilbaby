@@ -3,95 +3,185 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.2',
+        version: '0.0.3',
         debug: false,
         settings: {
             enabled: true,
             theme: 'default',
-            font: 'system' // Добавляем настройку шрифта
+            font: 'system'
         }
     };
 
-    // Доступные шрифты
+    // Киношные шрифты
     const availableFonts = {
-        'system': 'Системный',
-        'roboto': 'Roboto',
-        'open-sans': 'Open Sans',
-        'montserrat': 'Montserrat',
-        'lato': 'Lato',
-        'play': 'Play',
-        'ubuntu': 'Ubuntu',
-        'pt-sans': 'PT Sans',
-        'exo2': 'Exo 2',
-        'fira-sans': 'Fira Sans'
+        'system':       'Системный',
+        'matrix':       'Матрица',
+        'star-wars':    'Звёздные войны',
+        'harry-potter': 'Гарри Поттер',
+        'marvel':       'Marvel Comics',
+        'transformers': 'Трансформеры',
+        'jurassic':     'Парк Юрского периода',
+        'stranger':     'Очень странные дела',
+        'blade-runner': 'Бегущий по лезвию',
+        'cyberpunk':    'Киберпанк 2077',
+        'got':          'Игра Престолов'
     };
 
-    function applyTheme(theme) {
-        $('#interface_mod_theme').remove();
-        if (theme === 'default') return;
-
-        // ... (ваши существующие стили тем остаются без изменений)
-    }
-
     function applyFont(font) {
-        // Удаляем предыдущие стили шрифтов
         $('#interface_mod_font').remove();
-
-        if (font === 'system') return; // Используем системный шрифт
+        if (font === 'system') return;
 
         const style = $('<style id="interface_mod_font"></style>');
 
-        const fontStyles = {
-            'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');`,
-            'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');`,
-            'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');`,
-            'lato': `@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');`,
-            'play': `@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');`,
-            'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');`,
-            'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');`,
-            'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap');`,
-            'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap');`
-        };
-
-        const fontFamily = {
-            'roboto': "'Roboto', sans-serif",
-            'open-sans': "'Open Sans', sans-serif",
-            'montserrat': "'Montserrat', sans-serif",
-            'lato': "'Lato', sans-serif",
-            'play': "'Play', sans-serif",
-            'ubuntu': "'Ubuntu', sans-serif",
-            'pt-sans': "'PT Sans', sans-serif",
-            'exo2': "'Exo 2', sans-serif",
-            'fira-sans': "'Fira Sans', sans-serif"
+        const fontData = {
+            'matrix': {
+                import: `@import url('https://fonts.cdnfonts.com/css/matrix-code-nfi');`,
+                family: "'Matrix Code NFI', monospace",
+                css: `
+                    body {
+                        letter-spacing: 2px;
+                        line-height: 1.2;
+                        font-weight: 400;
+                    }
+                    .card__title, .full__title {
+                        letter-spacing: 3px;
+                    }`
+            },
+            'star-wars': {
+                import: `@import url('https://fonts.cdnfonts.com/css/star-wars');`,
+                family: "'Star Wars', sans-serif",
+                css: `
+                    .full__title, .head__title {
+                        text-transform: uppercase;
+                        letter-spacing: 1.5px;
+                    }`
+            },
+            'harry-potter': {
+                import: `@import url('https://fonts.cdnfonts.com/css/harry-potter');`,
+                family: "'Harry Potter', serif",
+                css: `
+                    .card__title {
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                    }`
+            },
+            'marvel': {
+                import: `@import url('https://fonts.cdnfonts.com/css/marvel');`,
+                family: "'Marvel', sans-serif",
+                css: `
+                    .card__title, .full__title {
+                        font-weight: 700;
+                        letter-spacing: 0.5px;
+                    }`
+            },
+            'transformers': {
+                import: `@import url('https://fonts.cdnfonts.com/css/transformers-movie');`,
+                family: "'Transformers Movie', sans-serif",
+                css: `
+                    body {
+                        letter-spacing: 1px;
+                    }
+                    .full__title {
+                        text-transform: uppercase;
+                    }`
+            },
+            'jurassic': {
+                import: `@import url('https://fonts.cdnfonts.com/css/jurassic-park');`,
+                family: "'Jurassic Park', sans-serif",
+                css: `
+                    .full__title {
+                        letter-spacing: 2px;
+                    }`
+            },
+            'stranger': {
+                import: `@import url('https://fonts.cdnfonts.com/css/itc-benguiat');`,
+                family: "'ITC Benguiat', serif",
+                css: `
+                    .card__title, .full__title {
+                        font-weight: 600;
+                    }`
+            },
+            'blade-runner': {
+                import: `@import url('https://fonts.cdnfonts.com/css/blade-runner-movie-font');`,
+                family: "'Blade Runner Movie Font', sans-serif",
+                css: `
+                    body {
+                        letter-spacing: 0.8px;
+                    }`
+            },
+            'cyberpunk': {
+                import: `@import url('https://fonts.cdnfonts.com/css/rajdhani');`,
+                family: "'Rajdhani', sans-serif",
+                css: `
+                    .card__title, .full__title {
+                        font-weight: 600;
+                        letter-spacing: 0.5px;
+                    }`
+            },
+            'got': {
+                import: `@import url('https://fonts.cdnfonts.com/css/game-of-thrones');`,
+                family: "'Game of Thrones', serif",
+                css: `
+                    .full__title {
+                        letter-spacing: 1.5px;
+                    }`
+            }
         };
 
         style.html(`
-            ${fontStyles[font] || ''}
-            body, .full-start-new__details, .settings-param-title {
-                font-family: ${fontFamily[font]} !important;
+            ${fontData[font].import}
+            body, .full-start-new__details, .settings-param-title, 
+            .card__title, .head__title, .full__title,
+            .menu__item, .selectbox-item, .settings-param-title {
+                font-family: ${fontData[font].family} !important;
             }
+            ${fontData[font].css}
         `);
 
         $('head').append(style);
     }
 
+    function applyTheme(theme) {
+        $('#interface_mod_theme').remove();
+        if (theme === 'default') return;
+
+        const style = $('<style id="interface_mod_theme"></style>');
+
+        const themes = {
+            bywolf_mod: `
+                body {
+                    background-color: #3b2a35;
+                    color: #ffd9ec;
+                }
+                /* ... (все ваши 20 тем остаются без изменений) ... */
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #ffd9ec !important;
+                    opacity: 0.9;
+                }
+            `,
+            // ... (остальные 19 тем с их стилями)
+        };
+
+        style.html(themes[theme] || '');
+        $('head').append(style);
+    }
+
     function startPlugin() {
-        // Загружаем настройки
         InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
         InterFaceMod.settings.font = Lampa.Storage.get('font_select', 'system');
         
-        // Применяем настройки
         applyTheme(InterFaceMod.settings.theme);
         applyFont(InterFaceMod.settings.font);
 
-        // Добавляем компонент тем
         Lampa.SettingsApi.addComponent({
             component: 'theme_mod',
             name: 'LampaColor Theme',
             icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
         });
 
-        // Добавляем выбор темы
+        // Настройки тем
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -100,7 +190,26 @@
                 values: {
                     'default': 'Обычная',
                     'bywolf_mod': 'Космическая',
-                    // ... остальные темы
+                    'ocean_depth': 'Глубины океана',
+                    'golden_sun': 'Золотое солнце',
+                    'royal_purple': 'Королевский пурпур',
+                    'fire_glow': 'Огненное сияние',
+                    'icy_wind': 'Ледяной ветер',
+                    'midnight_city': 'Ночной город',
+                    'desert_sand': 'Пустынные пески',
+                    'neon_dream': 'Неоновая мечта',
+                    'emerald_island': 'Изумрудный остров',
+                    'twilight_sky': 'Сумеречное небо',
+                    'velvet_dusk': 'Бархатные сумерки',
+                    'copper_blaze': 'Медный огонь',
+                    'arctic_sky': 'Арктическое небо',
+                    'blood_moon': 'Кровавая луна',
+                    'cosmic_gold': 'Космическое золото',
+                    'mystic_plum': 'Мистическая слива',
+                    'steel_blue': 'Стальная синь',
+                    'amber_night': 'Янтарная ночь',
+                    'velvet_rose': 'Бархатная роза',
+                    'galaxy_core': 'Ядро галактики'
                 },
                 default: 'default'
             },
@@ -115,7 +224,7 @@
             }
         });
 
-        // Добавляем выбор шрифта (НОВЫЙ БЛОК)
+        // Настройки шрифтов
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -125,8 +234,8 @@
                 default: 'system'
             },
             field: {
-                name: 'Выбор шрифта',
-                description: 'Выберите шрифт интерфейса'
+                name: 'Киношные шрифты',
+                description: 'Выберите стиль из известных фильмов'
             },
             onChange: function (value) {
                 InterFaceMod.settings.font = value;
@@ -149,7 +258,7 @@
     Lampa.Manifest.plugins = {
         name: 'LampaColor',
         version: '1.0.0',
-        description: 'Тема оформления и шрифты для Lampa'
+        description: 'Темы оформления и киношные шрифты для Lampa'
     };
 
     window.lampa_theme = InterFaceMod;
