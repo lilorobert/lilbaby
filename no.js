@@ -1,4 +1,4 @@
-изучи код (function () {
+(function () {
     'use strict';
 
     var InterFaceMod = {
