@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.11', // Обновляем версию из-за фикса синтаксиса и стилей
+        version: '0.0.13', // Обновляем версию из-за фикса размера и анимаций
         debug: true, // Оставляем debug для отладки
         settings: {
             enabled: true,
@@ -234,102 +234,102 @@
             switch (loader) {
                 case 'pulseLoader':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="135" height="140" fill="${color}"><rect width="15" height="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="30" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="140" x="60" rx="6"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="90" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect width="9.4" height="75" y="6.25" rx="3.75"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="75" x="18.8" y="6.25" rx="3.75"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="87.5" x="37.6" rx="3.75"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="75" x="56.4" y="6.25" rx="3.75"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect><rect width="9.4" height="75" x="75.2" y="6.25" rx="3.75"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="75;68.75;62.5;56.25;50;43.75;37.5;31.25;25;87.5;75"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="6.25;9.375;12.5;15.625;18.75;21.875;25;28.125;31.25;0;6.25"/></rect></svg>`
                     );
                     break;
                 case 'spinCircle':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="8"><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/><animate attributeName="r" values="40;35;40" dur="0.8s" repeatCount="indefinite"/></circle></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="none" stroke="${color}" stroke-width="6.784"><circle cx="42.4" cy="42.4" r="33.92"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite"/><animate attributeName="r" values="33.92;29.68;33.92" dur="0.8s" repeatCount="indefinite"/></circle></svg>`
                     );
                     break;
                 case 'ripplePulse':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><circle cx="50" cy="50" r="20"><animate attributeName="r" values="20;40;20" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="30"><animate attributeName="r" values="30;50;30" dur="1.5s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0.5s"/></circle></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="none" stroke="${color}" stroke-width="3.392"><circle cx="42.4" cy="42.4" r="16.96"><animate attributeName="r" values="16.96;33.92;16.96" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="42.4" cy="42.4" r="25.44"><animate attributeName="r" values="25.44;42.4;25.44" dur="1.5s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0.5s"/></circle></svg>`
                     );
                     break;
                 case 'lampaCLetter':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="60" fill="${color}"><text x="10" y="50" font-family="Arial" font-size="40" font-weight="bold">LampaC</text><text x="10" y="50" font-family="Arial" font-size="40" fill="none" stroke="${color}" stroke-width="2"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></text><text x="10" y="50" font-family="Arial" font-size="40" fill="${color}"><animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite" begin="0.5s"/></text></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><text x="5.648" y="67.84" font-family="Arial" font-size="33.92" font-weight="bold">LampaC</text><text x="5.648" y="67.84" font-family="Arial" font-size="33.92" fill="none" stroke="${color}" stroke-width="1.696"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></text><text x="5.648" y="67.84" font-family="Arial" font-size="33.92" fill="${color}"><animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite" begin="0.5s"/></text></svg>`
                     );
                     break;
                 case 'lineWave':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" fill="${color}"><rect x="20" y="20" width="10" height="20"><animate attributeName="height" values="20;40;20" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="40" y="20" width="10" height="20"><animate attributeName="height" values="20;40;20" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="60" y="20" width="10" height="20"><animate attributeName="height" values="20;40;20" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="80" y="20" width="10" height="20"><animate attributeName="height" values="20;40;20" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect x="14.12" y="14.12" width="7.064" height="14.12"><animate attributeName="height" values="14.12;28.24;14.12" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="28.24" y="14.12" width="7.064" height="14.12"><animate attributeName="height" values="14.12;28.24;14.12" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="42.36" y="14.12" width="7.064" height="14.12"><animate attributeName="height" values="14.12;28.24;14.12" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="56.48" y="14.12" width="7.064" height="14.12"><animate attributeName="height" values="14.12;28.24;14.12" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
                     );
                     break;
                 case 'triangleSpin':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><path d="M50 20L80 65L20 65Z"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;1" dur="1.2s" repeatCount="indefinite"/></path></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><path d="M42.4 16.96L67.84 55.08L16.96 55.08Z"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;1" dur="1.2s" repeatCount="indefinite"/></path></svg>`
                     );
                     break;
                 case 'barPulse':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" fill="${color}"><rect x="20" y="20" width="60" height="10"><animate attributeName="width" values="60;80;60" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="20" y="40" width="60" height="10"><animate attributeName="width" values="60;80;60" dur="1s" repeatCount="indefinite" begin="0.5s"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect x="14.12" y="14.12" width="42.36" height="7.064"><animate attributeName="width" values="42.36;56.48;42.36" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="14.12" y="28.24" width="42.36" height="7.064"><animate attributeName="width" values="42.36;56.48;42.36" dur="1s" repeatCount="indefinite" begin="0.5s"/></rect></svg>`
                     );
                     break;
                 case 'squareGrid':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="${color}"><rect x="10" y="10" width="15" height="15"><animateTransform attributeName="transform" type="rotate" from="0 17.5 17.5" to="360 17.5 17.5" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="35" y="10" width="15" height="15"><animateTransform attributeName="transform" type="rotate" from="0 42.5 17.5" to="360 42.5 17.5" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="10" y="35" width="15" height="15"><animateTransform attributeName="transform" type="rotate" from="0 17.5 42.5" to="360 17.5 42.5" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="35" y="35" width="15" height="15"><animateTransform attributeName="transform" type="rotate" from="0 42.5 42.5" to="360 42.5 42.5" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect x="7.064" y="7.064" width="10.596" height="10.596"><animateTransform attributeName="transform" type="rotate" from="0 12.376 12.376" to="360 12.376 12.376" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="24.704" y="7.064" width="10.596" height="10.596"><animateTransform attributeName="transform" type="rotate" from="0 30.016 12.376" to="360 30.016 12.376" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="7.064" y="24.704" width="10.596" height="10.596"><animateTransform attributeName="transform" type="rotate" from="0 12.376 30.016" to="360 12.376 30.016" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="24.704" y="24.704" width="10.596" height="10.596"><animateTransform attributeName="transform" type="rotate" from="0 30.016 30.016" to="360 30.016 30.016" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
                     );
                     break;
                 case 'arrowBounce':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" fill="${color}"><path d="M30 20L50 40L70 20"><animate attributeName="y" values="0;10;0" dur="1s" repeatCount="indefinite" begin="0s"/></path><path d="M30 40L50 60L70 40"><animate attributeName="y" values="0;10;0" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><path d="M21.2 16.96L42.4 33.92L63.6 16.96"><animate attributeName="y" values="0;7.064;0" dur="1s" repeatCount="indefinite" begin="0s"/></path><path d="M21.2 33.92L42.4 50.88L63.6 33.92"><animate attributeName="y" values="0;7.064;0" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
                     );
                     break;
                 case 'diamondFade':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><path d="M50 20L80 50L50 80L20 50Z"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></path><path d="M50 30L70 50L50 70L30 50Z"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><path d="M42.4 16.96L67.84 42.4L42.4 67.84L16.96 42.4Z"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></path><path d="M42.4 25.44L59.36 42.4L42.4 59.36L25.44 42.4Z"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
                     );
                     break;
                 case 'crossRotate':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="45" y="20" width="10" height="60"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/></rect><rect x="20" y="45" width="60" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect x="38.128" y="16.96" width="8.472" height="50.88"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite"/></rect><rect x="16.96" y="38.128" width="50.88" height="8.472"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite"/></rect></svg>`
                     );
                     break;
                 case 'spinCircleOld':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="8"><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/><animate attributeName="r" values="40;35;40" dur="0.8s" repeatCount="indefinite"/></circle></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="none" stroke="${color}" stroke-width="6.784"><circle cx="42.4" cy="42.4" r="33.92"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite"/><animate attributeName="r" values="33.92;29.68;33.92" dur="0.8s" repeatCount="indefinite"/></circle></svg>`
                     );
                     break;
                 case 'waveDots':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" fill="${color}"><circle cx="20" cy="30" r="5"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0s"/></circle><circle cx="40" cy="30" r="5"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.2s"/></circle><circle cx="60" cy="30" r="5"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.4s"/></circle><circle cx="80" cy="30" r="5"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.6s"/></circle><circle cx="100" cy="30" r="5"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.8s"/></circle></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><circle cx="14.12" cy="25.44" r="4.24"><animate attributeName="cy" values="25.44;12.72;25.44" dur="1s" repeatCount="indefinite" begin="0s"/></circle><circle cx="28.24" cy="25.44" r="4.24"><animate attributeName="cy" values="25.44;12.72;25.44" dur="1s" repeatCount="indefinite" begin="0.2s"/></circle><circle cx="42.36" cy="25.44" r="4.24"><animate attributeName="cy" values="25.44;12.72;25.44" dur="1s" repeatCount="indefinite" begin="0.4s"/></circle><circle cx="56.48" cy="25.44" r="4.24"><animate attributeName="cy" values="25.44;12.72;25.44" dur="1s" repeatCount="indefinite" begin="0.6s"/></circle><circle cx="70.6" cy="25.44" r="4.24"><animate attributeName="cy" values="25.44;12.72;25.44" dur="1s" repeatCount="indefinite" begin="0.8s"/></circle></svg>`
                     );
                     break;
                 case 'orbitRings':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><circle cx="50" cy="50" r="30"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="1.5s" repeatCount="indefinite"/></circle></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="none" stroke="${color}" stroke-width="5.088"><circle cx="42.4" cy="42.4" r="25.44"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="42.4" cy="42.4" r="33.92"><animateTransform attributeName="transform" type="rotate" from="360 42.4 42.4" to="0 42.4 42.4" dur="1.5s" repeatCount="indefinite"/></circle></svg>`
                     );
                     break;
                 case 'bounceSquares':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="20" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="40" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.25s"/></rect><rect x="60" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.5s"/></rect><rect x="80" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.75s"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect x="14.12" y="14.12" width="14.12" height="14.12"><animate attributeName="y" values="14.12;7.064;14.12" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="28.24" y="14.12" width="14.12" height="14.12"><animate attributeName="y" values="14.12;7.064;14.12" dur="1s" repeatCount="indefinite" begin="0.25s"/></rect><rect x="42.36" y="14.12" width="14.12" height="14.12"><animate attributeName="y" values="14.12;7.064;14.12" dur="1s" repeatCount="indefinite" begin="0.5s"/></rect><rect x="56.48" y="14.12" width="14.12" height="14.12"><animate attributeName="y" values="14.12;7.064;14.12" dur="1s" repeatCount="indefinite" begin="0.75s"/></rect></svg>`
                     );
                     break;
                 case 'ripplePulseOld':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><circle cx="50" cy="50" r="20"><animate attributeName="r" values="20;40;20" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="30"><animate attributeName="r" values="30;50;30" dur="1.5s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0.5s"/></circle></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="none" stroke="${color}" stroke-width="3.392"><circle cx="42.4" cy="42.4" r="16.96"><animate attributeName="r" values="16.96;33.92;16.96" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="42.4" cy="42.4" r="25.44"><animate attributeName="r" values="25.44;42.4;25.44" dur="1.5s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0.5s"/></circle></svg>`
                     );
                     break;
                 case 'gridFade':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="${color}"><rect x="10" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="25" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="40" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="10" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect><rect x="25" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.8s"/></rect><rect x="40" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="10" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="25" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="40" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect x="7.064" y="7.064" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="17.66" y="7.064" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="28.256" y="7.064" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="7.064" y="17.66" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect><rect x="17.66" y="17.66" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.8s"/></rect><rect x="28.256" y="17.66" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="7.064" y="28.256" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="17.66" y="28.256" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="28.256" y="28.256" width="7.064" height="7.064"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
                     );
                     break;
                 case 'twirlBars':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="45" y="20" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="45" y="60" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="20" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="60" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><rect x="38.128" y="16.96" width="8.472" height="16.96"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="38.128" y="50.88" width="8.472" height="16.96"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="16.96" y="38.128" width="16.96" height="8.472"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="50.88" y="38.128" width="16.96" height="8.472"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
                     );
                     break;
                 case 'starBurst':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><path d="M50 20L55 40L75 45L55 50L50 70L45 50L25 45L45 40Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite"/></path><path d="M50 15L53 35L70 40L53 45L50 65L47 45L30 40L47 35Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="${color}"><path d="M42.4 16.96L46.64 33.92L63.6 38.16L46.64 42.4L42.4 59.36L38.16 42.4L21.2 38.16L38.16 33.92Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite"/></path><path d="M42.4 12.72L44.944 29.68L59.36 33.92L44.944 38.16L42.4 55.12L39.856 38.16L25.44 33.92L39.856 29.68Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
                     );
                     break;
                 case 'hexSpin':
                     svgCode = encodeURIComponent(
-                        `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><path d="M50 25L65 37.5L65 62.5L50 75L35 62.5L35 37.5Z"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-width" values="6;10;6" dur="1.2s" repeatCount="indefinite"/></path></svg>`
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="84.8" height="84.8" viewBox="0 0 84.8 84.8" fill="none" stroke="${color}" stroke-width="5.088"><path d="M42.4 21.2L55.12 31.796L55.12 53.004L42.4 63.6L29.68 53.004L29.68 31.796Z"><animateTransform attributeName="transform" type="rotate" from="0 42.4 42.4" to="360 42.4 42.4" dur="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-width" values="5.088;8.48;5.088" dur="1.2s" repeatCount="indefinite"/></path></svg>`
                     );
                     break;
                 default:
@@ -339,35 +339,43 @@
 
             style.html(`
                 .activity__loader {
-                    background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
-                    background-size: 80% 80%;
-                    -webkit-background-size: 80% 80%;
-                    -moz-background-size: 80% 80%;
-                    -o-background-size: 80% 80%;
+                    background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50% !important;
+                    background-size: 80% 80% !important;
+                    -webkit-background-size: 80% 80% !important;
+                    -moz-background-size: 80% 80% !important;
+                    -o-background-size: 80% 80% !important;
                     display: none;
-                    max-width: 100px;
-                    max-height: 100px;
-                    width: 100%;
-                    height: 100%;
+                    width: 84.8px;
+                    height: 84.8px;
                 }
                 .player-video__loader {
                     background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50% !important;
-                    background-size: 80% 80%;
-                    -webkit-background-size: 80% 80%;
-                    -moz-background-size: 80% 80%;
-                    -o-background-size: 80% 80%;
+                    background-size: 80% 80% !important;
+                    -webkit-background-size: 80% 80% !important;
+                    -moz-background-size: 80% 80% !important;
+                    -o-background-size: 80% 80% !important;
                     display: none;
-                    max-width: 100px;
-                    max-height: 100px;
-                    width: 100%;
-                    height: 100%;
+                    width: 84.8px;
+                    height: 84.8px;
                 }
             `);
             $('head').append(style);
 
+            // Проверка отображения .activity__loader
+            setTimeout(() => {
+                const activityLoaders = document.querySelectorAll('.activity__loader');
+                activityLoaders.forEach(loader => {
+                    if (window.getComputedStyle(loader).display !== 'none') {
+                        if (InterFaceMod.debug) {
+                            console.log(`Activity loader visible: ${loader}`);
+                        }
+                    }
+                });
+            }, 1000);
+
             if (InterFaceMod.debug) {
                 console.log(`Loader ${loader} applied, color: ${color}`);
-                console.log(`SVG length: ${decodeURIComponent(svgCode).length}`);
+                console.log(`SVG size: 84.8x84.8, length: ${decodeURIComponent(svgCode).length}`);
             }
         } catch (e) {
             console.error(`Error applying loader ${loader}:`, e);
