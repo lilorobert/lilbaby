@@ -3,8 +3,8 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.10', // Обновляем версию из-за фикса синтаксиса
-        debug: true, // Включаем debug для отладки
+        version: '0.0.11', // Обновляем версию из-за фикса синтаксиса и стилей
+        debug: true, // Оставляем debug для отладки
         settings: {
             enabled: true,
             theme: 'default',
@@ -164,6 +164,9 @@
 
         style.html(themes[theme] || '');
         $('head').append(style);
+        if (InterFaceMod.debug) {
+            console.log(`Theme ${theme} applied`);
+        }
     }
 
     function applyFont(font) {
@@ -214,6 +217,9 @@
         `);
 
         $('head').append(style);
+        if (InterFaceMod.debug) {
+            console.log(`Font ${font} applied`);
+        }
     }
 
     function applyLoader(loader) {
@@ -333,30 +339,28 @@
 
             style.html(`
                 .activity__loader {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 100%;
-                    height: 100%;
-                    max-width: 100px;
-                    max-height: 100px;
-                    transform: translate(-50%, -50%);
-                    display: none;
                     background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
                     background-size: 80% 80%;
-                }
-                .player-video__loader {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 100%;
-                    height: 100%;
+                    -webkit-background-size: 80% 80%;
+                    -moz-background-size: 80% 80%;
+                    -o-background-size: 80% 80%;
+                    display: none;
                     max-width: 100px;
                     max-height: 100px;
-                    transform: translate(-50%, -50%);
-                    display: none;
+                    width: 100%;
+                    height: 100%;
+                }
+                .player-video__loader {
                     background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50% !important;
                     background-size: 80% 80%;
+                    -webkit-background-size: 80% 80%;
+                    -moz-background-size: 80% 80%;
+                    -o-background-size: 80% 80%;
+                    display: none;
+                    max-width: 100px;
+                    max-height: 100px;
+                    width: 100%;
+                    height: 100%;
                 }
             `);
             $('head').append(style);
