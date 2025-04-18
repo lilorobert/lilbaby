@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.8', // Обновляем версию из-за добавления старых загрузчиков и фикса центрирования
+        version: '0.0.9', // Обновляем версию из-за фикса синтаксиса и стилей
         debug: false,
         settings: {
             enabled: true,
@@ -185,7 +185,7 @@
             'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
             'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
             'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@4
+            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
             'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
             'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
         };
@@ -340,7 +340,7 @@
                 max-height: 100px;
                 transform: translate(-50%, -50%);
                 display: none;
-                background: url("data:image/svg+xml,${svgCode}") no-repeat center center;
+                background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
                 background-size: 80% 80%;
             }
             .player-video__loader {
@@ -353,7 +353,7 @@
                 max-height: 100px;
                 transform: translate(-50%, -50%);
                 display: none;
-                background: url("data:image/svg+xml,${svgCode}") no-repeat center center;
+                background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
                 background-size: 80% 80%;
             }
         `);
