@@ -12,177 +12,33 @@
         }
     };
 
-    // Доступные шрифты
-    const availableFonts = {
-        'system': 'Системный',
-        'montserrat': 'Montserrat',
-        'ubuntu': 'Ubuntu',
-        'fira-sans': 'Fira Sans',
-        'roboto': 'Roboto',
-        'open-sans': 'Open Sans',
-        'pt-sans': 'PT Sans',
-        'exo2': 'Exo 2',
-        'russo-one': 'Russo One',
-        'comfortaa': 'Comfortaa',
-        'netflix-style': 'Noto Sans (Netflix)',
-        'kinopoisk': 'Manrope (КиноПоиск)',
-        'raleway-film': 'Raleway (Постерный стиль)',
-        'jost-cinema': 'Jost (Современный)',
-        'merri-cinema': 'Merriweather (Артхаус / Драма)'
-    };
+  // Доступные шрифты
+const availableFonts = {
+    'system': 'Системный',
+    'montserrat': 'Montserrat',
+    'ubuntu': 'Ubuntu',
+    'fira-sans': 'Fira Sans',
+    'roboto': 'Roboto',
+    'open-sans': 'Open Sans',
+    'pt-sans': 'PT Sans',
+    'exo2': 'Exo 2',
+    'russo-one': 'Russo One',
+    'comfortaa': 'Comfortaa',
+    'netflix-style': 'Noto Sans (Netflix)',
+    'kinopoisk': 'Manrope (КиноПоиск)',
+    'raleway-film': 'Raleway (Постерный стиль)',
+    'jost-cinema': 'Jost (Современный)',
+    'merri-cinema': 'Merriweather (Артхаус / Драма)'
+};
 
-    // Стили лоадеров (10+ вариантов)
-    const loaderStyles = {
-        'default': {
-            name: 'Стандартный',
-            color: '#ff5722',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="135" height="140" fill="#COLOR#">
-                <rect width="15" height="120" y="10" rx="6">
-                    <animate attributeName="height" begin="0.5s" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/>
-                    <animate attributeName="y" begin="0.5s" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/>
-                </rect>
-                <rect width="15" height="120" x="30" y="10" rx="6">
-                    <animate attributeName="height" begin="0.25s" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/>
-                    <animate attributeName="y" begin="0.25s" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/>
-                </rect>
-                <rect width="15" height="140" x="60" rx="6">
-                    <animate attributeName="height" begin="0s" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/>
-                    <animate attributeName="y" begin="0s" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/>
-                </rect>
-                <rect width="15" height="120" x="90" y="10" rx="6">
-                    <animate attributeName="height" begin="0.25s" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/>
-                    <animate attributeName="y" begin="0.25s" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/>
-                </rect>
-                <rect width="15" height="120" x="120" y="10" rx="6">
-                    <animate attributeName="height" begin="0.5s" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/>
-                    <animate attributeName="y" begin="0.5s" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/>
-                </rect>
-            </svg>`
-        },
-        'pulse': {
-            name: 'Пульсация',
-            color: '#00bcd4',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#COLOR#">
-                <circle cx="50" cy="50" r="0" opacity="1">
-                    <animate attributeName="r" dur="1.5s" repeatCount="indefinite" values="0;30;0"/>
-                    <animate attributeName="opacity" dur="1.5s" repeatCount="indefinite" values="1;0.5;0"/>
-                </circle>
-                <circle cx="50" cy="50" r="0" opacity="1">
-                    <animate attributeName="r" dur="1.5s" begin="0.5s" repeatCount="indefinite" values="0;30;0"/>
-                    <animate attributeName="opacity" dur="1.5s" begin="0.5s" repeatCount="indefinite" values="1;0.5;0"/>
-                </circle>
-            </svg>`
-        },
-        'spinner': {
-            name: 'Круговой',
-            color: '#9c27b0',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="#COLOR#">
-                <circle cx="50" cy="50" r="40" stroke-width="8" stroke-dasharray="60 15" stroke-linecap="round" fill="none">
-                    <animateTransform attributeName="transform" type="rotate" dur="1.5s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-                </circle>
-            </svg>`
-        },
-        'dots': {
-            name: 'Точечный',
-            color: '#4caf50',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="100" fill="#COLOR#">
-                <circle cx="20" cy="50" r="10">
-                    <animate attributeName="cy" dur="1s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
-                </circle>
-                <circle cx="60" cy="50" r="10">
-                    <animate attributeName="cy" dur="1s" begin="0.2s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
-                </circle>
-                <circle cx="100" cy="50" r="10">
-                    <animate attributeName="cy" dur="1s" begin="0.4s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 登录
-0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
-                </circle>
-                <circle cx="140" cy="50" r="10">
-                    <animate attributeName="cy" dur="1s" begin="0.6s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
-                </circle>
-                <circle cx="180" cy="50" r="10">
-                    <animate attributeName="cy" dur="1s" begin="0.8s" repeatCount="indefinite" values="50;30;50;70;50" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"/>
-                </circle>
-            </svg>`
-        },
-        'neon': {
-            name: 'Неоновый',
-            color: '#ff00ff',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="#COLOR#">
-                <path d="M30,30 L120,30 L90,120 Z" stroke-width="4" fill="none">
-                    <animate attributeName="stroke" dur="2s" repeatCount="indefinite" values="#ff00ff;#00ffff;#ff00ff"/>
-                </path>
-                <path d="M40,40 L110,40 L80,110 Z" stroke-width="3" fill="none">
-                    <animate attributeName="stroke" dur="2s" begin="0.5s" repeatCount="indefinite" values="#00ffff;#ff00ff;#00ffff"/>
-                </path>
-            </svg>`
-        },
-        'bounce': {
-            name: 'Прыгающий',
-            color: '#ff9800',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#COLOR#">
-                <circle cx="50" cy="30" r="10">
-                    <animate attributeName="cy" dur="1s" repeatCount="indefinite" values="30;70;30" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1"/>
-                </circle>
-            </svg>`
-        },
-        'ripple': {
-            name: 'Волны',
-            color: '#2196f3',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#COLOR#">
-                <circle cx="50" cy="50" r="10" opacity="0">
-                    <animate attributeName="r" dur="2s" repeatCount="indefinite" values="0;40" keyTimes="0;1" keySplines="0.1 0.8 0.2 1"/>
-                    <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;0" keyTimes="0;1"/>
-                </circle>
-                <circle cx="50" cy="50" r="10" opacity="0">
-                    <animate attributeName="r" dur="2s" begin="1s" repeatCount="indefinite" values="0;40" keyTimes="0;1" keySplines="0.1 0.8 0.2 1"/>
-                    <animate attributeName="opacity" dur="2s" begin="1s" repeatCount="indefinite" values="1;0" keyTimes="0;1"/>
-                </circle>
-            </svg>`
-        },
-        'metaball': {
-            name: 'Метаболлы',
-            color: '#e91e63',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#COLOR#">
-                <circle cx="30" cy="50" r="20">
-                    <animate attributeName="cx" dur="3s" repeatCount="indefinite" values="30;70;30"/>
-                </circle>
-                <circle cx="70" cy="50" r="20">
-                    <animate attributeName="cx" dur="3s" repeatCount="indefinite" values="70;30;70"/>
-                </circle>
-            </svg>`
-        },
-        'clock': {
-            name: 'Часы',
-            color: '#3f51b5',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#COLOR#">
-                <circle cx="50" cy="50" r="45" stroke-width="3" fill="none"/>
-                <line x1="50" y1="50" x2="50" y2="30" stroke-width="3">
-                    <animateTransform attributeName="transform" type="rotate" dur="6s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-                </line>
-                <line x1="50" y1="50" x2="50" y2="20" stroke-width="5">
-                    <animateTransform attributeName="transform" type="rotate" dur="60s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-                </line>
-            </svg>`
-        },
-        'infinity': {
-            name: 'Бесконечность',
-            color: '#8bc34a',
-            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="#COLOR#" stroke-width="5">
-                <path d="M20,50 C35,20 65,20 80,50 C95,80 65,80 50,50 C35,20 5,20 20,50 Z">
-                    <animate attributeName="stroke-dashoffset" dur="3s" repeatCount="indefinite" values="0;200;0"/>
-                    <animate attributeName="stroke-dasharray" dur="3s" repeatCount="indefinite" values="10,10;100,100;10,10"/>
-                </path>
-            </svg>`
-        }
-    };
 
-    function applyTheme(theme) {
+        function applyTheme(theme) {
         $('#interface_mod_theme').remove();
         if (theme === 'default') return;
 
         const style = $('<style id="interface_mod_theme"></style>');
 
-              const themes = {
+        const themes = {
             barbie: `
                 body {
                     background-color: #3b2a35;
@@ -2100,93 +1956,69 @@
         $('head').append(style);
     }
 
-
     function applyFont(font) {
-        $('#interface_mod_font').remove();
+    // Удаляем предыдущие стили шрифтов
+    $('#interface_mod_font').remove();
 
-        if (font === 'system') return;
+    if (font === 'system') return; // Используем системный шрифт
 
-        const style = $('<style id="interface_mod_font"></style>');
+    const style = $('<style id="interface_mod_font"></style>');
 
-        const fontStyles = {
-            'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
-            'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
-            'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
-        };
+    const fontStyles = {
+        'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+        'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
+        'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
+        'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
+        'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
 
-        const fontFamily = {
-            'montserrat': "'Montserrat', sans-serif",
-            'ubuntu': "'Ubuntu', sans-serif",
-            'fira-sans': "'Fira Sans', sans-serif",
-            'roboto': "'Roboto', sans-serif",
-            'open-sans': "'Open Sans', sans-serif",
-            'pt-sans': "'PT Sans', sans-serif",
-            'exo2': "'Exo 2', sans-serif",
-            'russo-one': "'Russo One', sans-serif",
-            'comfortaa': "'Comfortaa', cursive",
-            'netflix-style': "'Noto Sans', sans-serif",
-            'kinopoisk': "'Manrope', sans-serif",
-            'raleway-film': "'Raleway', sans-serif",
-            'jost-cinema': "'Jost', sans-serif",
-            'merri-cinema': "'Merriweather', serif"
-        };
+        // Тематические (из фильмов)
+'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
+    };
 
-        style.html(`
-            ${fontStyles[font] || ''}
-            body, .full-start-new__details, .settings-param-title {
-                font-family: ${fontFamily[font]} !important;
-            }
-        `);
+    const fontFamily = {
+        'montserrat': "'Montserrat', sans-serif",
+        'ubuntu': "'Ubuntu', sans-serif",
+        'fira-sans': "'Fira Sans', sans-serif",
+        'roboto': "'Roboto', sans-serif",
+        'open-sans': "'Open Sans', sans-serif",
+        'pt-sans': "'PT Sans', sans-serif",
+        'exo2': "'Exo 2', sans-serif",
+        'russo-one': "'Russo One', sans-serif",
+        'comfortaa': "'Comfortaa', cursive",
 
-        $('head').append(style);
-    }
+    'netflix-style': "'Noto Sans', sans-serif",
+    'kinopoisk': "'Manrope', sans-serif",
+    'raleway-film': "'Raleway', sans-serif",
+    'jost-cinema': "'Jost', sans-serif",
+    'merri-cinema': "'Merriweather', serif"
+    };
 
-    function applyLoader(loaderName) {
-        $('#custom_loader_style').remove();
-        if (loaderName === 'default') return;
+    style.html(`
+        ${fontStyles[font] || ''}
+        body, .full-start-new__details, .settings-param-title {
+            font-family: ${fontFamily[font]} !important;
+        }
+    `);
 
-        const loader = loaderStyles[loaderName] || loaderStyles.default;
-        const svgCode = encodeURIComponent(loader.svg.replace('#COLOR#', loader.color));
-
-        const style = $(`<style id="custom_loader_style">
-            .loader__content::before {
-                content: url("data:image/svg+xml,${svgCode}");
-                display: block;
-                margin: 0 auto;
-                width: 100%;
-                height: 100px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
-            }
-        </style>`);
-
-        $('head').append(style);
-    }
+    $('head').append(style);
+}
 
     function startPlugin() {
-        // Загрузка сохраненных настроек
-        InterFaceMod.settings = {
-            theme: Lampa.Storage.get('theme_select', 'default'),
-            font: Lampa.Storage.get('font_select', 'system'),
-            loader: Lampa.Storage.get('loader_style', 'default')
-        };
-
+        // Загружаем настройки
+        InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
+        InterFaceMod.settings.font = Lampa.Storage.get('font_select', 'system');
+        
         // Применяем настройки
         applyTheme(InterFaceMod.settings.theme);
         applyFont(InterFaceMod.settings.font);
-        applyLoader(InterFaceMod.settings.loader);
 
         // Добавляем компонент тем
         Lampa.SettingsApi.addComponent({
@@ -2238,7 +2070,7 @@
             }
         });
 
-        // Добавляем выбор шрифта
+        // Добавляем выбор шрифта (НОВЫЙ БЛОК)
         Lampa.SettingsApi.addParam({
             component: 'theme_mod',
             param: {
@@ -2255,28 +2087,6 @@
                 InterFaceMod.settings.font = value;
                 Lampa.Storage.set('font_select', value);
                 applyFont(value);
-            }
-        });
-
-        // Добавляем выбор стиля загрузки
-        Lampa.SettingsApi.addParam({
-            component: 'theme_mod',
-            param: {
-                name: 'loader_style',
-                type: 'select',
-                values: Object.fromEntries(
-                    Object.entries(loaderStyles).map(([key, value]) => [key, value.name])
-                ),
-                default: 'default'
-            },
-            field: {
-                name: 'Стиль загрузки',
-                description: 'Выберите анимацию при загрузке'
-            },
-            onChange: function (value) {
-                InterFaceMod.settings.loader = value;
-                Lampa.Storage.set('loader_style', value);
-                applyLoader(value);
             }
         });
     }
