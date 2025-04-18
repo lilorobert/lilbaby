@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.5',
+        version: '0.0.5', // Обновляем версию из-за новых загрузчиков
         debug: false,
         settings: {
             enabled: true,
@@ -165,20 +165,20 @@
         const style = $('<style id="interface_mod_font"></style>');
 
         const fontStyles = {
-            'montserrat': "@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');",
-            'ubuntu': "@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');",
-            'fira-sans': "@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');",
-            'roboto': "@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');",
-            'open-sans': "@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');",
-            'pt-sans': "@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');",
-            'exo2': "@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');",
-            'russo-one': "@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');",
-            'comfortaa': "@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');",
-            'netflix-style': "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');",
-            'kinopoisk': "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');",
-            'raleway-film': "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');",
-            'jost-cinema': "@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');",
-            'merri-cinema': "@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');"
+            'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
+            'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
+            'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
         };
 
         const fontFamily = {
@@ -198,12 +198,12 @@
             'merri-cinema': "'Merriweather', serif"
         };
 
-        style.html(
-            `${fontStyles[font] || ''}
+        style.html(`
+            ${fontStyles[font] || ''}
             body, .full-start-new__details, .settings-param-title {
                 font-family: ${fontFamily[font]} !important;
-            }`
-        );
+            }
+        `);
 
         $('head').append(style);
     }
@@ -276,7 +276,7 @@
         }
 
         style.html(`
-            .activity__loader {
+            .activity__loader, .player-video__loader {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -284,24 +284,6 @@
                 height: 100%;
                 display: none;
                 background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
-                background-size: contain;
-            }
-            .player-video__paused, .player-video__loader {
-                position: fixed;
-                left: 50%;
-                top: 50%;
-                width: 8em;
-                height: 8em;
-                border-radius: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                margin-left: -4em;
-                margin-top: -4em;
-                box-sizing: border-box;
-            }
-            .player-video__loader {
-                background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
-                background-size: contain;
-                display: none;
             }
         `);
         $('head').append(style);
@@ -347,7 +329,7 @@
                     'midnight_city': 'Ночной город',
                     'desert_sand': 'Пустынные пески',
                     'neon_dream': 'Неоновая мечта',
-                    'emerald_island': 'Из彼此: 'Изумрудный остров',
+                    'emerald_island': 'Изумрудный остров',
                     'twilight_sky': 'Сумеречное небо',
                     'velvet_dusk': 'Бархатные сумерки',
                     'copper_blaze': 'Медный огонь',
