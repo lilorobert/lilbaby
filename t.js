@@ -24,11 +24,11 @@ const availableFonts = {
     'exo2': 'Exo 2',
     'russo-one': 'Russo One',
     'comfortaa': 'Comfortaa',
-    'press-start': 'Press Start 2P (Матрица)',
-    'cinzel': 'Cinzel (Гарри Поттер)',
-    'bangers': 'Bangers (Марвел / Комиксы)',
-    'poiret-one': 'Poiret One (Ретро стиль)',
-    'caveat': 'Caveat (Артхаус / Драма)'
+    'netflix-style': 'Noto Sans (Netflix)',
+    'kinopoisk': 'Manrope (КиноПоиск)',
+    'raleway-film': 'Raleway (Постерный стиль)',
+    'jost-cinema': 'Jost (Современный)',
+    'merri-cinema': 'Merriweather (Артхаус / Драма)'
 };
 
         function applyTheme(theme) {
@@ -38,7 +38,7 @@ const availableFonts = {
         const style = $('<style id="interface_mod_theme"></style>');
 
         const themes = {
-            bywolf_mod: `
+            barbie: `
                 body {
                     background-color: #3b2a35;
                     color: #ffd9ec;
@@ -1975,11 +1975,11 @@ const availableFonts = {
         'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
 
         // Тематические (из фильмов)
-        'press-start': `@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic');`,
-        'cinzel': `@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap&subset=cyrillic');`,
-        'bangers': `@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap&subset=cyrillic');`,
-        'poiret-one': `@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap&subset=cyrillic');`,
-        'caveat': `@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap&subset=cyrillic');`
+'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
+    'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
     };
 
     const fontFamily = {
@@ -1993,11 +1993,11 @@ const availableFonts = {
         'russo-one': "'Russo One', sans-serif",
         'comfortaa': "'Comfortaa', cursive",
 
-        'press-start': "'Press Start 2P', monospace",
-        'cinzel': "'Cinzel', serif",
-        'bangers': "'Bangers', cursive",
-        'poiret-one': "'Poiret One', cursive",
-        'caveat': "'Caveat', cursive"
+    'netflix-style': "'Noto Sans', sans-serif",
+    'kinopoisk': "'Manrope', sans-serif",
+    'raleway-film': "'Raleway', sans-serif",
+    'jost-cinema': "'Jost', sans-serif",
+    'merri-cinema': "'Merriweather', serif"
     };
 
     style.html(`
@@ -2034,7 +2034,7 @@ const availableFonts = {
                 type: 'select',
                 values: {
                     'default': 'Обычная',
-                    'bywolf_mod': 'Космическая',
+                    'barbie': 'Барби',
                     'ocean_depth': 'Глубины океана',
                     'golden_sun': 'Золотое солнце',
                     'royal_purple': 'Королевский пурпур',
