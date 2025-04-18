@@ -1,99 +1,341 @@
-
-(function() {
+(function () {
     'use strict';
 
-    // Стили для разных тем (минифицированные, с .activity__loader из исходного CSS Lampa)
-    var themes = {
-        default: '.activity__loader{position:absolute;top:0;left:0;width:100%;height:100%;display:none;background:url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%}',
-        violet_stroke: ':root{--main-color:#8B29B9;--background-color:#1d1f20;--text-color:#fff;--transparent-white:rgba(255,255,255,.2)}body{background-color:#1d1f20;color:#fff}.menu__ico{color:#000;-webkit-filter:invert(1);filter:invert(1)}.activity__loader{position:absolute;top:0;left:0;width:100%;height:100%;display:none;background:url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%}.modal-loading{height:6em;-webkit-background-size:contain;-moz-background-size:contain;-o-background-size:contain;background-size:contain}.console__tab.focus,.menu__item.focus,.menu__item.traverse,.menu__item.hover,.full-person.focus,.full-start__button.focus,.full-descr__tag.focus,.simple-button.focus,.head__action.focus,.head__action.hover,.player-panel .button.focus,.search-source.active{background:#8B29B9;color:#fff}.navigation-tabs__button.focus,.time-line>div,.player-panel__position,.player-panel__position>div:after{background-color:#8B29B9;color:#fff}.iptv-menu__list-item.focus,.iptv-program__timeline>div{background-color:#8B29B9!important;color:#fff!important}.radio-item.focus,.lang__selector-item.focus,.simple-keyboard .hg-button.focus,.modal__button.focus,.search-history-key.focus,.simple-keyboard-mic.focus,.torrent-serial__progress,.full-review-add.focus,.full-review.focus,.tag-count.focus,.settings-folder.focus,.settings-param.focus,.selectbox-item.focus,.selectbox-item.hover{background:#8B29B9;color:#fff}.online.focus{box-shadow:0 0 0 .2em #8B29B9}.online_modss.focus::after,.online-prestige.focus::after,.radio-item.focus .radio-item__imgbox:after,.iptv-channel.focus::before,.iptv-channel.last--focus::before{border-color:#8B29B9!important}.card-more.focus .card-more__box::after{border:.3em solid #8B29B9}.simple-button--filter>div{background-color:rgba(255,255,255,.1)}.iptv-playlist-item.focus::after,.iptv-playlist-item.hover::after{border-color:#8B29B9!important}.ad-bot.focus .ad-bot__content::after,.ad-bot.hover .ad-bot__content::after,.card-episode.focus .full-episode::after,.register.focus::after,.season-episode.focus::after,.full-episode.focus::after,.full-review-add.focus::after,.card.focus .card__view::after,.card.hover .card__view::after,.extensions__item.focus:after,.torrent-item.focus::after,.extensions__block-add.focus:after{border-color:#8B29B9}.items-line__more{background:rgba(255,255,255,.1)}.items-line__more.focus{background:#8B29B9!important;color:#fff!important}.torrent-serial__size{background-color:#fff;color:#000}.broadcast__scan>div,.broadcast__device.focus{background-color:#8B29B9;color:#fff}.card:hover .card__img,.card.focus .card__img{border-color:#8B29B9}.noty{background:#8B29B9;color:#fff}.radio-player.focus{background-color:#8B29B9;color:#fff}.explorer-card__head-img.focus::after{border:.3em solid #8B29B9}',
-        neon_mod: ':root{--main-color:#e13fe4;--secondary-color:#9d61d3;--background-color:rgba(15,2,33,.95);--text-color:#fff;--transparent-accent:rgba(225,63,228,.1)}body{background:linear-gradient(135deg,#0d0221 0%,#150734 50%,#1f0c47 100%);color:#fff}.menu__ico{color:#000;-webkit-filter:invert(1);filter:invert(1)}.activity__loader{position:absolute;top:0;left:0;width:100%;height:100%;display:none;background:url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%}.modal-loading{height:6em;-webkit-background-size:contain;-moz-background-size:contain;-o-background-size:contain;background-size:contain}.console__tab.focus,.menu__item.focus,.menu__item.traverse,.menu__item.hover,.full-person.focus,.full-start__button.focus,.full-descr__tag.focus,.simple-button.focus,.head__action.focus,.head__action.hover,.player-panel .button.focus,.search-source.active,.navigation-tabs__button.focus,.radio-item.focus,.lang__selector-item.focus,.simple-keyboard .hg-button.focus,.modal__button.focus,.search-history-key.focus,.simple-keyboard-mic.focus,.torrent-serial__progress,.full-review-add.focus,.full-review.focus,.tag-count.focus,.settings-folder.focus,.settings-param.focus,.selectbox-item.focus,.selectbox-item.hover,.radio-player.focus,.broadcast__device.focus{background:linear-gradient(to right,#e13fe4,#9d61d3);color:#fff;box-shadow:0 0 10px rgba(225,63,228,.2);text-shadow:0 0 10px rgba(255,255,255,.5);border:none}.time-line>div,.player-panel__position,.player-panel__position>div:after,.iptv-menu__list-item.focus,.iptv-program__timeline>div,.broadcast__scan>div{background-color:#e13fe4;color:#fff}.card.focus .card__view::after,.card.hover .card__view::after{border:3px solid #e13fe4!important;box-shadow:0 0 10px rgba(225,63,228,.2)}.online.focus{border:3px solid #e13fe4!important;box-shadow:0 0 10px rgba(225,63,228,.2)}.online_modss.focus::after,.online-prestige.focus::after,.radio-item.focus .radio-item__imgbox:after,.iptv-channel.focus::before,.iptv-channel.last--focus::before,.iptv-playlist-item.focus::after,.iptv-playlist-item.hover::after,.ad-bot.focus .ad-bot__content::after,.ad-bot.hover .ad-bot__content::after,.card-episode.focus .full-episode::after,.register.focus::after,.season-episode.focus::after,.full-episode.focus::after,.full-review-add.focus::after,.extensions__item.focus:after,.torrent-item.focus::after,.extensions__block-add.focus:after,.card-more.focus .card-more__box::after,.explorer-card__head-img.focus::after{border:3px solid #e13fe4!important;box-shadow:0 0 10px rgba(225,63,228,.2)}.items-line__more{background:rgba(225,63,228,.1)}.items-line__more.focus{background:linear-gradient(to right,#e13fe4,#9d61d3)!important;color:#fff!important;box-shadow:0 0 10px rgba(225,63,228,.2)}.simple-button--filter>div{background-color:rgba(225,63,228,.1)}.torrent-serial__size{background-color:#fff;color:#000}.noty{background:linear-gradient(to right,#e13fe4,#9d61d3);color:#fff}.full-start__background{opacity:.7;filter:brightness(1.2) saturate(1.3)}.settings__content,.settings-input__content,.selectbox__content,.modal__content{background:rgba(15,2,33,.95);border:1px solid rgba(225,63,228,.1);box-shadow:0 0 10px rgba(225,63,228,.1)}',
-        emerald: ':root{--main-color:#43cea2;--secondary-color:#185a9d;--background-color:rgba(26,42,58,.98);--text-color:#fff;--transparent-accent:rgba(67,206,162,.1)}body{background:linear-gradient(135deg,#1a2a3a 0%,#2C5364 50%,#203A43 100%);color:#fff}.menu__ico{color:#000;-webkit-filter:invert(1);filter:invert(1)}.activity__loader{position:absolute;top:0;left:0;width:100%;height:100%;display:none;background:url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%}.modal-loading{height:6em;-webkit-background-size:contain;-moz-background-size:contain;-o-background-size:contain;background-size:contain}.console__tab.focus,.menu__item.focus,.menu__item.traverse,.menu__item.hover,.full-person.focus,.full-start__button.focus,.full-descr__tag.focus,.simple-button.focus,.head__action.focus,.head__action.hover,.player-panel .button.focus,.search-source.active,.navigation-tabs__button.focus,.radio-item.focus,.lang__selector-item.focus,.simple-keyboard .hg-button.focus,.modal__button.focus,.search-history-key.focus,.simple-keyboard-mic.focus,.torrent-serial__progress,.full-review-add.focus,.full-review.focus,.tag-count.focus,.settings-folder.focus,.settings-param.focus,.selectbox-item.focus,.selectbox-item.hover,.radio-player.focus,.broadcast__device.focus{background:linear-gradient(to right,#43cea2,#185a9d);color:#fff;box-shadow:0 4px 15px rgba(67,206,162,.3)}.time-line>div,.player-panel__position,.player-panel__position>div:after,.iptv-menu__list-item.focus,.iptv-program__timeline>div,.broadcast__scan>div{background-color:#43cea2;color:#fff}.card.focus .card__view::after,.card.hover .card__view::after{border:3px solid #43cea2!important;box-shadow:0 0 20px rgba(67,206,162,.4)}.online.focus{border:3px solid #43cea2!important;box-shadow:0 0 20px rgba(67,206,162,.4)}.online_modss.focus::after,.online-prestige.focus::after,.radio-item.focus .radio-item__imgbox:after,.iptv-channel.focus::before,.iptv-channel.last--focus::before,.iptv-playlist-item.focus::after,.iptv-playlist-item.hover::after,.ad-bot.focus .ad-bot__content::after,.ad-bot.hover .ad-bot__content::after,.card-episode.focus .full-episode::after,.register.focus::after,.season-episode.focus::after,.full-episode.focus::after,.full-review-add.focus::after,.extensions__item.focus:after,.torrent-item.focus::after,.extensions__block-add.focus:after,.card-more.focus .card-more__box::after,.explorer-card__head-img.focus::after{border:3px solid #43cea2!important;box-shadow:0 0 20px rgba(67,206,162,.4)}.items-line__more{background:rgba(67,206,162,.1)}.items-line__more.focus{background:linear-gradient(to right,#43cea2,#185a9d)!important;color:#fff!important;box-shadow:0 4px 15px rgba(67,206,162,.3)}.simple-button--filter>div{background-color:rgba(67,206,162,.1)}.torrent-serial__size{background-color:#fff;color:#000}.noty{background:linear-gradient(to right,#43cea2,#185a9d);color:#fff}.full-start__background{opacity:.85;filter:brightness(1.1) saturate(1.2)}.settings__content,.settings-input__content,.selectbox__content,.modal__content{background:rgba(26,42,58,.98);border:1px solid rgba(67,206,162,.1);box-shadow:0 0 20px rgba(67,206,162,.1)}'
-    };
-
-    // Цвета loader'а для каждой темы
-    var loaderColors = {
-        default: '#fff',
-        violet_stroke: '#8B29B9',
-        neon_mod: '#e13fe4',
-        emerald: '#43cea2'
-    };
-
-    // Функция для применения темы и обновления loader'а
-    function applyTheme(theme) {
-        // Удаляем старый стиль темы
-        var oldStyle = document.querySelector('#interface_theme_mod_style');
-        if (oldStyle) {
-            oldStyle.parentNode.removeChild(oldStyle);
+    var InterFaceMod = {
+        name: 'LampaColor',
+        version: '0.0.3', // Обновляем версию, так как добавляем новый функционал
+        debug: false,
+        settings: {
+            enabled: true,
+            theme: 'default',
+            font: 'system',
+            loader: 'standard' // Новая настройка для загрузчика
         }
+    };
 
-        // Применяем тему с подставленным SVG
-        var style = document.createElement('style');
-        style.id = 'interface_theme_mod_style';
-        var color = loaderColors[theme] || loaderColors.default;
-        var svgCode = encodeURIComponent(
-            `<svg xmlns="http://www.w3.org/2000/svg" width="135" height="140" fill="${color}"><rect width="15" height="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="30" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="140" x="60" rx="6"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="90" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect></svg>`
-        );
-        style.textContent = themes[theme].replace('${svgCode}', svgCode);
-        document.head.appendChild(style);
+    // Доступные шрифты
+    const availableFonts = {
+        'system': 'Системный',
+        'montserrat': 'Montserrat',
+        'ubuntu': 'Ubuntu',
+        'fira-sans': 'Fira Sans',
+        'roboto': 'Roboto',
+        'open-sans': 'Open Sans',
+        'pt-sans': 'PT Sans',
+        'exo2': 'Exo 2',
+        'russo-one': 'Russo One',
+        'comfortaa': 'Comfortaa',
+        'netflix-style': 'Noto Sans (Netflix)',
+        'kinopoisk': 'Manrope (КиноПоиск)',
+        'raleway-film': 'Raleway (Постерный стиль)',
+        'jost-cinema': 'Jost (Современный)',
+        'merri-cinema': 'Merriweather (Артхаус / Драма)'
+    };
 
-        // Логирование для отладки
-        console.log('Theme applied:', theme, 'Loader color:', color);
-        console.log('SVG length:', decodeURIComponent(svgCode).length);
+    // Доступные загрузчики
+    const availableLoaders = {
+        'standard': 'Стандартный',
+        'pulseLoader': 'PulseLoader'
+    };
+
+    // Цвета для PulseLoader
+    const loaderColors = {
+        default: '#fff'
+    };
+
+    function applyTheme(theme) {
+        $('#interface_mod_theme').remove();
+        if (theme === 'default') return;
+
+        const style = $('<style id="interface_mod_theme"></style>');
+
+        const themes = {
+            galaxy_core: `
+                body {
+                    background-color: #0f0f2a;
+                    color: #e8eaf6;
+                }
+                body.black--style {
+                    background: #09091c;
+                }
+                .menu__item.focus,
+                .menu__item.traverse,
+                .menu__item.hover,
+                .settings-folder.focus,
+                .settings-param.focus,
+                .selectbox-item.focus,
+                .selectbox-item.hover,
+                .full-person.focus,
+                .full-start__button.focus,
+                .full-descr__tag.focus,
+                .simple-button.focus,
+                .iptv-list__item.focus,
+                .iptv-menu__list-item.focus,
+                .head__action.focus,
+                .head__action.hover,
+                .player-panel .button.focus,
+                .search-source.active {
+                    background: linear-gradient(to right, #7c4dff 1%, #311b92 100%);
+                    color: #e8eaf6;
+                }
+                .settings-folder.focus .settings-folder__icon {
+                    filter: invert(1);
+                }
+                .settings-param-title > span {
+                    color: #e8eaf6;
+                }
+                .settings__content,
+                .settings-input__content,
+                .selectbox__content,
+                .modal__content {
+                    background: linear-gradient(135deg, #1a1a4a 1%, #0a0a2a 100%);
+                }
+                .settings-input__links {
+                    background-color: rgba(124, 77, 255, 0.2);
+                }
+                .card.focus .card__view::after,
+                .card.hover .card__view::after,
+                .extensions__item.focus:after,
+                .torrent-item.focus::after,
+                .extensions__block-add.focus:after {
+                    border-color: #b388ff;
+                }
+                .online-prestige.focus::after,
+                .iptv-channel.focus::before,
+                .iptv-channel.last--focus::before {
+                    border-color: #b388ff !important;
+                }
+                .time-line > div,
+                .player-panel__position,
+                .player-panel__position > div:after {
+                    background-color: #651fff;
+                }
+                .extensions {
+                    background: #0a0a2a;
+                }
+                .extensions__item,
+                .extensions__block-add {
+                    background-color: #1a1a4a;
+                }
+                .torrent-item__size,
+                .torrent-item__exe,
+                .torrent-item__viewed,
+                .torrent-serial__size {
+                    background-color: #d1c4e9;
+                    color: #0f0f2a;
+                }
+                .torrent-serial {
+                    background-color: rgba(124, 77, 255, 0.08);
+                }
+                .torrent-file.focus,
+                .torrent-serial.focus {
+                    background-color: rgba(124, 77, 255, 0.28);
+                }
+                .iptv-channel {
+                    background-color: #3a3a6b !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e8eaf6 !important;
+                    opacity: 0.9;
+                }
+            `
+        };
+
+        style.html(themes[theme] || '');
+        $('head').append(style);
     }
 
-    // Функция инициализации плагина
-    function initPlugin() {
-        // Устанавливаем стандартную тему по умолчанию для всех устройств
-        var defaultTheme = 'default';
-        var savedTheme = Lampa.Storage.get('interface_theme', defaultTheme);
+    function applyFont(font) {
+        $('#interface_mod_font').remove();
 
-        // Проверяем, существует ли сохраненная тема
-        if (!themes[savedTheme]) {
-            savedTheme = defaultTheme;
-            Lampa.Storage.set('interface_theme', defaultTheme);
+        if (font === 'system') return;
+
+        const style = $('<style id="interface_mod_font"></style>');
+
+        const fontStyles = {
+            'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
+            'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
+            'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
+            'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
+        };
+
+        const fontFamily = {
+            'montserrat': "'Montserrat', sans-serif",
+            'ubuntu': "'Ubuntu', sans-serif",
+            'fira-sans': "'Fira Sans', sans-serif",
+            'roboto': "'Roboto', sans-serif",
+            'open-sans': "'Open Sans', sans-serif",
+            'pt-sans': "'PT Sans', sans-serif",
+            'exo2': "'Exo 2', sans-serif",
+            'russo-one': "'Russo One', sans-serif",
+            'comfortaa': "'Comfortaa', cursive",
+            'netflix-style': "'Noto Sans', sans-serif",
+            'kinopoisk': "'Manrope', sans-serif",
+            'raleway-film': "'Raleway', sans-serif",
+            'jost-cinema': "'Jost', sans-serif",
+            'merri-cinema': "'Merriweather', serif"
+        };
+
+        style.html(`
+            ${fontStyles[font] || ''}
+            body, .full-start-new__details, .settings-param-title {
+                font-family: ${fontFamily[font]} !important;
+            }
+        `);
+
+        $('head').append(style);
+    }
+
+    function applyLoader(loader) {
+        $('#interface_loader_style').remove();
+
+        if (loader === 'standard') return; // Стандартный загрузчик использует дефолтные стили Lampa
+
+        if (loader === 'pulseLoader') {
+            const style = $('<style id="interface_loader_style"></style>');
+            const color = loaderColors.default;
+            const svgCode = encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" width="135" height="140" fill="${color}"><rect width="15" height="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="30" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="140" x="60" rx="6"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="90" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect></svg>`
+            );
+            style.html(`.activity__loader{position:absolute;top:0;left:0;width:100%;height:100%;display:none;background:url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%}`);
+            $('head').append(style);
+
+            if (InterFaceMod.debug) {
+                console.log('PulseLoader applied, color:', color);
+                console.log('SVG length:', decodeURIComponent(svgCode).length);
+            }
         }
+    }
 
-        // Применяем тему
-        applyTheme(savedTheme);
+    function startPlugin() {
+        // Загружаем настройки
+        InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
+        InterFaceMod.settings.font = Lampa.Storage.get('font_select', 'system');
+        InterFaceMod.settings.loader = Lampa.Storage.get('loader_select', 'standard');
 
-        // Добавляем настройку в интерфейс
+        // Применяем настройки
+        applyTheme(InterFaceMod.settings.theme);
+        applyFont(InterFaceMod.settings.font);
+        applyLoader(InterFaceMod.settings.loader);
+
+        // Добавляем компонент тем
+        Lampa.SettingsApi.addComponent({
+            component: 'theme_mod',
+            name: 'LampaColor Theme',
+            icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
+        });
+
+        // Добавляем выбор темы
         Lampa.SettingsApi.addParam({
-            component: 'interface',
+            component: 'theme_mod',
             param: {
-                name: 'interface_theme',
+                name: 'theme_select',
                 type: 'select',
                 values: {
-                    default: 'Стандартная',
-                    violet_stroke: 'Фиолетовая',
-                    neon_mod: 'Neon Mod',
-                    emerald: 'Emerald'
+                    'default': 'Обычная',
+                    'barbie': 'Барби',
+                    'ocean_depth': 'Глубины океана',
+                    'golden_sun': 'Золотое солнце',
+                    'royal_purple': 'Королевский пурпур',
+                    'fire_glow': 'Огненное сияние',
+                    'icy_wind': 'Ледяной ветер',
+                    'midnight_city': 'Ночной город',
+                    'desert_sand': 'Пустынные пески',
+                    'neon_dream': 'Неоновая мечта',
+                    'emerald_island': 'Изумрудный остров',
+                    'twilight_sky': 'Сумеречное небо',
+                    'velvet_dusk': 'Бархатные сумерки',
+                    'copper_blaze': 'Медный огонь',
+                    'arctic_sky': 'Арктическое небо',
+                    'blood_moon': 'Кровавая луна',
+                    'cosmic_gold': 'Космическое золото',
+                    'mystic_plum': 'Мистическая слива',
+                    'steel_blue': 'Стальная синь',
+                    'amber_night': 'Янтарная ночь',
+                    'velvet_rose': 'Бархатная роза',
+                    'galaxy_core': 'Ядро галактики'
                 },
-                default: defaultTheme
+                default: 'default'
             },
             field: {
-                name: 'Тема интерфейса',
-                description: 'Измените внешний вид интерфейса'
+                name: 'Выбор темы',
+                description: 'Выберите тему оформления интерфейса'
             },
-            onChange: function(value) {
-                Lampa.Storage.set('interface_theme', value);
-                Lampa.Settings.update();
+            onChange: function (value) {
+                InterFaceMod.settings.theme = value;
+                Lampa.Storage.set('theme_select', value);
                 applyTheme(value);
+            }
+        });
+
+        // Добавляем выбор шрифта
+        Lampa.SettingsApi.addParam({
+            component: 'theme_mod',
+            param: {
+                name: 'font_select',
+                type: 'select',
+                values: availableFonts,
+                default: 'system'
             },
-            onRender: function(item) {
-                setTimeout(function() {
-                    $('div[data-name="interface_theme"]').insertBefore('div[data-name="interface_size"]');
-                }, 0);
+            field: {
+                name: 'Выбор шрифта',
+                description: 'Выберите шрифт интерфейса'
+            },
+            onChange: function (value) {
+                InterFaceMod.settings.font = value;
+                Lampa.Storage.set('font_select', value);
+                applyFont(value);
+            }
+        });
+
+        // Добавляем выбор загрузчика
+        Lampa.SettingsApi.addParam({
+            component: 'theme_mod',
+            param: {
+                name: 'loader_select',
+                type: 'select',
+                values: availableLoaders,
+                default: 'standard'
+            },
+            field: {
+                name: 'Выбор загрузчика',
+                description: 'Выберите стиль загрузчика'
+            },
+            onChange: function (value) {
+                InterFaceMod.settings.loader = value;
+                Lampa.Storage.set('loader_select', value);
+                applyLoader(value);
             }
         });
     }
 
     if (window.appready) {
-        initPlugin();
+        startPlugin();
     } else {
-        Lampa.Listener.follow('app', function(e) {
-            if (e.type === 'ready') {
-                initPlugin();
+        Lampa.Listener.follow('app', function (event) {
+            if (event.type === 'ready') {
+                startPlugin();
             }
         });
     }
+
+    Lampa.Manifest.plugins = {
+        name: 'LampaColor',
+        version: '1.0.0',
+        description: 'Тема оформления, шрифты и загрузчики для Lampa'
+    };
+
+    window.lampa_theme = InterFaceMod;
 })();
