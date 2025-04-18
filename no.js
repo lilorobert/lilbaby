@@ -3,7 +3,7 @@
 
     var InterFaceMod = {
         name: 'LampaColor',
-        version: '0.0.6', // Обновляем версию из-за фикса центрирования
+        version: '0.0.8', // Обновляем версию из-за добавления старых загрузчиков и фикса центрирования
         debug: false,
         settings: {
             enabled: true,
@@ -45,7 +45,16 @@
         'squareGrid': 'SquareGrid',
         'arrowBounce': 'ArrowBounce',
         'diamondFade': 'DiamondFade',
-        'crossRotate': 'CrossRotate'
+        'crossRotate': 'CrossRotate',
+        'spinCircleOld': 'SpinCircle (Old)',
+        'waveDots': 'WaveDots',
+        'orbitRings': 'OrbitRings',
+        'bounceSquares': 'BounceSquares',
+        'ripplePulseOld': 'RipplePulse (Old)',
+        'gridFade': 'GridFade',
+        'twirlBars': 'TwirlBars',
+        'starBurst': 'StarBurst',
+        'hexSpin': 'HexSpin'
     };
 
     // Цвета для загрузчиков
@@ -176,7 +185,7 @@
             'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
             'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
             'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
+            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@4
             'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
             'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
         };
@@ -273,18 +282,66 @@
                     `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="45" y="20" width="10" height="60"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/></rect><rect x="20" y="45" width="60" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/></rect></svg>`
                 );
                 break;
+            case 'spinCircleOld':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="8"><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/><animate attributeName="r" values="40;35;40" dur="0.8s" repeatCount="indefinite"/></circle></svg>`
+                );
+                break;
+            case 'waveDots':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" fill="${color}"><circle cx="20" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0s"/></circle><circle cx="40" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.2s"/></circle><circle cx="60" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.4s"/></circle><circle cx="80" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.6s"/></circle><circle cx="100" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.8s"/></circle></svg>`
+                );
+                break;
+            case 'orbitRings':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><circle cx="50" cy="50" r="30"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="1.5s" repeatCount="indefinite"/></circle></svg>`
+                );
+                break;
+            case 'bounceSquares':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="20" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="40" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.25s"/></rect><rect x="60" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.5s"/></rect><rect x="80" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.75s"/></rect></svg>`
+                );
+                break;
+            case 'ripplePulseOld':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><circle cx="50" cy="50" r="20"><animate attributeName="r" values="20;40;20" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="30"><animate attributeName="r" values="30;50;30" dur="1.5s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0.5s"/></circle></svg>`
+                );
+                break;
+            case 'gridFade':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="${color}"><rect x="10" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="25" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="40" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="10" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect><rect x="25" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.8s"/></rect><rect x="40" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="10" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="25" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="40" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
+                );
+                break;
+            case 'twirlBars':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="45" y="20" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="45" y="60" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="20" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="60" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
+                );
+                break;
+            case 'starBurst':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><path d="M50 20L55 40L75 45L55 50L50 70L45 50L25 45L45 40Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite"/></path><path d="M50 15L53 35L70 40L53 45L50 65L47 45L30 40L47 35Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
+                );
+                break;
+            case 'hexSpin':
+                svgCode = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><path d="M50 25L65 37.5L65 62.5L50 75L35 62.5L35 37.5Z"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-width" values="6;10;6" dur="1.2s" repeatCount="indefinite"/></path></svg>`
+                );
+                break;
         }
 
         style.html(`
             .activity__loader {
                 position: absolute;
-                top: 0;
-                left: 0;
+                top: 50%;
+                left: 50%;
                 width: 100%;
                 height: 100%;
+                max-width: 100px;
+                max-height: 100px;
+                transform: translate(-50%, -50%);
                 display: none;
-                background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
-                background-size: contain;
+                background: url("data:image/svg+xml,${svgCode}") no-repeat center center;
+                background-size: 80% 80%;
             }
             .player-video__loader {
                 position: absolute;
@@ -292,12 +349,12 @@
                 left: 50%;
                 width: 100%;
                 height: 100%;
-                max-width: 150px;
-                max-height: 150px;
+                max-width: 100px;
+                max-height: 100px;
                 transform: translate(-50%, -50%);
                 display: none;
-                background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
-                background-size: contain;
+                background: url("data:image/svg+xml,${svgCode}") no-repeat center center;
+                background-size: 80% 80%;
             }
         `);
         $('head').append(style);
