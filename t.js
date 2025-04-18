@@ -102,6 +102,12 @@
                 .iptv-channel {
                     background-color: #6a3c58 !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #ffd9ec !important;
+                    opacity: 0.9;
+                }
             `,
             ocean_depth: `
                 body {
@@ -186,6 +192,12 @@
                 }
                 .iptv-channel {
                     background-color: #2a506b !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e0f7ff !important;
+                    opacity: 0.9;
                 }
             `,
             golden_sun: `
@@ -272,6 +284,12 @@
                 .iptv-channel {
                     background-color: #6b5a3c !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #fff8e1 !important;
+                    opacity: 0.9;
+                }
             `,
             royal_purple: `
                 body {
@@ -356,6 +374,12 @@
                 }
                 .iptv-channel {
                     background-color: #5a3c6b !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #f3e5f5 !important;
+                    opacity: 0.9;
                 }
             `,
             fire_glow: `
@@ -442,6 +466,12 @@
                 .iptv-channel {
                     background-color: #6b3c3a !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #ffebee !important;
+                    opacity: 0.9;
+                }
             `,
             icy_wind: `
                 body {
@@ -526,6 +556,12 @@
                 }
                 .iptv-channel {
                     background-color: #3a6b6b !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e0f7f7 !important;
+                    opacity: 0.9;
                 }
             `,
             midnight_city: `
@@ -612,6 +648,12 @@
                 .iptv-channel {
                     background-color: #4a4a6b !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e6e6fa !important;
+                    opacity: 0.9;
+                }
             `,
             desert_sand: `
                 body {
@@ -696,6 +738,12 @@
                 }
                 .iptv-channel {
                     background-color: #6b5a4a !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #f5f5f0 !important;
+                    opacity: 0.9;
                 }
             `,
             neon_dream: `
@@ -782,6 +830,12 @@
                 .iptv-channel {
                     background-color: #4a3c6b !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #f8f8ff !important;
+                    opacity: 0.9;
+                }
             `,
             emerald_island: `
                 body {
@@ -866,6 +920,12 @@
                 }
                 .iptv-channel {
                     background-color: #3a6b4a !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e8f5e9 !important;
+                    opacity: 0.9;
                 }
             `,
             twilight_sky: `
@@ -952,6 +1012,12 @@
                 .iptv-channel {
                     background-color: #5a3c6b !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #f3e5ff !important;
+                    opacity: 0.9;
+                }
             `,
             velvet_dusk: `
                 body {
@@ -1036,6 +1102,12 @@
                 }
                 .iptv-channel {
                     background-color: #5a3c5a !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #f5e6ff !important;
+                    opacity: 0.9;
                 }
             `,
             copper_blaze: `
@@ -1122,6 +1194,12 @@
                 .iptv-channel {
                     background-color: #6b4a28 !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #ffefe0 !important;
+                    opacity: 0.9;
+                }
             `,
             arctic_sky: `
                 body {
@@ -1206,6 +1284,12 @@
                 }
                 .iptv-channel {
                     background-color: #2a506b !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e1f5fe !important;
+                    opacity: 0.9;
                 }
             `,
             blood_moon: `
@@ -1292,6 +1376,12 @@
                 .iptv-channel {
                     background-color: #6b2a2a !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #ffebee !important;
+                    opacity: 0.9;
+                }
             `,
             cosmic_gold: `
                 body {
@@ -1376,6 +1466,12 @@
                 }
                 .iptv-channel {
                     background-color: #6b5a1c !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #fffde7 !important;
+                    opacity: 0.9;
                 }
             `,
             mystic_plum: `
@@ -1462,6 +1558,12 @@
                 .iptv-channel {
                     background-color: #5a1c5a !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #f3e5f5 !important;
+                    opacity: 0.9;
+                }
             `,
             steel_blue: `
                 body {
@@ -1546,6 +1648,12 @@
                 }
                 .iptv-channel {
                     background-color: #3a4a6b !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e3f2fd !important;
+                    opacity: 0.9;
                 }
             `,
             amber_night: `
@@ -1632,6 +1740,12 @@
                 .iptv-channel {
                     background-color: #6b5a1c !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #fff8e1 !important;
+                    opacity: 0.9;
+                }
             `,
             velvet_rose: `
                 body {
@@ -1717,6 +1831,12 @@
                 .iptv-channel {
                     background-color: #6b2a2a !important;
                 }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #ffebee !important;
+                    opacity: 0.9;
+                }
             `,
             galaxy_core: `
                 body {
@@ -1801,6 +1921,12 @@
                 }
                 .iptv-channel {
                     background-color: #3a3a6b !important;
+                }
+                .full-start-new__details,
+                .full-start-new__details span,
+                .full-start-new__split {
+                    color: #e8eaf6 !important;
+                    opacity: 0.9;
                 }
             `
         };
