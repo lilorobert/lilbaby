@@ -12,19 +12,24 @@
         }
     };
 
-    // Доступные шрифты
-    const availableFonts = {
-        'system': 'Системный',
-        'roboto': 'Roboto',
-        'open-sans': 'Open Sans',
-        'montserrat': 'Montserrat',
-        'lato': 'Lato',
-        'play': 'Play',
-        'ubuntu': 'Ubuntu',
-        'pt-sans': 'PT Sans',
-        'exo2': 'Exo 2',
-        'fira-sans': 'Fira Sans'
-    };
+  // Доступные шрифты
+const availableFonts = {
+    'system': 'Системный',
+    'montserrat': 'Montserrat',
+    'ubuntu': 'Ubuntu',
+    'fira-sans': 'Fira Sans',
+    'roboto': 'Roboto',
+    'open-sans': 'Open Sans',
+    'pt-sans': 'PT Sans',
+    'exo2': 'Exo 2',
+    'russo-one': 'Russo One',
+    'comfortaa': 'Comfortaa',
+    'press-start': 'Press Start 2P (Матрица)',
+    'cinzel': 'Cinzel (Гарри Поттер)',
+    'bangers': 'Bangers (Марвел / Комиксы)',
+    'poiret-one': 'Poiret One (Ретро стиль)',
+    'caveat': 'Caveat (Артхаус / Драма)'
+};
 
         function applyTheme(theme) {
         $('#interface_mod_theme').remove();
@@ -1951,46 +1956,59 @@
     }
 
     function applyFont(font) {
-        // Удаляем предыдущие стили шрифтов
-        $('#interface_mod_font').remove();
+    // Удаляем предыдущие стили шрифтов
+    $('#interface_mod_font').remove();
 
-        if (font === 'system') return; // Используем системный шрифт
+    if (font === 'system') return; // Используем системный шрифт
 
-        const style = $('<style id="interface_mod_font"></style>');
+    const style = $('<style id="interface_mod_font"></style>');
 
-        const fontStyles = {
-            'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');`,
-            'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');`,
-            'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');`,
-            'lato': `@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');`,
-            'play': `@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');`,
-            'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');`,
-            'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');`,
-            'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap');`,
-            'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap');`
-        };
+    const fontStyles = {
+        'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
+        'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
+        'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
+        'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
+        'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
+        'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
 
-        const fontFamily = {
-            'roboto': "'Roboto', sans-serif",
-            'open-sans': "'Open Sans', sans-serif",
-            'montserrat': "'Montserrat', sans-serif",
-            'lato': "'Lato', sans-serif",
-            'play': "'Play', sans-serif",
-            'ubuntu': "'Ubuntu', sans-serif",
-            'pt-sans': "'PT Sans', sans-serif",
-            'exo2': "'Exo 2', sans-serif",
-            'fira-sans': "'Fira Sans', sans-serif"
-        };
+        // Тематические (из фильмов)
+        'press-start': `@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic');`,
+        'cinzel': `@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap&subset=cyrillic');`,
+        'bangers': `@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap&subset=cyrillic');`,
+        'poiret-one': `@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap&subset=cyrillic');`,
+        'caveat': `@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap&subset=cyrillic');`
+    };
 
-        style.html(`
-            ${fontStyles[font] || ''}
-            body, .full-start-new__details, .settings-param-title {
-                font-family: ${fontFamily[font]} !important;
-            }
-        `);
+    const fontFamily = {
+        'montserrat': "'Montserrat', sans-serif",
+        'ubuntu': "'Ubuntu', sans-serif",
+        'fira-sans': "'Fira Sans', sans-serif",
+        'roboto': "'Roboto', sans-serif",
+        'open-sans': "'Open Sans', sans-serif",
+        'pt-sans': "'PT Sans', sans-serif",
+        'exo2': "'Exo 2', sans-serif",
+        'russo-one': "'Russo One', sans-serif",
+        'comfortaa': "'Comfortaa', cursive",
 
-        $('head').append(style);
-    }
+        'press-start': "'Press Start 2P', monospace",
+        'cinzel': "'Cinzel', serif",
+        'bangers': "'Bangers', cursive",
+        'poiret-one': "'Poiret One', cursive",
+        'caveat': "'Caveat', cursive"
+    };
+
+    style.html(`
+        ${fontStyles[font] || ''}
+        body, .full-start-new__details, .settings-param-title {
+            font-family: ${fontFamily[font]} !important;
+        }
+    `);
+
+    $('head').append(style);
+}
 
     function startPlugin() {
         // Загружаем настройки
