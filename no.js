@@ -1,414 +1,90 @@
-(function () {
-    'use strict';
+(function() {
+	'use strict';
 
-    var InterFaceMod = {
-        name: 'LampaColor',
-        version: '0.0.4', // Обновляем версию из-за новых загрузчиков
-        debug: false,
-        settings: {
-            enabled: true,
-            theme: 'default',
-            font: 'system',
-            loader: 'standard'
-        }
-    };
+Lampa.Platform.tv();
+	
+var server_protocol = location.protocol === "https:" ? 'https://' : 'http://'	
+var icon_server_redirect = '<svg width="256px" height="256px" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13 21.75C13.4142 21.75 13.75 21.4142 13.75 21C13.75 20.5858 13.4142 20.25 13 20.25V21.75ZM3.17157 19.8284L3.7019 19.2981H3.7019L3.17157 19.8284ZM20.8284 4.17157L20.2981 4.7019V4.7019L20.8284 4.17157ZM21.25 13C21.25 13.4142 21.5858 13.75 22 13.75C22.4142 13.75 22.75 13.4142 22.75 13H21.25ZM10 3.75H14V2.25H10V3.75ZM2.75 13V12H1.25V13H2.75ZM2.75 12V11H1.25V12H2.75ZM13 20.25H10V21.75H13V20.25ZM21.25 11V12H22.75V11H21.25ZM1.25 13C1.25 14.8644 1.24841 16.3382 1.40313 17.489C1.56076 18.6614 1.89288 19.6104 2.64124 20.3588L3.7019 19.2981C3.27869 18.8749 3.02502 18.2952 2.88976 17.2892C2.75159 16.2615 2.75 14.9068 2.75 13H1.25ZM10 20.25C8.09318 20.25 6.73851 20.2484 5.71085 20.1102C4.70476 19.975 4.12511 19.7213 3.7019 19.2981L2.64124 20.3588C3.38961 21.1071 4.33855 21.4392 5.51098 21.5969C6.66182 21.7516 8.13558 21.75 10 21.75V20.25ZM14 3.75C15.9068 3.75 17.2615 3.75159 18.2892 3.88976C19.2952 4.02502 19.8749 4.27869 20.2981 4.7019L21.3588 3.64124C20.6104 2.89288 19.6614 2.56076 18.489 2.40313C17.3382 2.24841 15.8644 2.25 14 2.25V3.75ZM22.75 11C22.75 9.13558 22.7516 7.66182 22.5969 6.51098C22.4392 5.33855 22.1071 4.38961 21.3588 3.64124L20.2981 4.7019C20.7213 5.12511 20.975 5.70476 21.1102 6.71085C21.2484 7.73851 21.25 9.09318 21.25 11H22.75ZM10 2.25C8.13558 2.25 6.66182 2.24841 5.51098 2.40313C4.33856 2.56076 3.38961 2.89288 2.64124 3.64124L3.7019 4.7019C4.12511 4.27869 4.70476 4.02502 5.71085 3.88976C6.73851 3.75159 8.09318 3.75 10 3.75V2.25ZM2.75 11C2.75 9.09318 2.75159 7.73851 2.88976 6.71085C3.02502 5.70476 3.27869 5.12511 3.7019 4.7019L2.64124 3.64124C1.89288 4.38961 1.56076 5.33855 1.40313 6.51098C1.24841 7.66182 1.25 9.13558 1.25 11H2.75ZM2 12.75H22V11.25H2V12.75ZM21.25 12V13H22.75V12H21.25Z" fill="currentColor"></path> <path d="M13.5 7.5L18 7.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M6 17.5L6 15.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M6 8.5L6 6.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M9 17.5L9 15.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M9 8.5L9 6.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15.5841 17.5H14.8341V17.5L15.5841 17.5ZM15.5841 18L15.0964 18.5698C15.3772 18.8101 15.7911 18.8101 16.0718 18.5698L15.5841 18ZM16.656 18.0698C16.9706 17.8004 17.0074 17.327 16.738 17.0123C16.4687 16.6976 15.9952 16.6609 15.6806 16.9302L16.656 18.0698ZM15.4877 16.9302C15.173 16.6609 14.6996 16.6976 14.4302 17.0123C14.1609 17.327 14.1976 17.8004 14.5123 18.0698L15.4877 16.9302ZM20.3892 16.6352C20.6296 16.9726 21.0979 17.0512 21.4352 16.8108C21.7726 16.5704 21.8512 16.1021 21.6108 15.7648L20.3892 16.6352ZM18.5048 14.25C16.5912 14.25 14.8341 15.5999 14.8341 17.5H16.3341C16.3341 16.6387 17.1923 15.75 18.5048 15.75V14.25ZM14.8341 17.5L14.8341 18L16.3341 18L16.3341 17.5L14.8341 17.5ZM16.0718 18.5698L16.656 18.0698L15.6806 16.9302L15.0964 17.4302L16.0718 18.5698ZM16.0718 17.4302L15.4877 16.9302L14.5123 18.0698L15.0964 18.5698L16.0718 17.4302ZM21.6108 15.7648C20.945 14.8304 19.782 14.25 18.5048 14.25V15.75C19.3411 15.75 20.0295 16.1304 20.3892 16.6352L21.6108 15.7648Z" fill="currentColor"></path> <path d="M18.4952 21V21.75V21ZM21.4159 18.5H22.1659H21.4159ZM21.4159 18L21.9036 17.4302C21.6228 17.1899 21.2089 17.1899 20.9282 17.4302L21.4159 18ZM20.344 17.9302C20.0294 18.1996 19.9926 18.673 20.262 18.9877C20.5313 19.3024 21.0048 19.3391 21.3194 19.0698L20.344 17.9302ZM21.5123 19.0698C21.827 19.3391 22.3004 19.3024 22.5698 18.9877C22.8391 18.673 22.8024 18.1996 22.4877 17.9302L21.5123 19.0698ZM16.6108 19.3648C16.3704 19.0274 15.9021 18.9488 15.5648 19.1892C15.2274 19.4296 15.1488 19.8979 15.3892 20.2352L16.6108 19.3648ZM18.4952 21.75C20.4088 21.75 22.1659 20.4001 22.1659 18.5H20.6659C20.6659 19.3613 19.8077 20.25 18.4952 20.25V21.75ZM22.1659 18.5V18H20.6659V18.5H22.1659ZM20.9282 17.4302L20.344 17.9302L21.3194 19.0698L21.9036 18.5698L20.9282 17.4302ZM20.9282 18.5698L21.5123 19.0698L22.4877 17.9302L21.9036 17.4302L20.9282 18.5698ZM15.3892 20.2352C16.055 21.1696 17.218 21.75 18.4952 21.75V20.25C17.6589 20.25 16.9705 19.8696 16.6108 19.3648L15.3892 20.2352Z" fill="currentColor"></path> </g></svg>'
 
-    // Доступные шрифты
-    const availableFonts = {
-        'system': 'Системный',
-        'montserrat': 'Montserrat',
-        'ubuntu': 'Ubuntu',
-        'fira-sans': 'Fira Sans',
-        'roboto': 'Roboto',
-        'open-sans': 'Open Sans',
-        'pt-sans': 'PT Sans',
-        'exo2': 'Exo 2',
-        'russo-one': 'Russo One',
-        'comfortaa': 'Comfortaa',
-        'netflix-style': 'Noto Sans (Netflix)',
-        'kinopoisk': 'Manrope (КиноПоиск)',
-        'raleway-film': 'Raleway (Постерный стиль)',
-        'jost-cinema': 'Jost (Современный)',
-        'merri-cinema': 'Merriweather (Артхаус / Драма)'
-    };
-
-    // Доступные загрузчики
-    const availableLoaders = {
-        'standard': 'Стандартный',
-        'pulseLoader': 'PulseLoader',
-        'spinCircle': 'SpinCircle',
-        'waveDots': 'WaveDots',
-        'orbitRings': 'OrbitRings',
-        'bounceSquares': 'BounceSquares',
-        'ripplePulse': 'RipplePulse',
-        'gridFade': 'GridFade',
-        'twirlBars': 'TwirlBars',
-        'starBurst': 'StarBurst',
-        'hexSpin': 'HexSpin'
-    };
-
-    // Цвета для загрузчиков
-    const loaderColors = {
-        default: '#fff'
-    };
-
-    function applyTheme(theme) {
-        $('#interface_mod_theme').remove();
-        if (theme === 'default') return;
-
-        const style = $('<style id="interface_mod_theme"></style>');
-
-        const themes = {
-            galaxy_core: `
-                body {
-                    background-color: #0f0f2a;
-                    color: #e8eaf6;
-                }
-                body.black--style {
-                    background: #09091c;
-                }
-                .menu__item.focus,
-                .menu__item.traverse,
-                .menu__item.hover,
-                .settings-folder.focus,
-                .settings-param.focus,
-                .selectbox-item.focus,
-                .selectbox-item.hover,
-                .full-person.focus,
-                .full-start__button.focus,
-                .full-descr__tag.focus,
-                .simple-button.focus,
-                .iptv-list__item.focus,
-                .iptv-menu__list-item.focus,
-                .head__action.focus,
-                .head__action.hover,
-                .player-panel .button.focus,
-                .search-source.active {
-                    background: linear-gradient(to right, #7c4dff 1%, #311b92 100%);
-                    color: #e8eaf6;
-                }
-                .settings-folder.focus .settings-folder__icon {
-                    filter: invert(1);
-                }
-                .settings-param-title > span {
-                    color: #e8eaf6;
-                }
-                .settings__content,
-                .settings-input__content,
-                .selectbox__content,
-                .modal__content {
-                    background: linear-gradient(135deg, #1a1a4a 1%, #0a0a2a 100%);
-                }
-                .settings-input__links {
-                    background-color: rgba(124, 77, 255, 0.2);
-                }
-                .card.focus .card__view::after,
-                .card.hover .card__view::after,
-                .extensions__item.focus:after,
-                .torrent-item.focus::after,
-                .extensions__block-add.focus:after {
-                    border-color: #b388ff;
-                }
-                .online-prestige.focus::after,
-                .iptv-channel.focus::before,
-                .iptv-channel.last--focus::before {
-                    border-color: #b388ff !important;
-                }
-                .time-line > div,
-                .player-panel__position,
-                .player-panel__position > div:after {
-                    background-color: #651fff;
-                }
-                .extensions {
-                    background: #0a0a2a;
-                }
-                .extensions__item,
-                .extensions__block-add {
-                    background-color: #1a1a4a;
-                }
-                .torrent-item__size,
-                .torrent-item__exe,
-                .torrent-item__viewed,
-                .torrent-serial__size {
-                    background-color: #d1c4e9;
-                    color: #0f0f2a;
-                }
-                .torrent-serial {
-                    background-color: rgba(124, 77, 255, 0.08);
-                }
-                .torrent-file.focus,
-                .torrent-serial.focus {
-                    background-color: rgba(124, 77, 255, 0.28);
-                }
-                .iptv-channel {
-                    background-color: #3a3a6b !important;
-                }
-                .full-start-new__details,
-                .full-start-new__details span,
-                .full-start-new__split {
-                    color: #e8eaf6 !important;
-                    opacity: 0.9;
-                }
-            `
-        };
-
-        style.html(themes[theme] || '');
-        $('head').append(style);
-    }
-
-    function applyFont(font) {
-        $('#interface_mod_font').remove();
-
-        if (font === 'system') return;
-
-        const style = $('<style id="interface_mod_font"></style>');
-
-        const fontStyles = {
-            'montserrat': `@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'ubuntu': `@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'fira-sans': `@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'roboto': `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'open-sans': `@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'pt-sans': `@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');`,
-            'exo2': `@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'russo-one': `@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic');`,
-            'comfortaa': `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap&subset=cyrillic');`,
-            'netflix-style': `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'kinopoisk': `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'raleway-film': `@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'jost-cinema': `@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap&subset=cyrillic');`,
-            'merri-cinema': `@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&display=swap&subset=cyrillic');`
-        };
-
-        const fontFamily = {
-            'montserrat': "'Montserrat', sans-serif",
-            'ubuntu': "'Ubuntu', sans-serif",
-            'fira-sans': "'Fira Sans', sans-serif",
-            'roboto': "'Roboto', sans-serif",
-            'open-sans': "'Open Sans', sans-serif",
-            'pt-sans': "'PT Sans', sans-serif",
-            'exo2': "'Exo 2', sans-serif",
-            'russo-one': "'Russo One', sans-serif",
-            'comfortaa': "'Comfortaa', cursive",
-            'netflix-style': "'Noto Sans', sans-serif",
-            'kinopoisk': "'Manrope', sans-serif",
-            'raleway-film': "'Raleway', sans-serif",
-            'jost-cinema': "'Jost', sans-serif",
-            'merri-cinema': "'Merriweather', serif"
-        };
-
-        style.html(`
-            ${fontStyles[font] || ''}
-            body, .full-start-new__details, .settings-param-title {
-                font-family: ${fontFamily[font]} !important;
-            }
-        `);
-
-        $('head').append(style);
-    }
-
-    function applyLoader(loader) {
- $('#interface_loader_style').remove();
-
-    if (loader === 'standard') return;
-
-    const style = $('<style id="interface_loader_style"></style>');
-    const color = loaderColors.default;
-    let svgCode;
-
-
-        switch (loader) {
-            case 'pulseLoader':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="135" height="140" fill="${color}"><rect width="15" height="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="30" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="140" x="60" rx="6"><animate attributeName="height" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="90" y="10" rx="6"><animate attributeName="height" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.25s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect><rect width="15" height="120" x="120" y="10" rx="6"><animate attributeName="height" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="120;110;100;90;80;70;60;50;40;140;120"/><animate attributeName="y" begin="0.5s" calcMode="linear" dur="1s" repeatCount="indefinite" values="10;15;20;25;30;35;40;45;50;0;10"/></rect></svg>`
-                );
-                break;
-            case 'spinCircle':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="8"><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/><animate attributeName="r" values="40;35;40" dur="0.8s" repeatCount="indefinite"/></circle></svg>`
-                );
-                break;
-            case 'waveDots':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" fill="${color}"><circle cx="20" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0s"/></circle><circle cx="40" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.2s"/></circle><circle cx="60" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.4s"/></circle><circle cx="80" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.6s"/></circle><circle cx="100" cy="30"><animate attributeName="cy" values="30;15;30" dur="1s" repeatCount="indefinite" begin="0.8s"/></circle></svg>`
-                );
-                break;
-            case 'orbitRings':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><circle cx="50" cy="50" r="30"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="40"><animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="1.5s" repeatCount="indefinite"/></circle></svg>`
-                );
-                break;
-            case 'bounceSquares':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="20" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="40" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.25s"/></rect><rect x="60" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.5s"/></rect><rect x="80" y="20" width="20" height="20"><animate attributeName="y" values="20;10;20" dur="1s" repeatCount="indefinite" begin="0.75s"/></rect></svg>`
-                );
-                break;
-            case 'ripplePulse':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="4"><circle cx="50" cy="50" r="20"><animate attributeName="r" values="20;40;20" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="30"><animate attributeName="r" values="30;50;30" dur="1.5s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite" begin="0.5s"/></circle></svg>`
-                );
-                break;
-            case 'gridFade':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="${color}"><rect x="10" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="25" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="40" y="10" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="10" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect><rect x="25" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.8s"/></rect><rect x="40" y="25" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="10" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="25" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="40" y="40" width="10" height="10"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
-                );
-                break;
-            case 'twirlBars':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><rect x="45" y="20" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0s"/></rect><rect x="45" y="60" width="10" height="20"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.2s"/></rect><rect x="20" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.4s"/></rect><rect x="60" y="45" width="20" height="10"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite" begin="0.6s"/></rect></svg>`
-                );
-                break;
-            case 'starBurst':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="${color}"><path d="M50 20L55 40L75 45L55 50L50 70L45 50L25 45L45 40Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite"/></path><path d="M50 15L53 35L70 40L53 45L50 65L47 45L30 40L47 35Z"><animate attributeName="transform" type="scale" values="1;1.2;1" dur="1s" repeatCount="indefinite" begin="0.5s"/></path></svg>`
-                );
-                break;
-            case 'hexSpin':
-                svgCode = encodeURIComponent(
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="none" stroke="${color}" stroke-width="6"><path d="M50 25L65 37.5L65 62.5L50 75L35 62.5L35 37.5Z"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-width" values="6;10;6" dur="1.2s" repeatCount="indefinite"/></path></svg>`
-                );
-                break;
-        }
-
-style.html(`
-        .activity__loader,
-        .player-video__loader {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            background: url("data:image/svg+xml,${svgCode}") no-repeat 50% 50%;
-            background-size: contain;
-        }
-    `);
-
-    $('head').append(style);
-
-    if (InterFaceMod.debug) {
-        console.log(`${loader} applied, color:`, color);
-        console.log('SVG length:', decodeURIComponent(svgCode).length);
-    }
-}
-
-    function startPlugin() {
-        // Загружаем настройки
-        InterFaceMod.settings.theme = Lampa.Storage.get('theme_select', 'default');
-        InterFaceMod.settings.font = Lampa.Storage.get('font_select', 'system');
-        InterFaceMod.settings.loader = Lampa.Storage.get('loader_select', 'standard');
-
-        // Применяем настройки
-        applyTheme(InterFaceMod.settings.theme);
-        applyFont(InterFaceMod.settings.font);
-        applyLoader(InterFaceMod.settings.loader);
-
-        // Добавляем компонент тем
-        Lampa.SettingsApi.addComponent({
-            component: 'theme_mod',
-            name: 'LampaColor Theme',
-            icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
-        });
-
-        // Добавляем выбор темы
-        Lampa.SettingsApi.addParam({
-            component: 'theme_mod',
-            param: {
-                name: 'theme_select',
-                type: 'select',
-                values: {
-                    'default': 'Обычная',
-                    'barbie': 'Барби',
-                    'ocean_depth': 'Глубины океана',
-                    'golden_sun': 'Золотое солнце',
-                    'royal_purple': 'Королевский пурпур',
-                    'fire_glow': 'Огненное сияние',
-                    'icy_wind': 'Ледяной ветер',
-                    'midnight_city': 'Ночной город',
-                    'desert_sand': 'Пустынные пески',
-                    'neon_dream': 'Неоновая мечта',
-                    'emerald_island': 'Изумрудный остров',
-                    'twilight_sky': 'Сумеречное небо',
-                    'velvet_dusk': 'Бархатные сумерки',
-                    'copper_blaze': 'Медный огонь',
-                    'arctic_sky': 'Арктическое небо',
-                    'blood_moon': 'Кровавая луна',
-                    'cosmic_gold': 'Космическое золото',
-                    'mystic_plum': 'Мистическая слива',
-                    'steel_blue': 'Стальная синь',
-                    'amber_night': 'Янтарная ночь',
-                    'velvet_rose': 'Бархатная роза',
-                    'galaxy_core': 'Ядро галактики'
-                },
-                default: 'default'
-            },
-            field: {
-                name: 'Выбор темы',
-                description: 'Выберите тему оформления интерфейса'
-            },
-            onChange: function (value) {
-                InterFaceMod.settings.theme = value;
-                Lampa.Storage.set('theme_select', value);
-                applyTheme(value);
-            }
-        });
-
-        // Добавляем выбор шрифта
-        Lampa.SettingsApi.addParam({
-            component: 'theme_mod',
-            param: {
-                name: 'font_select',
-                type: 'select',
-                values: availableFonts,
-                default: 'system'
-            },
-            field: {
-                name: 'Выбор шрифта',
-                description: 'Выберите шрифт интерфейса'
-            },
-            onChange: function (value) {
-                InterFaceMod.settings.font = value;
-                Lampa.Storage.set('font_select', value);
-                applyFont(value);
-            }
-        });
-
-        // Добавляем выбор загрузчика
-        Lampa.SettingsApi.addParam({
-            component: 'theme_mod',
-            param: {
-                name: 'loader_select',
-                type: 'select',
-                values: availableLoaders,
-                default: 'standard'
-            },
-            field: {
-                name: 'Выбор загрузчика',
-                description: 'Выберите стиль загрузчика'
-            },
-            onChange: function (value) {
-                InterFaceMod.settings.loader = value;
-                Lampa.Storage.set('loader_select', value);
-                applyLoader(value);
-            }
-        });
-    }
-
-    if (window.appready) {
-        startPlugin();
-    } else {
-        Lampa.Listener.follow('app', function (event) {
-            if (event.type === 'ready') {
-                startPlugin();
-            }
-        });
-    }
-
-    Lampa.Manifest.plugins = {
-        name: 'LampaColor',
-        version: '1.0.0',
-        description: 'Тема оформления, шрифты и загрузчики для Lampa'
-    };
-
-    window.lampa_theme = InterFaceMod;
+function startMe() {
+	
+	$('#REDIRECT').remove()
+	
+	var domainSVG = icon_server_redirect
+	var domainBUTT = '<div id="REDIRECT" class="head__action selector redirect-screen">' + domainSVG + '</div>';
+	
+	$('#app > div.head > div > div.head__actions').append(domainBUTT);
+	$('#REDIRECT').insertAfter('div[class="head__action selector open--settings"]');
+       
+	if(!Lampa.Storage.get('location_server')) {
+				setTimeout(function(){
+                                  $('#REDIRECT').remove()
+                                }, 10);
+	}
+	
+	$('#REDIRECT').on('hover:enter hover:click hover:touch', function() {
+		window.location.href = server_protocol + Lampa.Storage.get('location_server')
+	});
+  } 
+  
+  Lampa.SettingsApi.addComponent({
+            component: 'location_redirect',
+            name: 'Смена сервера',
+            icon: icon_server_redirect
+  });
+	
+  Lampa.SettingsApi.addParam({
+				component: 'location_redirect',
+				param: {
+					name: 'location_server',
+					type: 'input', 
+					values: '',
+					placeholder: 'Например: lampa.surge.sh',
+					default: ''
+				},
+				field: {
+					name: 'Адрес сервера',
+					description: 'Нажмите для ввода, смену сервера можно будет сделать кнопкой в верхнем баре'
+				},
+				onChange: function (value) {
+				   /*if (value) {
+					  window.location.href = server_protocol + value;
+	                           }*/
+				   if (value == '') {
+					   $('#REDIRECT').remove()
+				   }
+				   if (!value == '') {
+					      startMe();
+				   }
+				 }         
+    });
+	
+    Lampa.SettingsApi.addParam({
+			component: 'location_redirect',
+			param: {
+				name: 'const_redirect',
+				type: 'trigger',
+				default: false
+			},
+			field: {
+				name: 'Постоянный редирект',
+				description: 'Внимание!!! Если вы включите этот параметр, вернуться на старый сервер сможете только сбросом плагинов или отключением этого плагина через CUB' 
+			},	
+   });
+	 
+	
+	if(Lampa.Storage.field('const_redirect') == true) {
+	   window.location.href = server_protocol + Lampa.Storage.get('location_server');
+	}
+	
+	if(window.appready) startMe();
+	else {
+		Lampa.Listener.follow('app', function(e) {
+			if(e.type == 'ready') {
+				startMe();
+			}
+		});
+	}
+	
+      
 })();
