@@ -1,7 +1,9 @@
-(function(){
-    Lampa.App.activity({
-        url: 'http://194.87.29.170:12354',
-        component: 'full',
-        title: 'Redirect'
+(function () {
+    Lampa.Listener.wait('app', () => {
+        Lampa.App.activity({
+            url: 'https://www.example.com',
+            component: 'full',
+            title: 'Redirect'
+        });
     });
 })();
