@@ -1,9 +1,11 @@
 (function () {
-    Lampa.Listener.wait('app', () => {
-        Lampa.App.activity({
-            url: 'https://www.example.com',
-            component: 'full',
-            title: 'Redirect'
-        });
-    });
+    const wait = setInterval(() => {
+        if (window.Lampa && Lampa.App && Lampa.Api) {
+            clearInterval(wait);
+
+            // тут твой код
+            console.log('Lampa loaded');
+
+        }
+    }, 50);
 })();
