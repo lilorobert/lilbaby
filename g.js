@@ -1,33 +1,37 @@
 (function() {
     'use strict';
 
-    const GradientBackground = {
-        name: 'Animated Gradient Background',
-        version: '2.0.0',
-        author: 'Lampa Community',
-        description: 'Плавный анимированный градиентный фон',
+    const SoftGradientBackground = {
+        name: 'Soft Gradient Background',
+        version: '2.1.0',
+        description: 'Мягкий переливающийся градиентный фон',
         
         settings: {
             enabled: true,
-            // Цвета градиента (можно добавлять больше)
+            // Спокойные пастельные цвета
             colors: [
-                '#FF6B6B', '#FFE66D', '#4ECDC4', '#1A535C', 
-                '#6A0572', '#AB83A1', '#3D5A80', '#98C1D9'
+                '#1a1a2e', '#16213e', '#0f3460', // Темная синяя гамма
+                '#1e3c72', '#2a5298', '#6a93cb', // Более светлые синие
+                '#89abe3', '#c9d6ea'             // Светлые акценты
             ],
-            speed: 0.5,          // Скорость анимации
-            transitionDuration: 8, // Длительность перехода между цветами
-            gradientType: 'radial', // 'radial', 'linear', 'conic'
-            blendMode: 'screen'     // Режим наложения
+            speed: 0.15,               // Очень медленная анимация
+            brightness: 0.3,           // Яркость (0-1)
+            saturation: 0.5,           // Насыщенность (0-1)
+            noiseOpacity: 0.02,        // Прозрачность шума
+            blurAmount: 20             // Размытие в пикселях
         },
         
         canvas: null,
         ctx: null,
+        offscreenCanvas: null,
+        offscreenCtx: null,
         animationId: null,
         currentTime: 0,
+        noiseTexture: null,
         
         init: function() {
             this.applyBackground();
-            console.log('Gradient Background: Plugin initialized');
+            console.log('Soft Gradient: Plugin initialized');
         },
         
         applyBackground: function() {
@@ -38,7 +42,7 @@
             
             let background = document.querySelector('.background');
             if (!background) {
-                console.error('Gradient Background: Background element not found');
+                setTimeout(() => this.applyBackground(), 500);
                 return;
             }
             
@@ -50,39 +54,75 @@
             // Очищаем существующий фон
             background.innerHTML = '';
             
-            // Создаем canvas
+            // Создаем основной canvas
             this.canvas = document.createElement('canvas');
-            this.canvas.id = 'gradient-bg-' + Date.now();
+            this.canvas.className = 'soft-gradient-bg';
             this.canvas.style.cssText = `
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
+                width: 100vw;
+                height: 100vh;
                 z-index: -1;
                 pointer-events: none;
+                opacity: 0.7;
+                filter: blur(${this.settings.blurAmount}px);
             `;
+            
+            // Создаем offscreen canvas для эффектов
+            this.offscreenCanvas = document.createElement('canvas');
             
             background.appendChild(this.canvas);
             this.ctx = this.canvas.getContext('2d');
+            this.offscreenCtx = this.offscreenCanvas.getContext('2d');
             
-            // Настраиваем размеры canvas
             this.resizeCanvas();
-            window.addEventListener('resize', () => this.resizeCanvas());
+            this.createNoiseTexture();
             
-            // Запускаем анимацию
+            window.addEventListener('resize', () => {
+                this.resizeCanvas();
+                this.createNoiseTexture();
+            });
+            
             this.startAnimation();
         },
         
         resizeCanvas: function() {
-            if (this.canvas) {
-                const dpr = window.devicePixelRatio || 1;
-                this.canvas.width = window.innerWidth * dpr;
-                this.canvas.height = window.innerHeight * dpr;
-                this.canvas.style.width = window.innerWidth + 'px';
-                this.canvas.style.height = window.innerHeight + 'px';
-                this.ctx.scale(dpr, dpr);
+            if (!this.canvas) return;
+            
+            const dpr = window.devicePixelRatio || 1;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            [this.canvas, this.offscreenCanvas].forEach(canvas => {
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                canvas.style.width = width + 'px';
+                canvas.style.height = height + 'px';
+            });
+            
+            if (this.ctx) this.ctx.scale(dpr, dpr);
+        },
+        
+        createNoiseTexture: function() {
+            if (!this.offscreenCanvas) return;
+            
+            const width = this.offscreenCanvas.width;
+            const height = this.offscreenCanvas.height;
+            const imageData = this.offscreenCtx.createImageData(width, height);
+            const data = imageData.data;
+            
+            // Создаем мягкий шум
+            for (let i = 0; i < data.length; i += 4) {
+                const noise = Math.random() * 10;
+                data[i] = noise;     // R
+                data[i + 1] = noise; // G
+                data[i + 2] = noise; // B
+                data[i + 3] = 5;     // A - очень прозрачный
             }
+            
+            this.offscreenCtx.putImageData(imageData, 0, 0);
+            this.noiseTexture = this.offscreenCanvas;
         },
         
         startAnimation: function() {
@@ -91,7 +131,7 @@
             }
             
             const animate = () => {
-                this.currentTime += 0.01 * this.settings.speed;
+                this.currentTime += 0.005 * this.settings.speed; // Очень медленно
                 this.drawGradient();
                 this.animationId = requestAnimationFrame(animate);
             };
@@ -102,134 +142,99 @@
         drawGradient: function() {
             if (!this.ctx || !this.canvas) return;
             
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+            const width = this.canvas.width;
+            const height = this.canvas.height;
             const time = this.currentTime;
             
-            // Очищаем canvas
-            this.ctx.clearRect(0, 0, width, height);
-            
-            // Создаем плавно меняющиеся цвета
-            const colorCount = this.settings.colors.length;
-            const colorIndex1 = Math.floor(time * 100) % colorCount;
-            const colorIndex2 = (colorIndex1 + 1) % colorCount;
-            const t = (time * 100) % 1;
-            
-            const color1 = this.hexToRgb(this.settings.colors[colorIndex1]);
-            const color2 = this.hexToRgb(this.settings.colors[colorIndex2]);
-            
-            // Интерполируем цвета
-            const r = Math.floor(color1.r * (1 - t) + color2.r * t);
-            const g = Math.floor(color1.g * (1 - t) + color2.g * t);
-            const b = Math.floor(color1.b * (1 - t) + color2.b * t);
-            
-            const currentColor = `rgb(${r}, ${g}, ${b})`;
-            
-            // Создаем градиент в зависимости от типа
-            let gradient;
-            
-            switch(this.settings.gradientType) {
-                case 'radial':
-                    gradient = this.ctx.createRadialGradient(
-                        width / 2, height / 2, 0,
-                        width / 2, height / 2, Math.max(width, height) / 2
-                    );
-                    break;
-                    
-                case 'linear':
-                    const angle = (time * 360) % 360;
-                    const radians = angle * Math.PI / 180;
-                    const x1 = width / 2 + Math.cos(radians) * width;
-                    const y1 = height / 2 + Math.sin(radians) * height;
-                    gradient = this.ctx.createLinearGradient(
-                        width / 2, height / 2, x1, y1
-                    );
-                    break;
-                    
-                case 'conic':
-                    // Для conic градиента создаем сложный эффект
-                    this.drawConicGradient(time);
-                    return;
-            }
-            
-            // Добавляем цветовые остановки
-            gradient.addColorStop(0, currentColor);
-            gradient.addColorStop(0.5, this.interpolateColor(
-                this.settings.colors[(colorIndex1 + 2) % colorCount],
-                this.settings.colors[(colorIndex2 + 2) % colorCount],
-                t
-            ));
-            gradient.addColorStop(1, this.settings.colors[(colorIndex1 + 3) % colorCount]);
-            
-            // Заполняем фон
-            this.ctx.fillStyle = gradient;
+            // Очищаем с прозрачностью для плавного перехода
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             this.ctx.fillRect(0, 0, width, height);
             
-            // Добавляем дополнительные эффекты
-            this.addSpecialEffects(time);
-        },
-        
-        drawConicGradient: function(time) {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.max(width, height) / 2;
+            // Медленно меняющиеся цвета
+            const colorCount = this.settings.colors.length;
+            const colorIndex1 = Math.floor(time * 20) % colorCount;
+            const colorIndex2 = (colorIndex1 + 1) % colorCount;
+            const t = (time * 20) % 1;
             
-            // Создаем круговой градиент
-            for (let angle = 0; angle < 360; angle += 1) {
-                const radians = (angle + time * 50) * Math.PI / 180;
-                const colorAngle = (angle + time * 100) % 360;
-                
-                // Вычисляем цвет на основе угла
-                const hue = (colorAngle + time * 50) % 360;
-                const color = `hsl(${hue}, 70%, 50%)`;
-                
-                // Рисуем сектор
-                this.ctx.beginPath();
-                this.ctx.moveTo(centerX, centerY);
-                this.ctx.arc(
-                    centerX, centerY, radius,
-                    radians, radians + Math.PI / 180
-                );
-                this.ctx.closePath();
-                
-                this.ctx.fillStyle = color;
-                this.ctx.fill();
+            // Создаем радиальный градиент
+            const gradient = this.ctx.createRadialGradient(
+                width * (0.5 + Math.sin(time * 0.1) * 0.1),
+                height * (0.5 + Math.cos(time * 0.1) * 0.1),
+                0,
+                width / 2,
+                height / 2,
+                Math.max(width, height) * 0.8
+            );
+            
+            // Мягкие цветовые переходы
+            const colors = this.getSoftColors(colorIndex1, colorIndex2, t);
+            
+            gradient.addColorStop(0, colors.start);
+            gradient.addColorStop(0.5, colors.middle);
+            gradient.addColorStop(1, colors.end);
+            
+            // Рисуем градиент с низкой непрозрачностью
+            this.ctx.globalAlpha = 0.3;
+            this.ctx.fillStyle = gradient;
+            this.ctx.fillRect(0, 0, width, height);
+            this.ctx.globalAlpha = 1.0;
+            
+            // Добавляем текстуру шума
+            if (this.noiseTexture) {
+                this.ctx.globalAlpha = this.settings.noiseOpacity;
+                this.ctx.drawImage(this.noiseTexture, 0, 0, width, height);
+                this.ctx.globalAlpha = 1.0;
             }
+            
+            // Очень тонкие частицы (почти незаметные)
+            this.drawSubtleParticles(time);
         },
         
-        addSpecialEffects: function(time) {
-            // Добавляем мерцающие частицы
-            const particleCount = 50;
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+        getSoftColors: function(index1, index2, t) {
+            const color1 = this.hexToRgb(this.settings.colors[index1]);
+            const color2 = this.hexToRgb(this.settings.colors[index2]);
+            
+            // Приглушаем цвета
+            const darken = (color, amount) => ({
+                r: Math.floor(color.r * amount),
+                g: Math.floor(color.g * amount),
+                b: Math.floor(color.b * amount)
+            });
+            
+            const start = darken(this.interpolateColor(color1, color2, t), this.settings.brightness);
+            const middle = darken(this.interpolateColor(
+                this.hexToRgb(this.settings.colors[(index1 + 2) % this.settings.colors.length]),
+                this.hexToRgb(this.settings.colors[(index2 + 2) % this.settings.colors.length]),
+                t
+            ), this.settings.brightness * 0.7);
+            const end = darken(this.hexToRgb(
+                this.settings.colors[(index1 + 3) % this.settings.colors.length]
+            ), this.settings.brightness * 0.5);
+            
+            return {
+                start: `rgb(${start.r}, ${start.g}, ${start.b})`,
+                middle: `rgb(${middle.r}, ${middle.g}, ${middle.b})`,
+                end: `rgb(${end.r}, ${end.g}, ${end.b})`
+            };
+        },
+        
+        drawSubtleParticles: function(time) {
+            const particleCount = 15; // Очень мало частиц
+            const width = this.canvas.width;
+            const height = this.canvas.height;
             
             for (let i = 0; i < particleCount; i++) {
-                const x = (Math.sin(time * 2 + i) * 0.5 + 0.5) * width;
-                const y = (Math.cos(time * 1.5 + i) * 0.5 + 0.5) * height;
-                const size = (Math.sin(time * 3 + i) * 0.5 + 0.5) * 3;
-                const opacity = (Math.sin(time * 4 + i) * 0.5 + 0.5) * 0.3;
+                // Медленное движение
+                const x = (Math.sin(time * 0.5 + i * 0.5) * 0.3 + 0.5) * width;
+                const y = (Math.cos(time * 0.3 + i * 0.7) * 0.3 + 0.5) * height;
+                const size = (Math.sin(time + i) * 0.3 + 0.5) * 1.5; // Очень маленькие
+                const opacity = (Math.sin(time * 2 + i) * 0.2 + 0.3) * 0.1; // Еле заметные
                 
                 this.ctx.beginPath();
                 this.ctx.arc(x, y, size, 0, Math.PI * 2);
                 this.ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
                 this.ctx.fill();
             }
-            
-            // Добавляем волны
-            this.ctx.beginPath();
-            for (let x = 0; x < width; x += 10) {
-                const y = height / 2 + Math.sin(x * 0.01 + time * 2) * 20;
-                if (x === 0) {
-                    this.ctx.moveTo(x, y);
-                } else {
-                    this.ctx.lineTo(x, y);
-                }
-            }
-            this.ctx.strokeStyle = `rgba(255, 255, 255, 0.1)`;
-            this.ctx.lineWidth = 2;
-            this.ctx.stroke();
         },
         
         hexToRgb: function(hex) {
@@ -242,14 +247,11 @@
         },
         
         interpolateColor: function(color1, color2, t) {
-            const c1 = this.hexToRgb(color1);
-            const c2 = this.hexToRgb(color2);
-            
-            const r = Math.floor(c1.r * (1 - t) + c2.r * t);
-            const g = Math.floor(c1.g * (1 - t) + c2.g * t);
-            const b = Math.floor(c1.b * (1 - t) + c2.b * t);
-            
-            return `rgb(${r}, ${g}, ${b})`;
+            return {
+                r: Math.floor(color1.r * (1 - t) + color2.r * t),
+                g: Math.floor(color1.g * (1 - t) + color2.g * t),
+                b: Math.floor(color1.b * (1 - t) + color2.b * t)
+            };
         },
         
         removeBackground: function() {
@@ -263,53 +265,45 @@
                 background.innerHTML = background.dataset.originalContent;
             }
             
-            window.removeEventListener('resize', () => this.resizeCanvas());
+            this.canvas = null;
+            this.ctx = null;
         },
         
-        updateSettings: function(newSettings) {
-            Object.assign(this.settings, newSettings);
-            if (this.animationId) {
-                this.removeBackground();
-                this.applyBackground();
-            }
+        // Методы для динамического изменения настроек
+        setBrightness: function(value) {
+            this.settings.brightness = Math.max(0.1, Math.min(1, value));
+        },
+        
+        setSpeed: function(value) {
+            this.settings.speed = Math.max(0.05, Math.min(1, value));
         }
     };
     
-    // Инициализация плагина
-    function initGradientBackground() {
+    // Инициализация
+    function initSoftGradient() {
         if (typeof Lampa === 'undefined') {
-            setTimeout(initGradientBackground, 500);
+            setTimeout(initSoftGradient, 1000);
             return;
         }
         
-        // Загружаем сохраненные настройки
-        try {
-            const saved = localStorage.getItem('gradient_bg_settings');
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                GradientBackground.settings = {...GradientBackground.settings, ...parsed};
-            }
-        } catch (e) {
-            console.error('Failed to load gradient background settings:', e);
-        }
-        
-        // Запускаем с задержкой
+        // Дополнительная задержка для полной загрузки
         setTimeout(() => {
-            GradientBackground.init();
-        }, 2000);
-        
-        // Сохраняем в глобальную область видимости
-        window.GradientBackground = GradientBackground;
+            SoftGradientBackground.init();
+            
+            // Экспортируем для доступа из консоли
+            window.SoftGradient = SoftGradientBackground;
+            
+            console.log('Soft Gradient: Ready');
+            console.log('Используйте SoftGradient.setBrightness(0.3) для регулировки яркости');
+            console.log('Используйте SoftGradient.setSpeed(0.1) для регулировки скорости');
+        }, 3000);
     }
     
-    // Запуск при загрузке
-    document.addEventListener('DOMContentLoaded', initGradientBackground);
-    
-    // Альтернативный запуск
+    // Автоматический запуск
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initGradientBackground);
+        document.addEventListener('DOMContentLoaded', initSoftGradient);
     } else {
-        initGradientBackground();
+        initSoftGradient();
     }
     
 })();
